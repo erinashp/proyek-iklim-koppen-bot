@@ -35,13 +35,9 @@ class AuthenticatedSessionController extends Controller
         // Membuat session baru setelah login.
         $request->session()->regenerate();
 
-        // Mengarahkan pengguna berdasarkan role.
-        if ($request->user()->role === 'teacher') {
-            return redirect()->route('teacher.dashboard');
-        }
-
-        // Default: pengguna dengan role student.
-        return redirect()->route('student.dashboard');
+        // Semua user masuk ke dashboard utama.
+        // Dashboard akan mengarahkan berdasarkan role.
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

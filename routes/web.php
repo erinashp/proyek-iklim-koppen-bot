@@ -23,16 +23,23 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Default Dashboard
+| Main Dashboard
 |--------------------------------------------------------------------------
 |
-| Route bawaan Laravel/Breeze.
-| Untuk sementara kita biarkan tetap ada.
+| Semua user yang sudah login masuk ke sini terlebih dahulu.
+| Setelah itu diarahkan berdasarkan role.
 |
 */
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $user = request()->user();
+
+    if ($user->role === 'teacher') {
+        return redirect()->route('teacher.dashboard');
+    }
+
+    return redirect()->route('student.dashboard');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -40,41 +47,35 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 | Student Dashboard
 |--------------------------------------------------------------------------
-|
-| Hanya user dengan role "student" yang boleh mengakses.
-|
 */
 
-Route::middleware(['auth', 'verified', 'role:student'])->group(function () {
-
-    Route::get('/student/dashboard', function () {
-        return Inertia::render('Student/Dashboard');
-    })->name('student.dashboard');
-
-});
+Route::get('/student/dashboard', function () {
+    return Inertia::render('Student/Dashboard');
+})->middleware([
+    'auth',
+    'verified',
+    'role:student',
+])->name('student.dashboard');
 
 
 /*
 |--------------------------------------------------------------------------
 | Teacher Dashboard
 |--------------------------------------------------------------------------
-|
-| Hanya user dengan role "teacher" yang boleh mengakses.
-|
 */
 
-Route::middleware(['auth', 'verified', 'role:teacher'])->group(function () {
-
-    Route::get('/teacher/dashboard', function () {
-        return Inertia::render('Teacher/Dashboard');
-    })->name('teacher.dashboard');
-
-});
+Route::get('/teacher/dashboard', function () {
+    return Inertia::render('Teacher/Dashboard');
+})->middleware([
+    'auth',
+    'verified',
+    'role:teacher',
+])->name('teacher.dashboard');
 
 
 /*
 |--------------------------------------------------------------------------
-| Profile Routes
+| Profile
 |--------------------------------------------------------------------------
 */
 
@@ -88,13 +89,12 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
-
 });
 
 
 /*
 |--------------------------------------------------------------------------
-| Authentication Routes
+| Authentication
 |--------------------------------------------------------------------------
 */
 
