@@ -29,11 +29,19 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        // Memeriksa email dan password pengguna.
         $request->authenticate();
 
+        // Membuat session baru setelah login.
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        // Mengarahkan pengguna berdasarkan role.
+        if ($request->user()->role === 'teacher') {
+            return redirect()->route('teacher.dashboard');
+        }
+
+        // Default: pengguna dengan role student.
+        return redirect()->route('student.dashboard');
     }
 
     /**
@@ -41,12 +49,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        // Logout dari guard web.
         Auth::guard('web')->logout();
 
+        // Menghapus session.
         $request->session()->invalidate();
 
+        // Membuat token CSRF baru.
         $request->session()->regenerateToken();
 
+        // Kembali ke halaman utama.
         return redirect('/');
     }
 }
