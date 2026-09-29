@@ -230,7 +230,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'natasha@test.com'],
             [
                 'name' => 'Natasha Aurora Fabriane',
@@ -240,7 +240,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'nisrina@test.com'],
             [
                 'name' => 'Nisrina Nabil Ramadhanii',
@@ -250,7 +250,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'putra@test.com'],
             [
                 'name' => 'Putra Danish Wijaya',
@@ -260,7 +260,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'putri@test.com'],
             [
                 'name' => 'Putri Isnaini Kalyana',
@@ -270,7 +270,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'rafansyah@test.com'],
             [
                 'name' => 'Rafansyah Ramadhan Elmar',
@@ -280,7 +280,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'rayhan@test.com'],
             [
                 'name' => 'Rayhan Vai Arifin',
@@ -290,7 +290,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'rizky@test.com'],
             [
                 'name' => 'Rizky Akhmal Minardi',
@@ -300,7 +300,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'rr.zakia@test.com'],
             [
                 'name' => 'Rr. Zakia Nur Safitri',
@@ -310,7 +310,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'syavalia@test.com'],
             [
                 'name' => 'Syavalia Sepzian Ramadhani',
@@ -320,7 +320,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        ser::updateOrCreate(
+        User::updateOrCreate(
             ['email' => 'tennofallah@test.com'],
             [
                 'name' => 'Tennofallah Regina Putri Utama',

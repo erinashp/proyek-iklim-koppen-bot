@@ -73,12 +73,19 @@ Route::get('/teacher/dashboard', function () {
 ])->name('teacher.dashboard');
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Profile
 |--------------------------------------------------------------------------
 */
 
+// Halaman informasi profil untuk siswa dan guru
+Route::get('/profile/view', function () {
+    return Inertia::render('Profile/Show');
+})->middleware(['auth', 'verified'])->name('profile.show');
+
+// Profile bawaan Laravel Breeze
 Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])
@@ -91,6 +98,9 @@ Route::middleware('auth')->group(function () {
         ->name('profile.destroy');
 });
 
+Route::get('/student/profile', function () {
+    return Inertia::render('Student/Profile');
+})->middleware(['auth'])->name('student.profile');
 
 /*
 |--------------------------------------------------------------------------
