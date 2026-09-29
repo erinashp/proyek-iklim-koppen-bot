@@ -158,11 +158,11 @@ export default function Profile() {
                             </a>
 
                             <a
-                                href={`${dashboardUrl}#bantuan`}
+                                href={`${dashboardUrl}#chat-ai-bot`}
                                 className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
                             >
                                 <span className="w-5 text-center text-xl">ⓘ</span>
-                                <span>Bantuan</span>
+                                <span>Chat AI Bot</span>
                             </a>
                         </nav>
                     </div>

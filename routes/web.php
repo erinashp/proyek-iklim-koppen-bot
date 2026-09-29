@@ -58,11 +58,6 @@ Route::get('/student/dashboard', function () {
     'role:student',
 ])->name('student.dashboard');
 
-/*
-|--------------------------------------------------------------------------
-| Student Guide
-|--------------------------------------------------------------------------
-*/
 
 Route::get('/student/guide', function () {
     return Inertia::render('Student/Guide');
@@ -72,11 +67,6 @@ Route::get('/student/guide', function () {
     'role:student',
 ])->name('student.guide');
 
-/*
-|--------------------------------------------------------------------------
-| Student Material
-|--------------------------------------------------------------------------
-*/
 
 Route::get('/student/material', function () {
     return Inertia::render('Student/Material');
@@ -85,6 +75,14 @@ Route::get('/student/material', function () {
     'verified',
     'role:student',
 ])->name('student.material');
+
+Route::get('/student/objectives', function () {
+    return Inertia::render('Student/Objectives');
+})->middleware([
+    'auth',
+    'verified',
+    'role:student',
+])->name('student.objectives');
 
 
 /*

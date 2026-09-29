@@ -36,7 +36,7 @@ export default function Material({ auth }) {
         {
             icon: '◎',
             label: 'Tujuan Belajar',
-            href: '#tujuan',
+            href: route('student.objectives'),
         },
         {
             icon: '▣',
@@ -56,8 +56,8 @@ export default function Material({ auth }) {
         },
         {
             icon: 'ⓘ',
-            label: 'Bantuan',
-            href: '#bantuan',
+            label: 'Chat AI Bot',
+            href: '#chat-ai-bot',
         },
     ];
 
@@ -434,19 +434,6 @@ export default function Material({ auth }) {
 
                     </main>
                 </div>
-
-                {/* TOMBOL CHATBOT */}
-                <button
-                    type="button"
-                    onClick={() => {
-                        document.getElementById('chatbot')?.scrollIntoView({
-                            behavior: 'smooth',
-                        });
-                    }}
-                    className="fixed bottom-5 right-5 z-40 rounded-full bg-[#087b68] px-6 py-3 font-semibold text-white shadow-lg transition hover:bg-[#066653]"
-                >
-                    Chat IklimKöppenBot
-                </button>
 
             </div>
         </>

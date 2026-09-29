@@ -14,10 +14,12 @@ export default function Guide({ auth }) {
         ? user.name.charAt(0).toUpperCase()
         : 'U';
 
+    // URL dashboard menyesuaikan role pengguna
     const dashboardUrl = user.role === 'teacher'
         ? route('teacher.dashboard')
         : route('student.dashboard');
 
+    // URL profil menyesuaikan role pengguna
     const profileUrl = user.role === 'teacher'
         ? route('teacher.profile')
         : route('student.profile');
@@ -27,6 +29,48 @@ export default function Guide({ auth }) {
         post(route('logout'));
     };
 
+    // Menu sidebar dibuat menggunakan array agar konsisten
+    // dengan halaman Beranda dan halaman lainnya.
+    const menuItems = [
+        {
+            icon: '⌂',
+            label: 'Beranda',
+            href: route('student.dashboard'),
+        },
+        {
+            icon: '☷',
+            label: 'Petunjuk',
+            href: '#',
+            active: true,
+        },
+        {
+            icon: '◎',
+            label: 'Tujuan Belajar',
+            href: route('student.objectives'),
+        },
+        {
+            icon: '☼',
+            label: 'Materi Köppen',
+            href: route('student.material'),
+        },
+        {
+            icon: '◇',
+            label: 'Tantangan',
+            href: `${dashboardUrl}#tantangan`,
+        },
+        {
+            icon: '▥',
+            label: 'Hasil Skor',
+            href: `${dashboardUrl}#hasil-skor`,
+        },
+        {
+            icon: 'ⓘ',
+            label: 'Chat AI Bot',
+            href: '#chat-ai-bot',
+        },
+    ];
+
+    // Langkah-langkah penggunaan media pembelajaran
     const steps = [
         {
             number: '1',
@@ -81,7 +125,7 @@ export default function Guide({ auth }) {
                                 🌍
                             </div>
 
-                            <h1 className="text-2xl font-bold tracking-wide">
+                            <h1 className="text-xl font-bold tracking-wide">
                                 GeoBot
                             </h1>
                         </div>
@@ -96,64 +140,64 @@ export default function Guide({ auth }) {
                         </p>
 
                         <nav className="mt-3 space-y-1">
+                            {menuItems.map((item) => {
+                                const itemClass = `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
+                                    item.active
+                                        ? 'bg-[#e8f8f1] font-semibold text-[#07384b]'
+                                        : 'text-teal-50 hover:bg-white/10'
+                                }`;
 
-                            <Link
-                                href={dashboardUrl}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">⌂</span>
-                                <span>Beranda</span>
-                            </Link>
+                                const itemContent = (
+                                    <>
+                                        <span className="w-5 text-center text-xl">
+                                            {item.icon}
+                                        </span>
 
-                            {/* Menu Aktif */}
-                            <div className="flex items-center gap-3 rounded-xl bg-[#e8f8f1] px-4 py-3 font-semibold text-[#07384b]">
-                                <span className="w-5 text-center text-xl">☷</span>
-                                <span>Petunjuk</span>
-                            </div>
+                                        <span>{item.label}</span>
+                                    </>
+                                );
 
-                            <a
-                                href={`${dashboardUrl}#tujuan`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">◎</span>
-                                <span>Tujuan Belajar</span>
-                            </a>
+                                // Menu halaman yang sedang aktif
+                                if (item.active) {
+                                    return (
+                                        <div
+                                            key={item.label}
+                                            className={itemClass}
+                                            aria-current="page"
+                                        >
+                                            {itemContent}
+                                        </div>
+                                    );
+                                }
 
-                            <a
-                                href={`${dashboardUrl}#materi`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">☼</span>
-                                <span>Materi Köppen</span>
-                            </a>
+                                // Navigasi ke halaman lain menggunakan Inertia
+                                if (item.isPage) {
+                                    return (
+                                        <Link
+                                            key={item.label}
+                                            href={item.href}
+                                            className={itemClass}
+                                        >
+                                            {itemContent}
+                                        </Link>
+                                    );
+                                }
 
-                            <a
-                                href={`${dashboardUrl}#tantangan`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">◇</span>
-                                <span>Tantangan</span>
-                            </a>
-
-                            <a
-                                href={`${dashboardUrl}#hasil-skor`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">▥</span>
-                                <span>Hasil Skor</span>
-                            </a>
-
-                            <a
-                                href={`${dashboardUrl}#bantuan`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">ⓘ</span>
-                                <span>Bantuan</span>
-                            </a>
+                                // Navigasi ke bagian tertentu di dashboard
+                                return (
+                                    <a
+                                        key={item.label}
+                                        href={item.href}
+                                        className={itemClass}
+                                    >
+                                        {itemContent}
+                                    </a>
+                                );
+                            })}
                         </nav>
                     </div>
 
-                    {/* Profil User */}
+                    {/* Profil User dan Logout */}
                     <div className="mt-auto p-4">
 
                         <Link
@@ -176,6 +220,7 @@ export default function Guide({ auth }) {
                                 <p className="truncate text-sm font-semibold">
                                     {user.name}
                                 </p>
+
                                 <p className="text-xs text-teal-100">
                                     {roleLabel} · Profil Saya
                                 </p>
@@ -185,6 +230,7 @@ export default function Guide({ auth }) {
                         </Link>
 
                         <button
+                            type="button"
                             onClick={logout}
                             className="w-full rounded-xl border border-white/20 px-4 py-2.5 text-left text-sm text-white transition hover:bg-white/10"
                         >
@@ -318,12 +364,20 @@ export default function Guide({ auth }) {
                                             </div>
 
                                             <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                                                {['Petunjuk', 'Tujuan Belajar', 'Materi', 'Tantangan', 'Chatbot', 'Hasil Skor'].map((item) => (
+                                                {[
+                                                    'Petunjuk',
+                                                    'Tujuan Belajar',
+                                                    'Materi',
+                                                    'Tantangan',
+                                                    'Chatbot',
+                                                    'Hasil Skor',
+                                                ].map((item) => (
                                                     <div
                                                         key={item}
                                                         className="rounded-lg border border-[#d4e4e1] bg-white p-3"
                                                     >
                                                         <div className="mb-2 h-5 w-5 rounded-md bg-[#e1f5ed]" />
+
                                                         <p className="text-[10px] font-bold text-[#123b49]">
                                                             {item}
                                                         </p>
