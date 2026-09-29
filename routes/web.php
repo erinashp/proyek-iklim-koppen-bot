@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,34 @@ Route::get('/student/dashboard', function () {
     'role:student',
 ])->name('student.dashboard');
 
+/*
+|--------------------------------------------------------------------------
+| Student Guide
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/student/guide', function () {
+    return Inertia::render('Student/Guide');
+})->middleware([
+    'auth',
+    'verified',
+    'role:student',
+])->name('student.guide');
+
+/*
+|--------------------------------------------------------------------------
+| Student Material
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/student/material', function () {
+    return Inertia::render('Student/Material');
+})->middleware([
+    'auth',
+    'verified',
+    'role:student',
+])->name('student.material');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +100,21 @@ Route::get('/teacher/dashboard', function () {
     'verified',
     'role:teacher',
 ])->name('teacher.dashboard');
+
+
+/*
+|--------------------------------------------------------------------------
+| Teacher Profile
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/teacher/profile', function () {
+    return Inertia::render('Teacher/Profile');
+})->middleware([
+    'auth',
+    'verified',
+    'role:teacher',
+])->name('teacher.profile');
 
 
 
@@ -101,6 +145,10 @@ Route::middleware('auth')->group(function () {
 Route::get('/student/profile', function () {
     return Inertia::render('Student/Profile');
 })->middleware(['auth'])->name('student.profile');
+
+Route::put('/profile', [UserProfileController::class, 'update'])
+    ->middleware(['auth'])
+    ->name('profile.update');
 
 /*
 |--------------------------------------------------------------------------
