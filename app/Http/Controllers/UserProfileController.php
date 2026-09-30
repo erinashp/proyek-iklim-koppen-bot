@@ -30,27 +30,28 @@ class UserProfileController extends Controller
             ],
         ]);
 
-        // Update nama dan email
         $user->name = $validated['name'];
-        $user->email = $validated['email'];
 
-        // Jika pengguna mengunggah foto baru
+        if ($user->email !== $validated['email']) {
+            $user->email = $validated['email'];
+            $user->email_verified_at = null;
+        }
+
         if ($request->hasFile('avatar')) {
-            // Hapus foto lama jika ada
+            $newAvatar = $request->file('avatar')
+                ->store('profiles', 'public');
+
             if ($user->avatar) {
                 Storage::disk('public')->delete($user->avatar);
             }
 
-            // Simpan foto baru
-            $path = $request->file('avatar')->store('profiles', 'public');
-
-            $user->avatar = $path;
+            $user->avatar = $newAvatar;
         }
 
         $user->save();
 
         return redirect()
-            ->back()
+            ->route('teacher.profile')
             ->with('success', 'Profil berhasil diperbarui.');
     }
 }

@@ -1,213 +1,558 @@
-
-import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Head, Link, usePage, router, useForm } from '@inertiajs/react';
 
 export default function Profile() {
-    // Mengambil data user yang sedang login
-    const { auth } = usePage().props;
-    const user = auth.user;
+    const { auth, user: pageUser, flash } = usePage().props;
+    const user = pageUser ?? auth?.user ?? {};
 
-    const { post } = useForm();
-
-    // Role pengguna
     const roleLabel = 'Guru';
 
-    // Logout
-    const logout = (e) => {
-        e.preventDefault();
-        post(route('logout'));
+    const [isEditing, setIsEditing] = useState(false);
+    const [preview, setPreview] = useState(null);
+
+    const fileInputRef = useRef(null);
+
+    const {
+        data,
+        setData,
+        post,
+        processing,
+        errors,
+        reset,
+    } = useForm({
+        name: user?.name ?? '',
+        email: user?.email ?? '',
+        avatar: null,
+        _method: 'put',
+    });
+
+    const initial = data.name
+        ? data.name.charAt(0).toUpperCase()
+        : 'G';
+
+    const avatarUrl = user?.avatar
+        ? `/storage/${user.avatar}`
+        : null;
+
+    const displayedAvatar = preview || avatarUrl;
+
+    // Membersihkan URL preview ketika komponen diperbarui atau dilepas.
+    useEffect(() => {
+        return () => {
+            if (preview) {
+                URL.revokeObjectURL(preview);
+            }
+        };
+    }, [preview]);
+
+    const handleLogout = () => {
+        router.post(route('logout'));
     };
 
-    // Inisial nama untuk avatar
-    const initial = user.name
-        ? user.name.charAt(0).toUpperCase()
-        : 'G';
+    // Memilih foto profil dan menampilkan preview.
+    const handleAvatarChange = (event) => {
+        const file = event.target.files?.[0];
+
+        if (!file) return;
+
+        setData('avatar', file);
+
+        if (preview) {
+            URL.revokeObjectURL(preview);
+        }
+
+        setPreview(URL.createObjectURL(file));
+    };
+
+    // Menyimpan perubahan profil.
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        post(route('teacher.profile.update'), {
+            forceFormData: true,
+            preserveScroll: true,
+
+            onSuccess: () => {
+                setIsEditing(false);
+                setPreview(null);
+
+                if (fileInputRef.current) {
+                    fileInputRef.current.value = '';
+                }
+            },
+        });
+    };
+
+    // Membatalkan proses edit.
+    const handleCancelEdit = () => {
+        reset();
+        setPreview(null);
+        setIsEditing(false);
+
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+    };
+
+    const menuItems = [
+        {
+            title: 'Dashboard',
+            href: route('teacher.dashboard'),
+            icon: '⌂',
+        },
+        {
+            title: 'Data Siswa',
+            href: '/teacher/students',
+            icon: '♙',
+        },
+        {
+            title: 'Materi Pembelajaran',
+            href: '/teacher/materials',
+            icon: '▤',
+        },
+        {
+            title: 'Kuis',
+            href: '/teacher/quizzes',
+            icon: '✎',
+        },
+        {
+            title: 'Nilai Siswa',
+            href: '/teacher/grades',
+            icon: '▥',
+        },
+    ];
+
+    const profileItems = [
+        {
+            label: 'Nama Lengkap',
+            value: user?.name ?? '-',
+            icon: '♙',
+        },
+        {
+            label: 'Username',
+            value: user?.username ?? '-',
+            icon: '@',
+        },
+        {
+            label: 'Email',
+            value: user?.email ?? '-',
+            icon: '✉',
+        },
+        {
+            label: 'Role Pengguna',
+            value: roleLabel,
+            icon: '▣',
+        },
+        {
+            label: 'ID Pengguna',
+            value: user?.id ?? '-',
+            icon: '#',
+        },
+    ];
 
     return (
         <>
             <Head title="Profil Guru" />
 
-            <div className="min-h-screen bg-gray-100">
+            <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
 
-                {/* Navbar */}
-                <nav className="bg-white border-b border-gray-200">
-                    <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+                {/* Sidebar Kiri */}
+                <aside className="fixed inset-y-0 left-0 z-40 flex w-72 flex-col overflow-y-auto bg-gradient-to-b from-[#07384b] to-[#087b70] text-white">
 
-                        <h1 className="text-xl font-bold text-gray-800">
-                            Media Pembelajaran Iklim Köppen
-                        </h1>
+                    {/* Logo */}
+                    <div className="flex items-center gap-3 px-6 py-7">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-2xl">
+                            🌍
+                        </div>
 
-                        <div className="flex items-center gap-4">
-
-                            {/* Identitas Guru */}
-                            <div className="text-right">
-                                <p className="font-semibold text-gray-800">
-                                    {user.name}
-                                </p>
-
-                                <span className="text-sm text-green-600">
-                                    {roleLabel}
-                                </span>
-                            </div>
-
-                            {/* Avatar */}
-                            <div className="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-bold">
-                                {initial}
-                            </div>
-
-                            {/* Logout */}
-                            <button
-                                onClick={logout}
-                                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
-                            >
-                                Logout
-                            </button>
-
+                        <div>
+                            <h1 className="text-lg font-bold tracking-wide">
+                                GeoBot
+                            </h1>
+                            <p className="text-xs text-teal-100">
+                                Media Pembelajaran Iklim
+                            </p>
                         </div>
                     </div>
-                </nav>
 
-                {/* Content */}
-                <main className="max-w-5xl mx-auto px-6 py-10">
-
-                    {/* Tombol Kembali */}
-                    <Link
-                        href={route('teacher.dashboard')}
-                        className="inline-flex items-center gap-2 text-green-600 hover:text-green-800 font-medium mb-6"
-                    >
-                        ← Kembali ke Dashboard
-                    </Link>
-
-                    {/* Judul */}
-                    <div className="mb-8">
-                        <h2 className="text-3xl font-bold text-gray-800">
-                            Profil Guru
-                        </h2>
-
-                        <p className="mt-2 text-gray-600">
-                            Informasi akun guru media pembelajaran Iklim Köppen.
+                    {/* Panel Guru */}
+                    <div className="mx-5 rounded-2xl border border-white/15 bg-white/10 p-4">
+                        <p className="text-xs font-medium uppercase tracking-wider text-teal-100">
+                            Panel Guru
+                        </p>
+                        <p className="mt-1 text-sm font-semibold">
+                            Kelola pembelajaran
                         </p>
                     </div>
 
-                    {/* Kartu Profil */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                    {/* Menu Navigasi */}
+                    <nav className="mt-7 flex-1 space-y-2 px-4">
+                        <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-teal-100/70">
+                            Menu Utama
+                        </p>
 
-                        {/* Header Profil */}
-                        <div className="bg-green-600 px-8 py-10">
-                            <div className="flex flex-col sm:flex-row items-center gap-6">
+                        {menuItems.map((item) => (
+                            <Link
+                                key={item.title}
+                                href={item.href}
+                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-teal-50 transition hover:bg-white/10"
+                            >
+                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-lg">
+                                    {item.icon}
+                                </span>
 
-                                {/* Avatar */}
-                                <div className="w-24 h-24 rounded-full bg-white text-green-600 flex items-center justify-center text-4xl font-bold shadow-lg">
+                                {item.title}
+                            </Link>
+                        ))}
+                    </nav>
+
+                    {/* Identitas dan Logout */}
+                    <div className="border-t border-white/15 p-5">
+                        <div className="flex items-center gap-3">
+
+                            {displayedAvatar ? (
+                                <img
+                                    src={displayedAvatar}
+                                    alt="Foto profil guru"
+                                    className="h-10 w-10 shrink-0 rounded-full border-2 border-white/30 object-cover"
+                                />
+                            ) : (
+                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#123b49]">
                                     {initial}
                                 </div>
+                            )}
 
-                                {/* Identitas */}
+                            <div className="min-w-0 flex-1">
+                                <p className="truncate text-sm font-semibold">
+                                    {user?.name ?? 'Guru'}
+                                </p>
+                                <p className="truncate text-xs text-teal-100">
+                                    {user?.email ?? ''}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="mt-4 grid grid-cols-2 gap-2">
+                            <Link
+                                href={route('teacher.profile')}
+                                className="rounded-lg bg-white px-3 py-2 text-center text-xs font-semibold text-[#087b68] shadow-sm"
+                            >
+                                Profil
+                            </Link>
+
+                            <button
+                                type="button"
+                                onClick={handleLogout}
+                                className="rounded-lg bg-white/15 px-3 py-2 text-xs font-medium transition hover:bg-white/25"
+                            >
+                                Keluar
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                {/* Main Content */}
+                <main className="ml-72 min-h-screen min-w-0">
+                    <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8 sm:py-8">
+
+                        {/* Header */}
+                        <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                            <div>
+                                <p className="text-sm font-medium text-[#087b68]">
+                                    Pengaturan Akun
+                                </p>
+
+                                <h2 className="mt-1 text-2xl font-bold tracking-tight text-[#123b49] sm:text-3xl">
+                                    Profil Guru
+                                </h2>
+
+                                <p className="mt-2 text-sm text-slate-500">
+                                    Informasi akun dan identitas pengguna GeoBot.
+                                </p>
+                            </div>
+
+                            <Link
+                                href={route('teacher.dashboard')}
+                                className="inline-flex items-center justify-center gap-2 self-start rounded-xl border border-[#d4e4e1] bg-white px-4 py-3 text-sm font-semibold text-[#087b68] shadow-sm transition hover:bg-[#e5f5ef]"
+                            >
+                                <span>←</span>
+                                Kembali ke Dashboard
+                            </Link>
+                        </header>
+
+                        {/* Profile Banner */}
+                        <section className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-[#07384b] to-[#087b70] p-6 text-white shadow-lg sm:p-8">
+                            <div className="absolute -right-10 -top-16 h-56 w-56 rounded-full border-[30px] border-white/5" />
+                            <div className="absolute -bottom-24 right-36 h-48 w-48 rounded-full bg-white/5" />
+
+                            <div className="relative z-10 flex flex-col items-center gap-5 sm:flex-row">
+
+                                {/* Foto Profil Banner */}
+                                {displayedAvatar ? (
+                                    <img
+                                        src={displayedAvatar}
+                                        alt="Foto profil guru"
+                                        className="h-24 w-24 shrink-0 rounded-full border-4 border-white/20 object-cover shadow-lg"
+                                    />
+                                ) : (
+                                    <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full border-4 border-white/20 bg-[#d9f99d] text-4xl font-bold text-[#123b49] shadow-lg">
+                                        {initial}
+                                    </div>
+                                )}
+
                                 <div className="text-center sm:text-left">
-                                    <h3 className="text-2xl font-bold text-white">
-                                        {user.name}
+                                    <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-teal-50">
+                                        Akun Pengajar
+                                    </span>
+
+                                    <h3 className="mt-3 text-2xl font-bold sm:text-3xl">
+                                        {user?.name ?? 'Guru'}
                                     </h3>
 
-                                    <p className="text-green-100 mt-1">
-                                        {user.email}
+                                    <p className="mt-1 break-all text-sm text-teal-100">
+                                        {user?.email ?? ''}
                                     </p>
 
-                                    <span className="inline-block mt-3 px-4 py-1 bg-white text-green-700 rounded-full text-sm font-semibold">
+                                    <span className="mt-3 inline-flex rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-[#087b68]">
                                         {roleLabel}
                                     </span>
                                 </div>
-
                             </div>
-                        </div>
+                        </section>
 
                         {/* Informasi Akun */}
-                        <div className="p-8">
+                        <section className="overflow-hidden rounded-2xl border border-[#d4e4e1] bg-white shadow-sm">
 
-                            <h3 className="text-lg font-bold text-gray-800 mb-6">
-                                Informasi Pengguna
-                            </h3>
+                            {/* Section Header */}
+                            <div className="border-b border-[#e7f0ee] px-6 py-5 sm:px-8">
+                                <div className="flex items-center gap-3">
+                                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#e5f5ef] text-lg text-[#087b68]">
+                                        ▣
+                                    </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                                {/* Nama */}
-                                <div className="border-b border-gray-200 pb-4">
-                                    <p className="text-sm text-gray-500 mb-2">
-                                        Nama Lengkap
-                                    </p>
-
-                                    <p className="font-semibold text-gray-800">
-                                        {user.name}
-                                    </p>
+                                    <div>
+                                        <h3 className="font-bold text-[#123b49]">
+                                            Informasi Pengguna
+                                        </h3>
+                                        <p className="mt-1 text-xs text-slate-500">
+                                            Detail identitas akun yang sedang digunakan.
+                                        </p>
+                                    </div>
                                 </div>
-
-                                {/* Username */}
-                                <div className="border-b border-gray-200 pb-4">
-                                    <p className="text-sm text-gray-500 mb-2">
-                                        Username
-                                    </p>
-
-                                    <p className="font-semibold text-gray-800">
-                                        {user.username || '-'}
-                                    </p>
-                                </div>
-
-                                {/* Email */}
-                                <div className="border-b border-gray-200 pb-4">
-                                    <p className="text-sm text-gray-500 mb-2">
-                                        Email
-                                    </p>
-
-                                    <p className="font-semibold text-gray-800 break-all">
-                                        {user.email}
-                                    </p>
-                                </div>
-
-                                {/* Role */}
-                                <div className="border-b border-gray-200 pb-4">
-                                    <p className="text-sm text-gray-500 mb-2">
-                                        Role Pengguna
-                                    </p>
-
-                                    <p className="font-semibold text-gray-800">
-                                        {roleLabel}
-                                    </p>
-                                </div>
-
-                                {/* ID */}
-                                <div className="border-b border-gray-200 pb-4">
-                                    <p className="text-sm text-gray-500 mb-2">
-                                        ID Pengguna
-                                    </p>
-
-                                    <p className="font-semibold text-gray-800">
-                                        {user.id}
-                                    </p>
-                                </div>
-
                             </div>
 
-                            {/* Tombol Aksi */}
-                            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                            {/* Pesan Sukses */}
+                            {flash?.success && (
+                                <div className="mx-6 mt-5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 sm:mx-8">
+                                    {flash.success}
+                                </div>
+                            )}
 
-                                <button
-                                    type="button"
-                                    disabled
-                                    className="px-5 py-3 bg-gray-200 text-gray-500 rounded-lg cursor-not-allowed"
-                                    title="Fitur edit profil akan ditambahkan nanti"
+                            {/* Tampilan Informasi Profil */}
+                            {!isEditing ? (
+                                <>
+                                    <div className="grid grid-cols-1 gap-5 p-6 sm:grid-cols-2 sm:p-8">
+                                        {profileItems.map((item) => (
+                                            <div
+                                                key={item.label}
+                                                className="rounded-xl border border-[#e7f0ee] bg-[#fbfdfc] p-4 transition hover:border-[#b8d9ce]"
+                                            >
+                                                <div className="flex items-start gap-3">
+                                                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#e5f5ef] text-sm font-semibold text-[#087b68]">
+                                                        {item.icon}
+                                                    </div>
+
+                                                    <div className="min-w-0 flex-1">
+                                                        <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                                                            {item.label}
+                                                        </p>
+
+                                                        <p className="mt-2 break-words text-sm font-semibold text-[#123b49]">
+                                                            {item.value}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Actions */}
+                                    <div className="flex flex-col gap-3 border-t border-[#e7f0ee] bg-[#fbfdfc] px-6 py-5 sm:flex-row sm:px-8">
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsEditing(true)}
+                                            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#087b68] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#066456]"
+                                        >
+                                            ✎ Edit Profil
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            onClick={handleLogout}
+                                            className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#d4e4e1] bg-white px-5 py-3 text-sm font-semibold text-[#087b68] transition hover:bg-[#e5f5ef]"
+                                        >
+                                            Keluar dari Akun
+                                            <span>→</span>
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                /* Form Edit Profil */
+                                <form
+                                    onSubmit={handleSubmit}
+                                    className="space-y-6 p-6 sm:p-8"
                                 >
-                                    Edit Profil (Segera Hadir)
-                                </button>
+                                    {/* Upload Foto */}
+                                    <div className="rounded-2xl border border-dashed border-[#b8d9ce] bg-[#fbfdfc] p-5">
+                                        <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
 
-                                <button
-                                    onClick={logout}
-                                    className="px-5 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
-                                >
-                                    Logout
-                                </button>
+                                            {displayedAvatar ? (
+                                                <img
+                                                    src={displayedAvatar}
+                                                    alt="Preview foto profil"
+                                                    className="h-24 w-24 shrink-0 rounded-full border-4 border-white object-cover shadow"
+                                                />
+                                            ) : (
+                                                <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-[#d9f99d] text-3xl font-bold text-[#123b49]">
+                                                    {initial}
+                                                </div>
+                                            )}
 
-                            </div>
+                                            <div className="flex-1">
+                                                <h4 className="font-semibold text-[#123b49]">
+                                                    Foto Profil
+                                                </h4>
 
+                                                <p className="mt-1 text-sm text-slate-500">
+                                                    Pilih foto dengan format JPG,
+                                                    JPEG, PNG, atau WEBP.
+                                                    Maksimal 2 MB.
+                                                </p>
+
+                                                <input
+                                                    ref={fileInputRef}
+                                                    type="file"
+                                                    accept="image/jpeg,image/png,image/webp"
+                                                    onChange={handleAvatarChange}
+                                                    className="hidden"
+                                                />
+
+                                                <button
+                                                    type="button"
+                                                    onClick={() =>
+                                                        fileInputRef.current?.click()
+                                                    }
+                                                    className="mt-3 rounded-xl bg-[#087b68] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#066456]"
+                                                >
+                                                    Pilih Foto
+                                                </button>
+
+                                                {data.avatar && (
+                                                    <p className="mt-2 text-xs text-[#087b68]">
+                                                        Foto baru dipilih:{' '}
+                                                        {data.avatar.name}
+                                                    </p>
+                                                )}
+
+                                                {errors.avatar && (
+                                                    <p className="mt-2 text-sm text-red-600">
+                                                        {errors.avatar}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Nama Lengkap */}
+                                    <div>
+                                        <label
+                                            htmlFor="profile-name"
+                                            className="mb-2 block text-sm font-semibold text-[#123b49]"
+                                        >
+                                            Nama Lengkap
+                                        </label>
+
+                                        <input
+                                            id="profile-name"
+                                            type="text"
+                                            value={data.name}
+                                            onChange={(event) =>
+                                                setData('name', event.target.value)
+                                            }
+                                            className="w-full rounded-xl border border-[#d4e4e1] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#087b68] focus:ring-4 focus:ring-[#087b68]/10"
+                                            placeholder="Masukkan nama lengkap"
+                                        />
+
+                                        {errors.name && (
+                                            <p className="mt-1 text-sm text-red-600">
+                                                {errors.name}
+                                            </p>
+                                        )}
+                                    </div>
+
+                                    {/* Email */}
+                                    <div>
+                                        <label
+                                            htmlFor="profile-email"
+                                            className="mb-2 block text-sm font-semibold text-[#123b49]"
+                                        >
+                                            Email
+                                        </label>
+
+                                        <input
+                                            id="profile-email"
+                                            type="email"
+                                            value={data.email}
+                                            onChange={(event) =>
+                                                setData('email', event.target.value)
+                                            }
+                                            className="w-full rounded-xl border border-[#d4e4e1] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#087b68] focus:ring-4 focus:ring-[#087b68]/10"
+                                            placeholder="nama@email.com"
+                                        />
+
+                                        {errors.email && (
+                                            <p className="mt-1 text-sm text-red-600">
+                                                {errors.email}
+                                            </p>
+                                        )}
+                                    </div>
+
+                                    {/* Tombol Form */}
+                                    <div className="flex flex-col-reverse gap-3 border-t border-[#e7f0ee] pt-6 sm:flex-row sm:justify-end">
+                                        <button
+                                            type="button"
+                                            onClick={handleCancelEdit}
+                                            disabled={processing}
+                                            className="rounded-xl border border-[#d4e4e1] px-5 py-3 text-sm font-semibold text-[#42616a] transition hover:bg-[#f3f9f8] disabled:cursor-not-allowed disabled:opacity-50"
+                                        >
+                                            Batal
+                                        </button>
+
+                                        <button
+                                            type="submit"
+                                            disabled={processing}
+                                            className="rounded-xl bg-[#087b68] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#066456] disabled:cursor-not-allowed disabled:opacity-60"
+                                        >
+                                            {processing
+                                                ? 'Menyimpan...'
+                                                : 'Simpan Perubahan'}
+                                        </button>
+                                    </div>
+                                </form>
+                            )}
+                        </section>
+
+                        {/* Footer */}
+                        <div className="mt-8 rounded-2xl border border-[#d4e4e1] bg-white/70 px-5 py-4">
+                            <p className="text-sm leading-relaxed text-slate-500">
+                                <span className="font-semibold text-[#123b49]">
+                                    GeoBot
+                                </span>{' '}
+                                — Media pembelajaran klasifikasi iklim Köppen
+                                untuk mendukung kegiatan belajar mengajar.
+                            </p>
                         </div>
                     </div>
-
                 </main>
             </div>
         </>

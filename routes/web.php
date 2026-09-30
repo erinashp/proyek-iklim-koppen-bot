@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\UserProfileController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,7 @@ Route::get('/dashboard', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Student Dashboard
+| Student
 |--------------------------------------------------------------------------
 */
 
@@ -87,7 +88,7 @@ Route::get('/student/objectives', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Teacher Dashboard
+| Teacher
 |--------------------------------------------------------------------------
 */
 
@@ -99,20 +100,16 @@ Route::get('/teacher/dashboard', function () {
     'role:teacher',
 ])->name('teacher.dashboard');
 
+Route::middleware(['auth', 'verified', 'role:teacher'])->group(function () {
+    Route::get('/teacher/profile', function (Request $request) {
+        return Inertia::render('Teacher/Profile', [
+            'user' => $request->user(),
+        ]);
+    })->name('teacher.profile');
 
-/*
-|--------------------------------------------------------------------------
-| Teacher Profile
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/teacher/profile', function () {
-    return Inertia::render('Teacher/Profile');
-})->middleware([
-    'auth',
-    'verified',
-    'role:teacher',
-])->name('teacher.profile');
+    Route::put('/teacher/profile', [UserProfileController::class, 'update'])
+        ->name('teacher.profile.update');
+});
 
 
 
