@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
     {
         //Data Peserta Didik
         User::updateOrCreate(
-            ['email' => 'acintya@test.com'],
+            ['email' => 'acintya@smabhaone.com'],
             [
                 'name' => 'Acintya Ambarwati',
                 'password' => '14833',
@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate( 
-            ['email' => 'adelia@test.com'],
+            ['email' => 'adelia@smabhaone.com'],
             [
                 'name' => 'Adelia Martha Indria Putri',
                 'password' => '14834',
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'aldeq@test.com'],
+            ['email' => 'aldeq@smabhaone.com'],
             [
                 'name' => 'Aldeq Sultan Pratama',
                 'password' => '14847',
@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'alvin@test.com'],
+            ['email' => 'alvin@smabhaone.com'],
             [
                 'name' => 'Alvin Dwi Pramono',
                 'password' => '14850',
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'amelia@test.com'],
+            ['email' => 'amelia@smabhaone.com'],
             [
                 'name' => 'Amelia Maharani Wulandari',
                 'password' => '14855',
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'asyafira@test.com'],
+            ['email' => 'asyafira@smabhaone.com'],
             [
                 'name' => 'Asyafira Leyna Fiolita',
                 'password' => '14875',
@@ -71,7 +71,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'brian@test.com'],
+            ['email' => 'brian@smabhaone.com'],
             [
                 'name' => 'Brian Naufal Abbasy',
                 'password' => '14892',
@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'chantika@test.com'],
+            ['email' => 'chantika@smabhaone.com'],
             [
                 'name' => 'Chantika Efiyana Adhi Setya',
                 'password' => '14898',
@@ -91,7 +91,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'chelsea@test.com'],
+            ['email' => 'chelsea@smabhaone.com'],
             [
                 'name' => 'Chelsea Cahya Setiawan',
                 'password' => '14902',
@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'chyntia@test.com'],
+            ['email' => 'chyntia@smabhaone.com'],
             [
                 'name' => 'Chyntia Ariella',
                 'password' => '14904',
@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'Dhika@test.com'],
+            ['email' => 'Dhika@smabhaone.com'],
             [
                 'name' => 'Dika Firmansyah',
                 'password' => '14919',
@@ -121,7 +121,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'emilie@test.com'],
+            ['email' => 'emilie@smabhaone.com'],
             [
                 'name' => 'Emilie Audrey Hamdoyo',
                 'password' => '14929',
@@ -131,7 +131,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'farel@test.com'],
+            ['email' => 'farel@smabhaone.com'],
             [
                 'name' => 'Farel Andriano Koentoro',
                 'password' => '14937',
@@ -141,7 +141,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'farrena@test.com'],
+            ['email' => 'farrena@smabhaone.com'],
             [
                 'name' => 'Farrena Elyasa Winona',
                 'password' => '14940',
@@ -151,7 +151,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'ferdian@test.com'],
+            ['email' => 'ferdian@smabhaone.com'],
             [
                 'name' => 'Ferdian Pratama Putra',
                 'password' => '14946',
@@ -161,7 +161,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'hanunnah@test.com'],
+            ['email' => 'hanunnah@smabhaone.com'],
             [
                 'name' => 'Hanunnah Ismahani Hanifah',
                 'password' => '14960',
@@ -171,7 +171,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'hilmi@test.com'],
+            ['email' => 'hilmi@smabhaone.com'],
             [
                 'name' => 'Hilmi Ali Musyaffa',
                 'password' => '14965',
@@ -181,7 +181,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'melia@test.com'],
+            ['email' => 'melia@smabhaone.com'],
             [
                 'name' => 'Melia Sumartono',
                 'password' => '15000',
@@ -191,7 +191,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'moch.zheldano@test.com'],
+            ['email' => 'moch.zheldano@smabhaone.com'],
             [
                 'name' => 'Moch. Zheldano Agra Murphi',
                 'password' => '15003',
@@ -201,7 +201,7 @@ class DatabaseSeeder extends Seeder
         );
 
          User::updateOrCreate(
-            ['email' => 'muhammad.farid@test.com'],
+            ['email' => 'muhammad.farid@smabhaone.com'],
             [
                 'name' => 'Muhammad Farid Abyansyah',
                 'password' => '15014',
@@ -211,7 +211,7 @@ class DatabaseSeeder extends Seeder
         );
 
          User::updateOrCreate(
-            ['email' => 'muhammad.irfanuddaqiqi@test.com'],
+            ['email' => 'muhammad.irfanuddaqiqi@smabhaone.com'],
             [
                 'name' => 'Muhammad Irfanuddaqiqi Yaqin',
                 'password' => '15019',
@@ -221,7 +221,7 @@ class DatabaseSeeder extends Seeder
         );
 
          User::updateOrCreate(
-            ['email' => 'mustika@test.com'],
+            ['email' => 'mustika@smabhaone.com'],
             [
                 'name' => 'Mustika Ramadhani',
                 'password' => '15025',
@@ -231,7 +231,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'natasha@test.com'],
+            ['email' => 'natasha@smabhaone.com'],
             [
                 'name' => 'Natasha Aurora Fabriane',
                 'password' => '15034',
@@ -241,7 +241,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'nisrina@test.com'],
+            ['email' => 'nisrina@smabhaone.com'],
             [
                 'name' => 'Nisrina Nabil Ramadhanii',
                 'password' => '15041',
@@ -251,7 +251,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'putra@test.com'],
+            ['email' => 'putra@smabhaone.com'],
             [
                 'name' => 'Putra Danish Wijaya',
                 'password' => '15047',
@@ -261,7 +261,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'putri@test.com'],
+            ['email' => 'putri@smabhaone.com'],
             [
                 'name' => 'Putri Isnaini Kalyana',
                 'password' => '15048',
@@ -271,7 +271,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'rafansyah@test.com'],
+            ['email' => 'rafansyah@smabhaone.com'],
             [
                 'name' => 'Rafansyah Ramadhan Elmar',
                 'password' => '15053',
@@ -281,7 +281,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'rayhan@test.com'],
+            ['email' => 'rayhan@smabhaone.com'],
             [
                 'name' => 'Rayhan Vai Arifin',
                 'password' => '15058',
@@ -291,7 +291,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'rizky@test.com'],
+            ['email' => 'rizky@smabhaone.com'],
             [
                 'name' => 'Rizky Akhmal Minardi',
                 'password' => '15063',
@@ -301,7 +301,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'rr.zakia@test.com'],
+            ['email' => 'rr.zakia@smabhaone.com'],
             [
                 'name' => 'Rr. Zakia Nur Safitri',
                 'password' => '15065',
@@ -311,7 +311,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'syavalia@test.com'],
+            ['email' => 'syavalia@smabhaone.com'],
             [
                 'name' => 'Syavalia Sepzian Ramadhani',
                 'password' => '15090',
@@ -321,7 +321,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'tennofallah@test.com'],
+            ['email' => 'tennofallah@smabhaone.com'],
             [
                 'name' => 'Tennofallah Regina Putri Utama',
                 'password' => '15092',
@@ -331,7 +331,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'siswa@test.com'],
+            ['email' => 'siswa@smabhaone.com'],
             [
                 'name' => 'Siswa Test',
                 'password' => 'password123',
@@ -342,7 +342,7 @@ class DatabaseSeeder extends Seeder
 
         //Data Guru
         User::updateOrCreate(
-            ['email' => 'suaibatulislamiyah@test.com'],
+            ['email' => 'suaibatulislamiyah@smabhaone.com'],
             [
                 'name' => 'Suaibatul Islamiyah',
                 'password' => 'password123',
@@ -352,7 +352,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'royagata@test.com'],
+            ['email' => 'royagata@smabhaone.com'],
             [
                 'name' => 'Roy Agata',
                 'password' => 'password123',
@@ -362,7 +362,7 @@ class DatabaseSeeder extends Seeder
         );
 
         User::updateOrCreate(
-            ['email' => 'erinasaharani@test.com'],
+            ['email' => 'erinasaharani@smabhaone.com'],
             [
                 'name' => 'Erina Saharani Hermanto Putri',
                 'password' => 'password123',
