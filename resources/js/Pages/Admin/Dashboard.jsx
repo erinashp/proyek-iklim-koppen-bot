@@ -5,45 +5,93 @@ export default function Dashboard() {
     const { auth } = usePage().props;
     const user = auth?.user;
 
+    const initial = user?.name
+        ? user.name.charAt(0).toUpperCase()
+        : 'A';
+
     const handleLogout = () => {
         router.post(route('logout'));
     };
 
+    // Menu khusus admin
     const menuItems = [
         {
             title: 'Dashboard',
-            href: route('teacher.dashboard'),
+            href: route('admin.dashboard'),
             icon: '⌂',
             active: true,
         },
         {
-            title: 'Data Siswa',
-            href: '/teacher/students',
+            title: 'Data Guru',
+            href: '/admin/teachers',
             icon: '♙',
         },
         {
-            title: 'Nilai Siswa',
-            href: '/teacher/grades',
+            title: 'Data Siswa',
+            href: '/admin/students',
+            icon: '♧',
+        },
+        {
+            title: 'Materi Pembelajaran',
+            href: '/admin/materials',
+            icon: '▤',
+        },
+        {
+            title: 'Tantangan / Kuis',
+            href: '/admin/quizzes',
+            icon: '✎',
+        },
+        {
+            title: 'Hasil Kuis',
+            href: '/admin/grades',
             icon: '▥',
         },
     ];
 
-    const teacherFeatures = [
+    // Kartu fitur utama admin
+    const adminCards = [
         {
             number: '01',
-            title: 'Data Siswa',
+            title: 'Data Guru',
             description:
-                'Tambah akun siswa, lihat daftar siswa, dan kelola informasi data siswa yang terdaftar di GeoBot.',
-            href: '/teacher/students',
+                'Tambahkan akun guru baru dan lihat daftar guru yang terdaftar dalam sistem GeoBot.',
+            href: '/admin/teachers',
             icon: '♙',
-            action: 'Kelola Data Siswa',
+            action: 'Kelola Data Guru',
         },
         {
             number: '02',
+            title: 'Data Siswa',
+            description:
+                'Tambahkan siswa baru, lihat daftar siswa, dan kelola informasi akun siswa.',
+            href: '/admin/students',
+            icon: '♧',
+            action: 'Kelola Data Siswa',
+        },
+        {
+            number: '03',
+            title: 'Materi Pembelajaran',
+            description:
+                'Tambahkan dan kelola materi klasifikasi iklim Köppen sebagai sumber pembelajaran siswa.',
+            href: '/admin/materials',
+            icon: '▤',
+            action: 'Kelola Materi',
+        },
+        {
+            number: '04',
+            title: 'Tantangan / Kuis',
+            description:
+                'Buat dan kelola tantangan atau kuis untuk menguji pemahaman siswa mengenai klasifikasi iklim.',
+            href: '/admin/quizzes',
+            icon: '✎',
+            action: 'Kelola Tantangan',
+        },
+        {
+            number: '05',
             title: 'Hasil Kuis Siswa',
             description:
-                'Lihat hasil pengerjaan kuis siswa, periksa nilai, dan pantau perkembangan pemahaman siswa mengenai klasifikasi iklim Köppen.',
-            href: '/teacher/grades',
+                'Lihat hasil pengerjaan kuis dan pantau perkembangan belajar siswa.',
+            href: '/admin/grades',
             icon: '▥',
             action: 'Lihat Hasil Kuis',
         },
@@ -51,11 +99,13 @@ export default function Dashboard() {
 
     return (
         <>
-            <Head title="Dashboard Guru" />
+            <Head title="Dashboard Admin" />
 
             <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
-                {/* Sidebar */}
+
+                {/* Sidebar Kiri */}
                 <aside className="fixed inset-y-0 left-0 z-40 flex w-72 flex-col overflow-y-auto bg-gradient-to-b from-[#07384b] to-[#087b70] text-white">
+
                     {/* Logo */}
                     <div className="flex items-center gap-3 px-6 py-7">
                         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-2xl">
@@ -72,17 +122,18 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    {/* Panel Guru */}
+                    {/* Panel Admin */}
                     <div className="mx-5 rounded-2xl border border-white/15 bg-white/10 p-4">
                         <p className="text-xs font-medium uppercase tracking-wider text-teal-100">
-                            Panel Guru
+                            Panel Admin
                         </p>
+
                         <p className="mt-1 text-sm font-semibold">
-                            Pengelolaan siswa dan evaluasi
+                            Kelola sistem pembelajaran
                         </p>
                     </div>
 
-                    {/* Navigasi */}
+                    {/* Menu Navigasi */}
                     <nav className="mt-7 flex-1 space-y-2 px-4">
                         <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-teal-100/70">
                             Menu Utama
@@ -111,15 +162,14 @@ export default function Dashboard() {
                     <div className="border-t border-white/15 p-5">
                         <div className="flex items-center gap-3">
                             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#123b49]">
-                                {(user?.name ?? 'G')
-                                    .charAt(0)
-                                    .toUpperCase()}
+                                {initial}
                             </div>
 
                             <div className="min-w-0 flex-1">
                                 <p className="truncate text-sm font-semibold">
-                                    {user?.name ?? 'Guru'}
+                                    {user?.name ?? 'Admin'}
                                 </p>
+
                                 <p className="truncate text-xs text-teal-100">
                                     {user?.email ?? ''}
                                 </p>
@@ -128,13 +178,14 @@ export default function Dashboard() {
 
                         <div className="mt-4 grid grid-cols-2 gap-2">
                             <Link
-                                href={route('teacher.profile')}
+                                href={route('admin.profile')}
                                 className="rounded-lg border border-white/20 px-3 py-2 text-center text-xs font-medium transition hover:bg-white/10"
                             >
                                 Profil
                             </Link>
 
                             <button
+                                type="button"
                                 onClick={handleLogout}
                                 className="rounded-lg bg-white/15 px-3 py-2 text-xs font-medium transition hover:bg-white/25"
                             >
@@ -147,36 +198,35 @@ export default function Dashboard() {
                 {/* Main Content */}
                 <main className="ml-72 min-h-screen min-w-0">
                     <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8 sm:py-8">
+
                         {/* Header */}
                         <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <p className="text-sm font-medium text-[#087b68]">
-                                    Panel Pengajar
+                                    Panel Administrator
                                 </p>
 
                                 <h2 className="mt-1 text-2xl font-bold tracking-tight text-[#123b49] sm:text-3xl">
-                                    Dashboard Guru
+                                    Dashboard Admin
                                 </h2>
 
                                 <p className="mt-2 text-sm text-slate-500">
-                                    Kelola data siswa dan pantau hasil evaluasi
-                                    pembelajaran.
+                                    Kelola pengguna dan konten pembelajaran GeoBot.
                                 </p>
                             </div>
 
                             <div className="flex items-center gap-3 rounded-2xl border border-[#d4e4e1] bg-white px-4 py-3 shadow-sm">
                                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#123b49]">
-                                    {(user?.name ?? 'G')
-                                        .charAt(0)
-                                        .toUpperCase()}
+                                    {initial}
                                 </div>
 
                                 <div>
                                     <p className="text-sm font-semibold text-[#123b49]">
-                                        {user?.name ?? 'Guru'}
+                                        {user?.name ?? 'Admin'}
                                     </p>
+
                                     <p className="text-xs text-slate-500">
-                                        Selamat mengajar!
+                                        Administrator GeoBot
                                     </p>
                                 </div>
                             </div>
@@ -189,19 +239,18 @@ export default function Dashboard() {
 
                             <div className="relative z-10 max-w-2xl">
                                 <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-teal-50">
-                                    Ruang Kerja Guru
+                                    Ruang Kerja Administrator
                                 </span>
 
                                 <h3 className="mt-4 text-2xl font-bold leading-tight sm:text-3xl">
-                                    Selamat datang, {user?.name ?? 'Guru'}!
+                                    Selamat datang, {user?.name ?? 'Admin'}!
                                 </h3>
 
                                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-teal-50 sm:text-base">
-                                    Pantau kegiatan belajar siswa melalui
-                                    GeoBot. Kelola data siswa dan lihat hasil
-                                    kuis untuk mengetahui perkembangan
-                                    pemahaman mereka terhadap klasifikasi iklim
-                                    Köppen.
+                                    Kelola akun guru dan siswa, susun materi
+                                    pembelajaran klasifikasi iklim Köppen,
+                                    buat tantangan atau kuis, serta pantau
+                                    hasil belajar siswa melalui satu dashboard.
                                 </p>
                             </div>
                         </section>
@@ -209,18 +258,17 @@ export default function Dashboard() {
                         {/* Feature Section */}
                         <div className="mb-5">
                             <h3 className="text-xl font-bold text-[#123b49]">
-                                Fitur Guru
+                                Pengelolaan Sistem
                             </h3>
 
                             <p className="mt-1 text-sm text-slate-500">
-                                Pilih fitur sesuai kebutuhan pengelolaan siswa
-                                dan evaluasi pembelajaran.
+                                Pilih fitur yang ingin Anda kelola sebagai administrator.
                             </p>
                         </div>
 
                         {/* Feature Cards */}
-                        <section className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                            {teacherFeatures.map((card) => (
+                        <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                            {adminCards.map((card) => (
                                 <Link
                                     key={card.number}
                                     href={card.href}
@@ -255,29 +303,6 @@ export default function Dashboard() {
                                     </div>
                                 </Link>
                             ))}
-                        </section>
-
-                        {/* Informasi Hak Akses */}
-                        <section className="mt-8 rounded-2xl border border-[#d4e4e1] bg-white p-5">
-                            <div className="flex items-start gap-3">
-                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#e5f5ef] text-lg text-[#087b68]">
-                                    ℹ
-                                </div>
-
-                                <div>
-                                    <h3 className="font-semibold text-[#123b49]">
-                                        Informasi Hak Akses Guru
-                                    </h3>
-
-                                    <p className="mt-1 text-sm leading-relaxed text-slate-500">
-                                        Guru memiliki akses untuk mengelola
-                                        data siswa dan melihat hasil kuis.
-                                        Pengelolaan materi pembelajaran serta
-                                        pembuatan kuis dilakukan melalui akun
-                                        admin.
-                                    </p>
-                                </div>
-                            </div>
                         </section>
 
                         {/* Footer */}

@@ -289,7 +289,7 @@ export default function Modul5() {
                                 </div>
 
                                 <Link
-                                    href={route("student.chatbot")}
+                                    href={route("student.dashboard")}
                                     className="inline-flex shrink-0 items-center justify-center rounded-xl bg-lime-200 px-5 py-3 text-sm font-bold text-[#123b49] transition hover:bg-lime-100"
                                 >
                                     Coba di Chatbot →
