@@ -9,7 +9,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        //Data Peserta Didik
+        // Data Peserta Didik
         User::updateOrCreate(
             ['email' => 'acintya@test.com'],
             [
@@ -340,7 +340,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        //Data Guru
+        // Data Guru
         User::updateOrCreate(
             ['email' => 'suaibatulislamiyah@test.com'],
             [
@@ -361,12 +361,13 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        // Data Admin
         User::updateOrCreate(
             ['email' => 'erinasaharani@test.com'],
             [
                 'name' => 'Erina Saharani Hermanto Putri',
                 'password' => 'password123',
-                'role' => 'teacher',
+                'role' => 'admin',
                 'email_verified_at' => now(),
             ]
         );
