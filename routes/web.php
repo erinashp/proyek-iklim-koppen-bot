@@ -86,6 +86,29 @@ Route::middleware(['auth', 'verified', 'role:student'])
             ->name('profile.update');
     });
 
+Route::get('/student/modul-1', function () {
+    return Inertia::render('Student/Modul1');
+})->name('student.modul1');
+
+Route::get('/student/modul-2', function () {
+    return Inertia::render('Student/Modul2');
+})->name('student.modul2');
+
+Route::get('/student/modul-3', function () {
+    return Inertia::render('Student/Modul3');
+})->name('student.modul3');
+
+Route::get('/student/modul-4', function () {
+    return Inertia::render('Student/Modul4');
+})->name('student.modul4');
+
+Route::get('/student/modul-5', function () {
+    return Inertia::render('Student/Modul5');
+})->name('student.modul5');
+
+Route::get('/student/modul-6', function () {
+    return Inertia::render('Student/Modul6');
+})->name('student.modul6');
 
 /*
 |--------------------------------------------------------------------------

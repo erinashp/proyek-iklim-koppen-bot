@@ -69,7 +69,7 @@ export default function Material({ auth }) {
             title: 'Pengertian Klasifikasi Iklim',
             description:
                 'Mengenal pengertian iklim dan dasar klasifikasi iklim Köppen.',
-            href: '#modul-1',
+            href: route('student.modul1')
         },
         {
             number: 2,
@@ -77,7 +77,7 @@ export default function Material({ auth }) {
             title: 'Kriteria Suhu dan Curah Hujan',
             description:
                 'Memahami unsur suhu dan curah hujan yang digunakan dalam klasifikasi.',
-            href: '#modul-2',
+            href: route('student.modul2')
         },
         {
             number: 3,
@@ -85,7 +85,7 @@ export default function Material({ auth }) {
             title: 'Kelompok Iklim A, B, C, D, dan E',
             description:
                 'Mengenal lima kelompok utama iklim berdasarkan sistem Köppen.',
-            href: '#modul-3',
+            href: route('student.modul3')
         },
         {
             number: 4,
@@ -93,7 +93,7 @@ export default function Material({ auth }) {
             title: 'Perbedaan Tipe Iklim yang Mirip',
             description:
                 'Membandingkan karakteristik tipe iklim yang memiliki ciri serupa.',
-            href: '#modul-4',
+            href: route('student.modul4')
         },
         {
             number: 5,
@@ -101,7 +101,7 @@ export default function Material({ auth }) {
             title: 'Klasifikasi Wilayah Berdasarkan Data',
             description:
                 'Berlatih membaca data suhu dan curah hujan untuk menentukan tipe iklim.',
-            href: '#modul-5',
+            href: route('student.modul5')
         },
         {
             number: 6,
@@ -109,7 +109,7 @@ export default function Material({ auth }) {
             title: 'Dampak Iklim terhadap Kehidupan',
             description:
                 'Menghubungkan karakteristik iklim dengan lingkungan dan aktivitas manusia.',
-            href: '#modul-6',
+            href: route('student.modul6')
         },
     ];
 
