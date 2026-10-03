@@ -1,13 +1,12 @@
-
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Teacher\StudentController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Teacher\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,22 +59,27 @@ Route::middleware(['auth', 'verified', 'role:student'])
     ->name('student.')
     ->group(function () {
 
+        // Dashboard Siswa
         Route::get('/dashboard', function () {
             return Inertia::render('Student/Dashboard');
         })->name('dashboard');
 
+        // Panduan Belajar
         Route::get('/guide', function () {
             return Inertia::render('Student/Guide');
         })->name('guide');
 
+        // Materi Pembelajaran
         Route::get('/material', function () {
             return Inertia::render('Student/Material');
         })->name('material');
 
+        // Tujuan Pembelajaran
         Route::get('/objectives', function () {
             return Inertia::render('Student/Objectives');
         })->name('objectives');
 
+        // Profil Siswa
         Route::get('/profile', function (Request $request) {
             return Inertia::render('Student/Profile', [
                 'user' => $request->user(),
@@ -86,41 +90,54 @@ Route::middleware(['auth', 'verified', 'role:student'])
             ->name('profile.update');
     });
 
-Route::get('/student/modul-1', function () {
-    return Inertia::render('Student/Modul1');
-})->name('student.modul1');
 
-Route::get('/student/modul-2', function () {
-    return Inertia::render('Student/Modul2');
-})->name('student.modul2');
+/*
+|--------------------------------------------------------------------------
+| Student Learning Modules
+|--------------------------------------------------------------------------
+|
+| Route modul pembelajaran iklim Köppen.
+| Route ini tetap menggunakan nama student.modul1 sampai student.modul6.
+|
+*/
 
-Route::get('/student/modul-3', function () {
-    return Inertia::render('Student/Modul3');
-})->name('student.modul3');
+Route::middleware(['auth', 'verified', 'role:student'])->group(function () {
 
-Route::get('/student/modul-4', function () {
-    return Inertia::render('Student/Modul4');
-})->name('student.modul4');
+    Route::get('/student/modul-1', function () {
+        return Inertia::render('Student/Modul1');
+    })->name('student.modul1');
 
-Route::get('/student/modul-5', function () {
-    return Inertia::render('Student/Modul5');
-})->name('student.modul5');
+    Route::get('/student/modul-2', function () {
+        return Inertia::render('Student/Modul2');
+    })->name('student.modul2');
 
-Route::get('/student/modul-6', function () {
-    return Inertia::render('Student/Modul6');
-})->name('student.modul6');
+    Route::get('/student/modul-3', function () {
+        return Inertia::render('Student/Modul3');
+    })->name('student.modul3');
+
+    Route::get('/student/modul-4', function () {
+        return Inertia::render('Student/Modul4');
+    })->name('student.modul4');
+
+    Route::get('/student/modul-5', function () {
+        return Inertia::render('Student/Modul5');
+    })->name('student.modul5');
+
+    Route::get('/student/modul-6', function () {
+        return Inertia::render('Student/Modul6');
+    })->name('student.modul6');
+});
+
 
 /*
 |--------------------------------------------------------------------------
 | Teacher Routes
 |--------------------------------------------------------------------------
 |
-| Guru dapat:
-| - Mengelola data siswa
-| - Melihat hasil kuis siswa
-| - Mengelola profil sendiri
-|
-| Guru tidak memiliki route untuk membuat materi atau kuis.
+| Semua route guru menggunakan:
+| URL prefix : /teacher
+| Route name : teacher.
+| Middleware : auth, verified, role:teacher
 |
 */
 
@@ -129,10 +146,12 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
     ->name('teacher.')
     ->group(function () {
 
+        // Dashboard Guru
         Route::get('/dashboard', function () {
             return Inertia::render('Teacher/Dashboard');
         })->name('dashboard');
 
+        // Profil Guru
         Route::get('/profile', function (Request $request) {
             return Inertia::render('Teacher/Profile', [
                 'user' => $request->user(),
@@ -142,15 +161,24 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         Route::put('/profile', [UserProfileController::class, 'update'])
             ->name('profile.update');
 
-            Route::get('/students', [StudentController::class, 'index'])
-        ->name('students.index');
+        Route::get('/guide', function () {
+            return Inertia::render('Teacher/Guide');
+        })->name('guide');
+
+        Route::delete('/students/{student}', [StudentController::class, 'destroy'])
+        ->name('students.destroy');
 
         /*
-         * Route Hasil Kuis
-         *
-         * Tambahkan route hasil kuis di sini ketika controller
-         * hasil kuis sudah dibuat.
+         * Data Siswa
          */
+
+        // Menampilkan daftar siswa
+        Route::get('/students', [StudentController::class, 'index'])
+            ->name('students.index');
+
+        // Menyimpan akun siswa baru
+        Route::post('/students', [StudentController::class, 'store'])
+            ->name('students.store');
     });
 
 
@@ -169,17 +197,17 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 |
 */
 
-Route::middleware(['auth', 'verified', 'role:admin'])
-    ->prefix('admin')
-    ->name('admin.')
+Route::middleware(['auth', 'verified', 'role:teacher'])
+    ->prefix('teacher')
+    ->name('teacher.')
     ->group(function () {
 
-        Route::get('/dashboard', function () {
-            return Inertia::render('Admin/Dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', fn () =>
+            Inertia::render('Teacher/Dashboard')
+        )->name('dashboard');
 
         Route::get('/profile', function (Request $request) {
-            return Inertia::render('Admin/Profile', [
+            return Inertia::render('Teacher/Profile', [
                 'user' => $request->user(),
             ]);
         })->name('profile');
@@ -187,11 +215,32 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         Route::put('/profile', [UserProfileController::class, 'update'])
             ->name('profile.update');
 
-        /*
-         * Route Data Guru
-         *
-         * Tambahkan route CRUD guru di sini.
-         */
+        Route::get('/students', [StudentController::class, 'index'])
+            ->name('students.index');
+
+        Route::post('/students', [StudentController::class, 'store'])
+            ->name('students.store');
+
+        // TUJUAN PEMBELAJARAN
+        Route::get('/objectives', fn () =>
+            Inertia::render('Teacher/Objectives')
+        )->name('objectives');
+
+        // PANDUAN
+        Route::get('/guide', fn () =>
+            Inertia::render('Teacher/Guide')
+        )->name('guide');
+
+        // DAFTAR MATERI
+        Route::get('/materials', function () {
+            return Inertia::render('Teacher/Materials/Index');
+        })->name('materials.index');
+
+        // DETAIL MODUL 1 - 6
+        Route::get('/materials/{material}', function ($material) {
+            return Inertia::render("Teacher/Materials/Modul{$material}");
+        })->whereNumber('material')->name('materials.show');
+    });
 
         /*
          * Route Data Siswa
@@ -216,8 +265,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])
          *
          * Tambahkan route hasil kuis di sini.
          */
-    });
-
 
 /*
 |--------------------------------------------------------------------------
@@ -225,7 +272,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 |--------------------------------------------------------------------------
 |
 | Route profil bawaan Laravel Breeze.
-| Nama route profile.update tetap digunakan oleh Breeze.
 |
 */
 

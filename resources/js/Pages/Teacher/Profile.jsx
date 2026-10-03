@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Head, Link, usePage, router, useForm } from '@inertiajs/react';
+import React, { useEffect, useRef, useState } from "react";
+import { Head, Link, usePage, router, useForm } from "@inertiajs/react";
+import TeacherSidebar from "@/Components/TeacherSidebar";
 
 export default function Profile() {
     const { auth, user: pageUser, flash } = usePage().props;
     const user = pageUser ?? auth?.user ?? {};
 
-    const roleLabel = 'Guru';
+    const roleLabel = "Guru";
 
     const [isEditing, setIsEditing] = useState(false);
     const [preview, setPreview] = useState(null);
@@ -20,15 +21,15 @@ export default function Profile() {
         errors,
         reset,
     } = useForm({
-        name: user?.name ?? '',
-        email: user?.email ?? '',
+        name: user?.name ?? "",
+        email: user?.email ?? "",
         avatar: null,
-        _method: 'put',
+        _method: "put",
     });
 
     const initial = data.name
         ? data.name.charAt(0).toUpperCase()
-        : 'G';
+        : "G";
 
     const avatarUrl = user?.avatar
         ? `/storage/${user.avatar}`
@@ -46,7 +47,7 @@ export default function Profile() {
     }, [preview]);
 
     const handleLogout = () => {
-        router.post(route('logout'));
+        router.post(route("logout"));
     };
 
     // Memilih foto profil dan menampilkan preview.
@@ -55,7 +56,7 @@ export default function Profile() {
 
         if (!file) return;
 
-        setData('avatar', file);
+        setData("avatar", file);
 
         if (preview) {
             URL.revokeObjectURL(preview);
@@ -68,7 +69,7 @@ export default function Profile() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        post(route('teacher.profile.update'), {
+        post(route("teacher.profile.update"), {
             forceFormData: true,
             preserveScroll: true,
 
@@ -77,7 +78,7 @@ export default function Profile() {
                 setPreview(null);
 
                 if (fileInputRef.current) {
-                    fileInputRef.current.value = '';
+                    fileInputRef.current.value = "";
                 }
             },
         });
@@ -90,172 +91,51 @@ export default function Profile() {
         setIsEditing(false);
 
         if (fileInputRef.current) {
-            fileInputRef.current.value = '';
+            fileInputRef.current.value = "";
         }
     };
 
-    const menuItems = [
-        {
-            title: 'Dashboard',
-            href: route('teacher.dashboard'),
-            icon: '⌂',
-        },
-        {
-            title: 'Data Siswa',
-            href: '/teacher/students',
-            icon: '♙',
-        },
-        {
-            title: 'Materi Pembelajaran',
-            href: '/teacher/materials',
-            icon: '▤',
-        },
-        {
-            title: 'Kuis',
-            href: '/teacher/quizzes',
-            icon: '✎',
-        },
-        {
-            title: 'Nilai Siswa',
-            href: '/teacher/grades',
-            icon: '▥',
-        },
-    ];
-
     const profileItems = [
         {
-            label: 'Nama Lengkap',
-            value: user?.name ?? '-',
-            icon: '♙',
+            label: "Nama Lengkap",
+            value: user?.name ?? "-",
+            icon: "♙",
         },
         {
-            label: 'Username',
-            value: user?.username ?? '-',
-            icon: '@',
+            label: "Username",
+            value: user?.username ?? "-",
+            icon: "@",
         },
         {
-            label: 'Email',
-            value: user?.email ?? '-',
-            icon: '✉',
+            label: "Email",
+            value: user?.email ?? "-",
+            icon: "✉",
         },
         {
-            label: 'Role Pengguna',
+            label: "Role Pengguna",
             value: roleLabel,
-            icon: '▣',
+            icon: "▣",
         },
         {
-            label: 'ID Pengguna',
-            value: user?.id ?? '-',
-            icon: '#',
+            label: "ID Pengguna",
+            value: user?.id ?? "-",
+            icon: "#",
         },
     ];
 
     return (
         <>
-            <Head title="Profil Guru" />
+            <Head title="Profil Guru - GeoBot" />
 
             <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
+                {/* SIDEBAR DARI COMPONENT BERSAMA */}
+                <TeacherSidebar />
 
-                {/* Sidebar Kiri */}
-                <aside className="fixed inset-y-0 left-0 z-40 flex w-72 flex-col overflow-y-auto bg-gradient-to-b from-[#07384b] to-[#087b70] text-white">
+                {/* MAIN CONTENT */}
+                <main className="min-h-screen min-w-0 lg:ml-72">
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
 
-                    {/* Logo */}
-                    <div className="flex items-center gap-3 px-6 py-7">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-2xl">
-                            🌍
-                        </div>
-
-                        <div>
-                            <h1 className="text-lg font-bold tracking-wide">
-                                GeoBot
-                            </h1>
-                            <p className="text-xs text-teal-100">
-                                Media Pembelajaran Iklim
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Panel Guru */}
-                    <div className="mx-5 rounded-2xl border border-white/15 bg-white/10 p-4">
-                        <p className="text-xs font-medium uppercase tracking-wider text-teal-100">
-                            Panel Guru
-                        </p>
-                        <p className="mt-1 text-sm font-semibold">
-                            Kelola pembelajaran
-                        </p>
-                    </div>
-
-                    {/* Menu Navigasi */}
-                    <nav className="mt-7 flex-1 space-y-2 px-4">
-                        <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-teal-100/70">
-                            Menu Utama
-                        </p>
-
-                        {menuItems.map((item) => (
-                            <Link
-                                key={item.title}
-                                href={item.href}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-lg">
-                                    {item.icon}
-                                </span>
-
-                                {item.title}
-                            </Link>
-                        ))}
-                    </nav>
-
-                    {/* Identitas dan Logout */}
-                    <div className="border-t border-white/15 p-5">
-                        <div className="flex items-center gap-3">
-
-                            {displayedAvatar ? (
-                                <img
-                                    src={displayedAvatar}
-                                    alt="Foto profil guru"
-                                    className="h-10 w-10 shrink-0 rounded-full border-2 border-white/30 object-cover"
-                                />
-                            ) : (
-                                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#123b49]">
-                                    {initial}
-                                </div>
-                            )}
-
-                            <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-semibold">
-                                    {user?.name ?? 'Guru'}
-                                </p>
-                                <p className="truncate text-xs text-teal-100">
-                                    {user?.email ?? ''}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="mt-4 grid grid-cols-2 gap-2">
-                            <Link
-                                href={route('teacher.profile')}
-                                className="rounded-lg bg-white px-3 py-2 text-center text-xs font-semibold text-[#087b68] shadow-sm"
-                            >
-                                Profil
-                            </Link>
-
-                            <button
-                                type="button"
-                                onClick={handleLogout}
-                                className="rounded-lg bg-white/15 px-3 py-2 text-xs font-medium transition hover:bg-white/25"
-                            >
-                                Keluar
-                            </button>
-                        </div>
-                    </div>
-                </aside>
-
-                {/* Main Content */}
-                <main className="ml-72 min-h-screen min-w-0">
-                    <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8 sm:py-8">
-
-                        {/* Header */}
+                        {/* HEADER */}
                         <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <p className="text-sm font-medium text-[#087b68]">
@@ -272,7 +152,7 @@ export default function Profile() {
                             </div>
 
                             <Link
-                                href={route('teacher.dashboard')}
+                                href={route("teacher.dashboard")}
                                 className="inline-flex items-center justify-center gap-2 self-start rounded-xl border border-[#d4e4e1] bg-white px-4 py-3 text-sm font-semibold text-[#087b68] shadow-sm transition hover:bg-[#e5f5ef]"
                             >
                                 <span>←</span>
@@ -280,14 +160,13 @@ export default function Profile() {
                             </Link>
                         </header>
 
-                        {/* Profile Banner */}
+                        {/* PROFILE BANNER */}
                         <section className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-[#07384b] to-[#087b70] p-6 text-white shadow-lg sm:p-8">
                             <div className="absolute -right-10 -top-16 h-56 w-56 rounded-full border-[30px] border-white/5" />
                             <div className="absolute -bottom-24 right-36 h-48 w-48 rounded-full bg-white/5" />
 
                             <div className="relative z-10 flex flex-col items-center gap-5 sm:flex-row">
-
-                                {/* Foto Profil Banner */}
+                                {/* FOTO PROFIL */}
                                 {displayedAvatar ? (
                                     <img
                                         src={displayedAvatar}
@@ -306,11 +185,11 @@ export default function Profile() {
                                     </span>
 
                                     <h3 className="mt-3 text-2xl font-bold sm:text-3xl">
-                                        {user?.name ?? 'Guru'}
+                                        {user?.name ?? "Guru"}
                                     </h3>
 
                                     <p className="mt-1 break-all text-sm text-teal-100">
-                                        {user?.email ?? ''}
+                                        {user?.email ?? ""}
                                     </p>
 
                                     <span className="mt-3 inline-flex rounded-full bg-white px-4 py-1.5 text-xs font-semibold text-[#087b68]">
@@ -320,10 +199,10 @@ export default function Profile() {
                             </div>
                         </section>
 
-                        {/* Informasi Akun */}
+                        {/* INFORMASI AKUN */}
                         <section className="overflow-hidden rounded-2xl border border-[#d4e4e1] bg-white shadow-sm">
 
-                            {/* Section Header */}
+                            {/* SECTION HEADER */}
                             <div className="border-b border-[#e7f0ee] px-6 py-5 sm:px-8">
                                 <div className="flex items-center gap-3">
                                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#e5f5ef] text-lg text-[#087b68]">
@@ -334,6 +213,7 @@ export default function Profile() {
                                         <h3 className="font-bold text-[#123b49]">
                                             Informasi Pengguna
                                         </h3>
+
                                         <p className="mt-1 text-xs text-slate-500">
                                             Detail identitas akun yang sedang digunakan.
                                         </p>
@@ -341,14 +221,17 @@ export default function Profile() {
                                 </div>
                             </div>
 
-                            {/* Pesan Sukses */}
+                            {/* PESAN SUKSES */}
                             {flash?.success && (
-                                <div className="mx-6 mt-5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 sm:mx-8">
+                                <div
+                                    role="alert"
+                                    className="mx-6 mt-5 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 sm:mx-8"
+                                >
                                     {flash.success}
                                 </div>
                             )}
 
-                            {/* Tampilan Informasi Profil */}
+                            {/* TAMPILAN INFORMASI PROFIL */}
                             {!isEditing ? (
                                 <>
                                     <div className="grid grid-cols-1 gap-5 p-6 sm:grid-cols-2 sm:p-8">
@@ -376,7 +259,7 @@ export default function Profile() {
                                         ))}
                                     </div>
 
-                                    {/* Actions */}
+                                    {/* ACTION BUTTONS */}
                                     <div className="flex flex-col gap-3 border-t border-[#e7f0ee] bg-[#fbfdfc] px-6 py-5 sm:flex-row sm:px-8">
                                         <button
                                             type="button"
@@ -397,15 +280,14 @@ export default function Profile() {
                                     </div>
                                 </>
                             ) : (
-                                /* Form Edit Profil */
+                                /* FORM EDIT PROFIL */
                                 <form
                                     onSubmit={handleSubmit}
                                     className="space-y-6 p-6 sm:p-8"
                                 >
-                                    {/* Upload Foto */}
+                                    {/* UPLOAD FOTO */}
                                     <div className="rounded-2xl border border-dashed border-[#b8d9ce] bg-[#fbfdfc] p-5">
                                         <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-
                                             {displayedAvatar ? (
                                                 <img
                                                     src={displayedAvatar}
@@ -449,7 +331,7 @@ export default function Profile() {
 
                                                 {data.avatar && (
                                                     <p className="mt-2 text-xs text-[#087b68]">
-                                                        Foto baru dipilih:{' '}
+                                                        Foto baru dipilih:{" "}
                                                         {data.avatar.name}
                                                     </p>
                                                 )}
@@ -463,7 +345,7 @@ export default function Profile() {
                                         </div>
                                     </div>
 
-                                    {/* Nama Lengkap */}
+                                    {/* NAMA LENGKAP */}
                                     <div>
                                         <label
                                             htmlFor="profile-name"
@@ -477,7 +359,7 @@ export default function Profile() {
                                             type="text"
                                             value={data.name}
                                             onChange={(event) =>
-                                                setData('name', event.target.value)
+                                                setData("name", event.target.value)
                                             }
                                             className="w-full rounded-xl border border-[#d4e4e1] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#087b68] focus:ring-4 focus:ring-[#087b68]/10"
                                             placeholder="Masukkan nama lengkap"
@@ -490,7 +372,7 @@ export default function Profile() {
                                         )}
                                     </div>
 
-                                    {/* Email */}
+                                    {/* EMAIL */}
                                     <div>
                                         <label
                                             htmlFor="profile-email"
@@ -504,7 +386,7 @@ export default function Profile() {
                                             type="email"
                                             value={data.email}
                                             onChange={(event) =>
-                                                setData('email', event.target.value)
+                                                setData("email", event.target.value)
                                             }
                                             className="w-full rounded-xl border border-[#d4e4e1] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#087b68] focus:ring-4 focus:ring-[#087b68]/10"
                                             placeholder="nama@email.com"
@@ -517,7 +399,7 @@ export default function Profile() {
                                         )}
                                     </div>
 
-                                    {/* Tombol Form */}
+                                    {/* TOMBOL FORM */}
                                     <div className="flex flex-col-reverse gap-3 border-t border-[#e7f0ee] pt-6 sm:flex-row sm:justify-end">
                                         <button
                                             type="button"
@@ -534,24 +416,24 @@ export default function Profile() {
                                             className="rounded-xl bg-[#087b68] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#066456] disabled:cursor-not-allowed disabled:opacity-60"
                                         >
                                             {processing
-                                                ? 'Menyimpan...'
-                                                : 'Simpan Perubahan'}
+                                                ? "Menyimpan..."
+                                                : "Simpan Perubahan"}
                                         </button>
                                     </div>
                                 </form>
                             )}
                         </section>
 
-                        {/* Footer */}
-                        <div className="mt-8 rounded-2xl border border-[#d4e4e1] bg-white/70 px-5 py-4">
+                        {/* FOOTER */}
+                        <footer className="mt-8 rounded-2xl border border-[#d4e4e1] bg-white/70 px-5 py-4">
                             <p className="text-sm leading-relaxed text-slate-500">
                                 <span className="font-semibold text-[#123b49]">
                                     GeoBot
-                                </span>{' '}
+                                </span>{" "}
                                 — Media pembelajaran klasifikasi iklim Köppen
                                 untuk mendukung kegiatan belajar mengajar.
                             </p>
-                        </div>
+                        </footer>
                     </div>
                 </main>
             </div>

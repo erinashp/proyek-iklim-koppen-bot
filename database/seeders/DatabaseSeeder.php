@@ -330,16 +330,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        User::updateOrCreate(
-            ['email' => 'siswa@smabhaone.com'],
-            [
-                'name' => 'Siswa Test',
-                'password' => 'password123',
-                'role' => 'student',
-                'email_verified_at' => now(),
-            ]
-        );
-
         // Data Guru
         User::updateOrCreate(
             ['email' => 'suaibatulislamiyah@smabhaone.com'],

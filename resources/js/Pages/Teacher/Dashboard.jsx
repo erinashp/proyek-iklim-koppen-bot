@@ -1,153 +1,80 @@
-import React from 'react';
-import { Head, Link, usePage, router } from '@inertiajs/react';
+import React from "react";
+import { Head, Link, usePage } from "@inertiajs/react";
+import TeacherSidebar from "@/Components/TeacherSidebar";
 
 export default function Dashboard() {
     const { auth } = usePage().props;
     const user = auth?.user;
 
-    const handleLogout = () => {
-        router.post(route('logout'));
-    };
-
-    const menuItems = [
-        {
-            title: 'Dashboard',
-            href: route('teacher.dashboard'),
-            icon: '⌂',
-            active: true,
-        },
-        {
-            title: 'Data Siswa',
-            href: '/teacher/students',
-            icon: '♙',
-        },
-        {
-            title: 'Nilai Siswa',
-            href: '/teacher/grades',
-            icon: '▥',
-        },
-    ];
-
     const teacherFeatures = [
         {
-            number: '01',
-            title: 'Data Siswa',
+            number: "01",
+            title: "Materi Pembelajaran",
             description:
-                'Tambah akun siswa, lihat daftar siswa, dan kelola informasi data siswa yang terdaftar di GeoBot.',
-            href: '/teacher/students',
-            icon: '♙',
-            action: 'Kelola Data Siswa',
+                "Buka materi pembelajaran klasifikasi iklim Köppen dan pelajari konten yang tersedia di GeoBot.",
+            href: "/teacher/materials",
+            icon: "▧",
+            action: "Buka Materi",
         },
         {
-            number: '02',
-            title: 'Hasil Kuis Siswa',
+            number: "02",
+            title: "Chatbot GeoBot",
             description:
-                'Lihat hasil pengerjaan kuis siswa, periksa nilai, dan pantau perkembangan pemahaman siswa mengenai klasifikasi iklim Köppen.',
-            href: '/teacher/grades',
-            icon: '▥',
-            action: 'Lihat Hasil Kuis',
+                "Gunakan chatbot untuk mencoba klasifikasi iklim berdasarkan data suhu dan curah hujan.",
+            href: "/teacher/chatbot",
+            icon: "☏",
+            action: "Buka Chatbot",
+        },
+        {
+            number: "03",
+            title: "Data Siswa",
+            description:
+                "Tambah akun siswa dan lihat daftar siswa yang terdaftar di GeoBot.",
+            href: route("teacher.students.index"),
+            icon: "♙",
+            action: "Kelola Data Siswa",
+        },
+        {
+            number: "04",
+            title: "Tambah Materi",
+            description:
+                "Buat dan tambahkan materi pembelajaran baru untuk mendukung kegiatan belajar siswa.",
+            href: "/teacher/materials/create",
+            icon: "＋",
+            action: "Tambah Materi",
+        },
+        {
+            number: "05",
+            title: "Tambah Quiz",
+            description:
+                "Buat kuis untuk mengevaluasi pemahaman siswa mengenai klasifikasi iklim Köppen.",
+            href: "/teacher/quizzes/create",
+            icon: "✎",
+            action: "Buat Quiz",
+        },
+        {
+            number: "06",
+            title: "Hasil Kuis Siswa",
+            description:
+                "Lihat hasil pengerjaan kuis, periksa nilai, dan pantau perkembangan pemahaman siswa.",
+            href: "/teacher/grades",
+            icon: "▥",
+            action: "Lihat Hasil Kuis",
         },
     ];
 
     return (
         <>
-            <Head title="Dashboard Guru" />
+            <Head title="Dashboard Guru - GeoBot" />
 
             <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
-                {/* Sidebar */}
-                <aside className="fixed inset-y-0 left-0 z-40 flex w-72 flex-col overflow-y-auto bg-gradient-to-b from-[#07384b] to-[#087b70] text-white">
-                    {/* Logo */}
-                    <div className="flex items-center gap-3 px-6 py-7">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-2xl">
-                            🌍
-                        </div>
+                {/* SIDEBAR BERSAMA */}
+                <TeacherSidebar />
 
-                        <div>
-                            <h1 className="text-lg font-bold tracking-wide">
-                                GeoBot
-                            </h1>
-                            <p className="text-xs text-teal-100">
-                                Media Pembelajaran Iklim
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Panel Guru */}
-                    <div className="mx-5 rounded-2xl border border-white/15 bg-white/10 p-4">
-                        <p className="text-xs font-medium uppercase tracking-wider text-teal-100">
-                            Panel Guru
-                        </p>
-                        <p className="mt-1 text-sm font-semibold">
-                            Pengelolaan siswa dan evaluasi
-                        </p>
-                    </div>
-
-                    {/* Navigasi */}
-                    <nav className="mt-7 flex-1 space-y-2 px-4">
-                        <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wider text-teal-100/70">
-                            Menu Utama
-                        </p>
-
-                        {menuItems.map((item) => (
-                            <Link
-                                key={item.title}
-                                href={item.href}
-                                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
-                                    item.active
-                                        ? 'bg-white text-[#087b68] shadow-lg'
-                                        : 'text-teal-50 hover:bg-white/10'
-                                }`}
-                            >
-                                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 text-lg">
-                                    {item.icon}
-                                </span>
-
-                                {item.title}
-                            </Link>
-                        ))}
-                    </nav>
-
-                    {/* Profil dan Logout */}
-                    <div className="border-t border-white/15 p-5">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#123b49]">
-                                {(user?.name ?? 'G')
-                                    .charAt(0)
-                                    .toUpperCase()}
-                            </div>
-
-                            <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-semibold">
-                                    {user?.name ?? 'Guru'}
-                                </p>
-                                <p className="truncate text-xs text-teal-100">
-                                    {user?.email ?? ''}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="mt-4 grid grid-cols-2 gap-2">
-                            <Link
-                                href={route('teacher.profile')}
-                                className="rounded-lg border border-white/20 px-3 py-2 text-center text-xs font-medium transition hover:bg-white/10"
-                            >
-                                Profil
-                            </Link>
-
-                            <button
-                                onClick={handleLogout}
-                                className="rounded-lg bg-white/15 px-3 py-2 text-xs font-medium transition hover:bg-white/25"
-                            >
-                                Keluar
-                            </button>
-                        </div>
-                    </div>
-                </aside>
-
-                {/* Main Content */}
-                <main className="ml-72 min-h-screen min-w-0">
-                    <div className="mx-auto max-w-7xl px-5 py-6 sm:px-8 sm:py-8">
-                        {/* Header */}
+                {/* MAIN CONTENT */}
+                <main className="min-h-screen min-w-0 lg:ml-72">
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+                        {/* HEADER */}
                         <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                                 <p className="text-sm font-medium text-[#087b68]">
@@ -158,23 +85,24 @@ export default function Dashboard() {
                                     Dashboard Guru
                                 </h2>
 
-                                <p className="mt-2 text-sm text-slate-500">
-                                    Kelola data siswa dan pantau hasil evaluasi
-                                    pembelajaran.
+                                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-500">
+                                    Akses pembelajaran, kelola siswa, buat
+                                    materi dan kuis, serta pantau hasil evaluasi.
                                 </p>
                             </div>
 
                             <div className="flex items-center gap-3 rounded-2xl border border-[#d4e4e1] bg-white px-4 py-3 shadow-sm">
                                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#123b49]">
-                                    {(user?.name ?? 'G')
+                                    {(user?.name ?? "G")
                                         .charAt(0)
                                         .toUpperCase()}
                                 </div>
 
-                                <div>
-                                    <p className="text-sm font-semibold text-[#123b49]">
-                                        {user?.name ?? 'Guru'}
+                                <div className="min-w-0">
+                                    <p className="max-w-[180px] truncate text-sm font-semibold text-[#123b49]">
+                                        {user?.name ?? "Guru"}
                                     </p>
+
                                     <p className="text-xs text-slate-500">
                                         Selamat mengajar!
                                     </p>
@@ -182,9 +110,10 @@ export default function Dashboard() {
                             </div>
                         </header>
 
-                        {/* Welcome Banner */}
+                        {/* WELCOME BANNER */}
                         <section className="relative mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-[#07384b] to-[#087b70] p-6 text-white shadow-lg sm:p-8">
                             <div className="absolute -right-10 -top-16 h-56 w-56 rounded-full border-[30px] border-white/5" />
+
                             <div className="absolute -bottom-24 right-36 h-48 w-48 rounded-full bg-white/5" />
 
                             <div className="relative z-10 max-w-2xl">
@@ -193,33 +122,32 @@ export default function Dashboard() {
                                 </span>
 
                                 <h3 className="mt-4 text-2xl font-bold leading-tight sm:text-3xl">
-                                    Selamat datang, {user?.name ?? 'Guru'}!
+                                    Selamat datang, {user?.name ?? "Guru"}!
                                 </h3>
 
                                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-teal-50 sm:text-base">
-                                    Pantau kegiatan belajar siswa melalui
-                                    GeoBot. Kelola data siswa dan lihat hasil
-                                    kuis untuk mengetahui perkembangan
-                                    pemahaman mereka terhadap klasifikasi iklim
-                                    Köppen.
+                                    Gunakan GeoBot untuk mendukung kegiatan
+                                    belajar mengajar. Akses materi dan chatbot,
+                                    kelola akun siswa, tambahkan materi serta
+                                    kuis, dan pantau hasil evaluasi siswa.
                                 </p>
                             </div>
                         </section>
 
-                        {/* Feature Section */}
+                        {/* FEATURE SECTION */}
                         <div className="mb-5">
                             <h3 className="text-xl font-bold text-[#123b49]">
                                 Fitur Guru
                             </h3>
 
                             <p className="mt-1 text-sm text-slate-500">
-                                Pilih fitur sesuai kebutuhan pengelolaan siswa
-                                dan evaluasi pembelajaran.
+                                Semua fitur pembelajaran dan pengelolaan kelas
+                                tersedia melalui menu berikut.
                             </p>
                         </div>
 
-                        {/* Feature Cards */}
-                        <section className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                        {/* FEATURE CARDS */}
+                        <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
                             {teacherFeatures.map((card) => (
                                 <Link
                                     key={card.number}
@@ -257,7 +185,7 @@ export default function Dashboard() {
                             ))}
                         </section>
 
-                        {/* Informasi Hak Akses */}
+                        {/* INFORMASI HAK AKSES */}
                         <section className="mt-8 rounded-2xl border border-[#d4e4e1] bg-white p-5">
                             <div className="flex items-start gap-3">
                                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#e5f5ef] text-lg text-[#087b68]">
@@ -270,26 +198,25 @@ export default function Dashboard() {
                                     </h3>
 
                                     <p className="mt-1 text-sm leading-relaxed text-slate-500">
-                                        Guru memiliki akses untuk mengelola
-                                        data siswa dan melihat hasil kuis.
-                                        Pengelolaan materi pembelajaran serta
-                                        pembuatan kuis dilakukan melalui akun
-                                        admin.
+                                        Guru dapat menggunakan fitur
+                                        pembelajaran GeoBot, mengelola data
+                                        siswa, menambahkan materi dan kuis,
+                                        serta melihat hasil evaluasi siswa.
                                     </p>
                                 </div>
                             </div>
                         </section>
 
-                        {/* Footer */}
-                        <div className="mt-8 rounded-2xl border border-[#d4e4e1] bg-white/70 px-5 py-4">
+                        {/* FOOTER */}
+                        <footer className="mt-8 rounded-2xl border border-[#d4e4e1] bg-white/70 px-5 py-4">
                             <p className="text-sm leading-relaxed text-slate-500">
                                 <span className="font-semibold text-[#123b49]">
                                     GeoBot
-                                </span>{' '}
+                                </span>{" "}
                                 — Media pembelajaran klasifikasi iklim Köppen
                                 untuk mendukung kegiatan belajar mengajar.
                             </p>
-                        </div>
+                        </footer>
                     </div>
                 </main>
             </div>
