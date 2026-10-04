@@ -145,7 +145,7 @@ export default function Dashboard({ auth }) {
                     {/* Menu Navigasi */}
                     <div className="px-4 pt-5">
                         <p className="px-3 text-xs font-bold uppercase tracking-[0.15em] text-teal-100/80">
-                            Ruang Belajar Köppen
+                            Media Belajar Iklim Köppen
                         </p>
 
                         <nav className="mt-3 space-y-1">
@@ -236,7 +236,7 @@ export default function Dashboard({ auth }) {
 
                             <div>
                                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                    Media Pembelajaran Kelas X
+                                    Media Pembelajaran Kelas X Fase E Materi Iklim Köppen
                                 </p>
 
                                 <h2 className="mt-1 text-3xl font-bold text-[#123b49]">
@@ -244,7 +244,7 @@ export default function Dashboard({ auth }) {
                                 </h2>
 
                                 <p className="mt-1 text-gray-500">
-                                    Mulai memahami pola suhu dan curah hujan dunia.
+                                    Belajar tentang pola suhu dan curah hujan dunia.
                                 </p>
                             </div>
 
@@ -273,17 +273,24 @@ export default function Dashboard({ auth }) {
 
                             <div className="flex flex-col justify-center px-8 py-10 sm:px-12">
                                 <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#a8e5ce]">
-                                    Selamat datang di IklimKöppenBot
+                                    Halo Anak-Anak !!!
+                                    Selamat datang di Media Belajar Iklim Köppen Bot,
+                                    Pantun dulu yaa Bestii
+                                    Jalan-Jalan ke Surabaya,
+                                    Mampir dulu ke Kota Lama,
+                                    Halo SMA Bhayangkari 1 Surabaya, 
+                                    Mari belajar Iklim Köppen dengan Suka Cita 
                                 </p>
 
                                 <h3 className="mt-5 max-w-xl text-2xl font-bold leading-tight text-white sm:text-3xl">
-                                    Membaca pola iklim dunia dengan sistem Köppen.
+                                    Pembelajaran materi klasifikasi iklim Köppen.
                                 </h3>
 
                                 <p className="mt-4 max-w-xl leading-relaxed text-[#d0e4e7]">
-                                    Pelajari klasifikasi iklim Köppen, berlatih melalui
-                                    kasus sederhana, lalu berdiskusi dengan
-                                    IklimKöppenBot berbasis aturan lokal.
+                                    Yuk, kita belajar tentang klasifikasi iklim Köppen mulai dari mempelajari materi, 
+                                    berlatih melalui kasus sederhana, kemudian
+                                    berdiskusi dengan IklimKöppenBot yang tersedia di media ini.
+                                    Semoga pembelajaran kita bermanfaat dan menyenangkan.
                                 </p>
 
                                 <div className="mt-6">
@@ -316,7 +323,7 @@ export default function Dashboard({ auth }) {
                                         </div>
 
                                         <p className="mt-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#b6d7df]">
-                                            Jelajahi Iklim Dunia
+                                            Menjelajahi Iklim yang ada di Dunia
                                         </p>
                                     </div>
                                 </div>
@@ -326,7 +333,7 @@ export default function Dashboard({ auth }) {
                         {/* JALUR BELAJAR */}
                         <section className="mt-8">
                             <h3 className="text-2xl font-bold text-[#123b49]">
-                                Jalur belajar kamu
+                                Ini adalah alur belajar kamu
                             </h3>
 
                             <p className="mt-1 text-gray-500">
@@ -385,6 +392,54 @@ export default function Dashboard({ auth }) {
                         </section>
 
                     </main>
+
+                    {/* FOOTER */}
+                    <footer className="mt-8 border-t border-[#d7e5e3] bg-white">
+                        <div className="mx-auto max-w-[1500px] px-6 py-8 sm:px-10">
+
+                            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+
+                                {/* BRAND */}
+                                <div className="flex items-start gap-4">
+                                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#e1f5ed] text-2xl">
+                                        🌍
+                                    </div>
+
+                                    <div>
+                                        <h3 className="font-bold text-[#123b49]">
+                                            IklimKöppenBot
+                                        </h3>
+
+                                        <p className="mt-1 max-w-md text-sm leading-relaxed text-gray-500">
+                                            Media pembelajaran interaktif untuk
+                                            mempelajari klasifikasi iklim Köppen
+                                            berdasarkan suhu dan curah hujan.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* INFO */}
+                                <div className="text-left md:text-right">
+                                    <p className="text-sm font-semibold text-[#123b49]">
+                                        Media Pembelajaran Kelas X
+                                    </p>
+
+                                    <p className="mt-1 text-sm text-gray-500">
+                                        Belajar • Berlatih • Memahami Iklim
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* COPYRIGHT */}
+                            <div className="mt-6 border-t border-[#e5eeec] pt-5 text-center">
+                                <p className="text-xs text-gray-400">
+                                    © {new Date().getFullYear()} IklimKöppenBot.
+                                    Semua hak dilindungi.
+                                </p>
+                            </div>
+
+                        </div>
+                    </footer>
                 </div>
 
             </div>

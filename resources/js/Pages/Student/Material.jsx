@@ -157,7 +157,7 @@ export default function Material({ auth }) {
                     {/* Menu */}
                     <div className="px-4 pt-5">
                         <p className="px-3 text-xs font-bold uppercase tracking-[0.15em] text-teal-100/80">
-                            Ruang Belajar Köppen
+                            Media Belajar Iklim Köppen
                         </p>
 
                         <nav className="mt-3 space-y-1">
@@ -245,15 +245,15 @@ export default function Material({ auth }) {
 
                             <div>
                                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                    Media Pembelajaran Kelas X
+                                    Media Pembelajaran Kelas X Fase E Materi Iklim Köppen
                                 </p>
 
                                 <h2 className="mt-1 text-3xl font-bold text-[#123b49]">
-                                    Materi Köppen
+                                    Materi Iklim Köppen
                                 </h2>
 
                                 <p className="mt-1 text-gray-500">
-                                    Pelajari klasifikasi iklim berdasarkan suhu dan curah hujan.
+                                    Mempelajari klasifikasi iklim berdasarkan suhu dan curah hujan.
                                 </p>
                             </div>
 
@@ -283,7 +283,7 @@ export default function Material({ auth }) {
 
                             <div className="flex flex-col justify-center px-8 py-9 sm:px-10">
                                 <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#16805f]">
-                                    Ruang Belajar Köppen
+                                    Media Pembelajaran Iklim Köppen
                                 </p>
 
                                 <h3 className="mt-4 max-w-xl text-2xl font-bold leading-tight text-[#123b49] sm:text-3xl">
@@ -291,7 +291,7 @@ export default function Material({ auth }) {
                                 </h3>
 
                                 <p className="mt-4 max-w-xl leading-relaxed text-gray-600">
-                                    Kenali konsep dasar dan cara kerja klasifikasi
+                                    Mengenali konsep dasar dan cara kerja klasifikasi
                                     iklim Köppen melalui enam modul pembelajaran.
                                 </p>
 
@@ -342,7 +342,7 @@ export default function Material({ auth }) {
                                     </h3>
 
                                     <p className="mt-1 text-gray-500">
-                                        Pelajari setiap topik secara berurutan.
+                                        Mempelajari setiap topik secara berurutan.
                                     </p>
                                 </div>
 

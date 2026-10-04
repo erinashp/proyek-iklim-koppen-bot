@@ -126,7 +126,7 @@ export default function Guide({ auth }) {
                             </div>
 
                             <h1 className="text-xl font-bold tracking-wide">
-                                GeoBot
+                                IklimKöppenBot
                             </h1>
                         </div>
                     </div>
@@ -136,7 +136,7 @@ export default function Guide({ auth }) {
                     {/* Menu Navigasi */}
                     <div className="px-4 pt-5">
                         <p className="px-3 text-xs font-bold uppercase tracking-[0.15em] text-teal-100/80">
-                            Ruang Belajar Köppen
+                            Media Belajar Iklim Köppen
                         </p>
 
                         <nav className="mt-3 space-y-1">
@@ -248,7 +248,7 @@ export default function Guide({ auth }) {
 
                             <div>
                                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                    Media Pembelajaran Kelas X
+                                    Media Pembelajaran Kelas X Fase E Materi Iklim Köppen
                                 </p>
 
                                 <h2 className="mt-1 text-3xl font-bold text-[#123b49]">
@@ -256,7 +256,7 @@ export default function Guide({ auth }) {
                                 </h2>
 
                                 <p className="mt-1 text-gray-500">
-                                    Ikuti langkah berikut untuk mulai belajar dengan GeoBot.
+                                    Ikuti langkah berikut untuk mulai belajar dengan IklimKöppenBot.
                                 </p>
                             </div>
                         </div>
@@ -268,13 +268,13 @@ export default function Guide({ auth }) {
                         {/* PENGANTAR */}
                         <section className="mb-8">
                             <h3 className="text-2xl font-bold text-[#123b49]">
-                                Mulai perjalanan belajarmu
+                                Mulai pengalaman belajarmu
                             </h3>
 
                             <p className="mt-2 max-w-3xl leading-relaxed text-gray-500">
-                                GeoBot membantu kamu memahami klasifikasi iklim Köppen
+                                IklimKöppenBot membantu kamu memahami klasifikasi iklim Köppen
                                 melalui materi, latihan kasus, dan evaluasi hasil belajar.
-                                Ikuti panduan berikut agar proses belajarmu lebih terarah.
+                                Ikuti yuk panduan berikut agar proses belajarmu lebih terarah.
                             </p>
                         </section>
 
@@ -289,11 +289,11 @@ export default function Guide({ auth }) {
 
                                     <div>
                                         <h3 className="text-xl font-bold text-[#123b49]">
-                                            Kenali menu utama
+                                            Kenali menu utama yang tersedia
                                         </h3>
 
                                         <p className="mt-1 text-sm text-gray-500">
-                                            Inilah bagian-bagian utama yang akan kamu gunakan.
+                                            Ini adalah fitur yang dapat kamu gunakan.
                                         </p>
                                     </div>
                                 </div>
@@ -336,7 +336,7 @@ export default function Guide({ auth }) {
                                         {/* Mini dashboard content */}
                                         <div className="min-w-0 flex-1 p-4 sm:p-5">
                                             <p className="text-[9px] font-bold uppercase tracking-wider text-[#16805f]">
-                                                Media Pembelajaran Kelas X
+                                                Media Pembelajaran Kelas X Fase E Materi Iklim Köppen
                                             </p>
 
                                             <h4 className="mt-1 text-lg font-bold text-[#123b49]">
@@ -346,7 +346,7 @@ export default function Guide({ auth }) {
                                             <div className="mt-3 grid overflow-hidden rounded-lg bg-[#07384b] sm:grid-cols-2">
                                                 <div className="p-4 text-white">
                                                     <p className="text-[9px] font-bold uppercase text-[#a8e5ce]">
-                                                        Selamat datang di GeoBot
+                                                        Selamat datang di IklimKöppenBot
                                                     </p>
 
                                                     <p className="mt-2 text-sm font-bold">
@@ -389,7 +389,7 @@ export default function Guide({ auth }) {
                                 </div>
 
                                 <p className="mt-3 text-center text-xs text-gray-500">
-                                    Ilustrasi sederhana tampilan Beranda GeoBot.
+                                    Tampilan Beranda IklimKöppenBot.
                                 </p>
                             </div>
                         </section>
