@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Head, Link, useForm, usePage, router } from '@inertiajs/react';
+import { Head, useForm, usePage, router } from '@inertiajs/react';
+import StudentSidebar from '@/Components/StudentSidebar';
 
 export default function Profile() {
     const { auth, flash } = usePage().props;
@@ -20,12 +21,7 @@ export default function Profile() {
         avatar: null,
     });
 
-    const isTeacher = user.role === 'teacher';
-    const roleLabel = isTeacher ? 'Guru' : 'Siswa';
-
-    const dashboardUrl = isTeacher
-        ? route('teacher.dashboard')
-        : route('student.dashboard');
+    const roleLabel = 'Siswa';
 
     const avatarUrl = user.avatar
         ? `/storage/${user.avatar}`
@@ -37,7 +33,6 @@ export default function Profile() {
         ? data.name.charAt(0).toUpperCase()
         : 'U';
 
-    // Preview foto yang dipilih
     useEffect(() => {
         if (!data.avatar) {
             setPreview(null);
@@ -50,7 +45,6 @@ export default function Profile() {
         return () => URL.revokeObjectURL(objectUrl);
     }, [data.avatar]);
 
-    // Simpan perubahan profil
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -60,7 +54,6 @@ export default function Profile() {
         });
     };
 
-    // Batalkan perubahan pada form
     const handleCancel = () => {
         setData({
             name: user.name || '',
@@ -71,136 +64,20 @@ export default function Profile() {
         setPreview(null);
     };
 
-    // Logout
     const logout = (e) => {
         e.preventDefault();
+
         router.post(route('logout'));
     };
 
     return (
         <>
-            <Head title="Profil Saya | GeoBot" />
+            <Head title="Profil Saya | IklimKöppenBot" />
 
             <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
 
-                {/* SIDEBAR */}
-                <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-gradient-to-b from-[#07384b] to-[#087b70] text-white md:flex">
-
-                    {/* Logo */}
-                    <div className="px-6 pt-7">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-2xl">
-                                🌍
-                            </div>
-
-                            <h1 className="text-2xl font-bold tracking-wide">
-                                GeoBot
-                            </h1>
-                        </div>
-                    </div>
-
-                    <div className="mx-4 mt-6 border-t border-white/20" />
-
-                    {/* Menu */}
-                    <div className="px-4 pt-5">
-                        <p className="px-3 text-xs font-bold uppercase tracking-[0.15em] text-teal-100/80">
-                            Ruang Belajar Köppen
-                        </p>
-
-                        <nav className="mt-3 space-y-1">
-
-                            <Link
-                                href={dashboardUrl}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">⌂</span>
-                                <span>Beranda</span>
-                            </Link>
-
-                            <a
-                                href={`${dashboardUrl}#petunjuk`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">☷</span>
-                                <span>Petunjuk</span>
-                            </a>
-
-                            <a
-                                href={`${dashboardUrl}#tujuan`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">◎</span>
-                                <span>Tujuan Belajar</span>
-                            </a>
-
-                            <a
-                                href={`${dashboardUrl}#materi`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">☼</span>
-                                <span>Materi Köppen</span>
-                            </a>
-
-                            <a
-                                href={`${dashboardUrl}#tantangan`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">◇</span>
-                                <span>Tantangan</span>
-                            </a>
-
-                            <a
-                                href={`${dashboardUrl}#hasil-skor`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">▥</span>
-                                <span>Hasil Skor</span>
-                            </a>
-
-                            <a
-                                href={`${dashboardUrl}#chat-ai-bot`}
-                                className="flex items-center gap-3 rounded-xl px-4 py-3 text-teal-50 transition hover:bg-white/10"
-                            >
-                                <span className="w-5 text-center text-xl">ⓘ</span>
-                                <span>Chat AI Bot</span>
-                            </a>
-                        </nav>
-                    </div>
-
-                    {/* Identitas pengguna di bawah sidebar */}
-                    <div className="mt-auto p-4">
-
-                        <div className="mb-3 flex items-center gap-3 rounded-xl border border-white/20 bg-white/10 p-3">
-                            {displayedAvatar ? (
-                                <img
-                                    src={displayedAvatar}
-                                    alt="Foto profil"
-                                    className="h-10 w-10 rounded-full object-cover"
-                                />
-                            ) : (
-                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#07384b]">
-                                    {initial}
-                                </div>
-                            )}
-
-                            <div className="min-w-0">
-                                <p className="truncate text-sm font-semibold">
-                                    {user.name}
-                                </p>
-                                <p className="text-xs text-teal-100">
-                                    {roleLabel}
-                                </p>
-                            </div>
-                        </div>
-
-                        <button
-                            onClick={logout}
-                            className="w-full rounded-xl border border-white/20 px-4 py-2.5 text-left text-sm text-white transition hover:bg-white/10"
-                        >
-                            ↪ Keluar
-                        </button>
-                    </div>
-                </aside>
+                {/* SIDEBAR KOMPONEN */}
+                <StudentSidebar />
 
                 {/* KONTEN UTAMA */}
                 <div className="min-h-screen md:ml-64">
@@ -222,6 +99,7 @@ export default function Profile() {
                                     Kelola informasi akun dan foto profil kamu.
                                 </p>
                             </div>
+
                         </div>
                     </header>
 
@@ -231,7 +109,8 @@ export default function Profile() {
                         {/* Pesan berhasil */}
                         {(flash?.success || recentlySuccessful) && (
                             <div className="mb-6 rounded-xl border border-green-200 bg-green-50 px-5 py-4 text-sm font-medium text-green-700">
-                                {flash?.success || 'Perubahan profil berhasil disimpan.'}
+                                {flash?.success ||
+                                    'Perubahan profil berhasil disimpan.'}
                             </div>
                         )}
 
@@ -241,9 +120,10 @@ export default function Profile() {
 
                                 {/* Header kartu profil */}
                                 <div className="bg-gradient-to-r from-[#07384b] to-[#087b70] px-6 py-8 sm:px-9">
+
                                     <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
 
-                                        {/* Foto profil */}
+                                        {/* Foto */}
                                         <div className="flex flex-col items-center gap-3">
 
                                             {displayedAvatar ? (
@@ -289,8 +169,9 @@ export default function Profile() {
 
                                         {/* Identitas */}
                                         <div className="text-center sm:text-left">
+
                                             <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#a8e5ce]">
-                                                Akun GeoBot
+                                                Akun IklimKöppenBot
                                             </p>
 
                                             <h3 className="mt-2 text-2xl font-bold text-white">
@@ -317,7 +198,8 @@ export default function Profile() {
                                         </h3>
 
                                         <p className="mt-1 text-sm text-gray-500">
-                                            Perbarui data yang ingin kamu ubah, lalu simpan perubahan.
+                                            Perbarui data yang ingin kamu ubah,
+                                            lalu simpan perubahan.
                                         </p>
                                     </div>
 
@@ -337,7 +219,10 @@ export default function Profile() {
                                                 type="text"
                                                 value={data.name}
                                                 onChange={(e) =>
-                                                    setData('name', e.target.value)
+                                                    setData(
+                                                        'name',
+                                                        e.target.value
+                                                    )
                                                 }
                                                 required
                                                 className="w-full rounded-xl border border-[#c8dcda] bg-[#fbfefd] px-4 py-3 text-[#123b49] outline-none transition placeholder:text-gray-400 focus:border-[#16805f] focus:ring-2 focus:ring-[#16805f]/10"
@@ -365,7 +250,10 @@ export default function Profile() {
                                                 type="email"
                                                 value={data.email}
                                                 onChange={(e) =>
-                                                    setData('email', e.target.value)
+                                                    setData(
+                                                        'email',
+                                                        e.target.value
+                                                    )
                                                 }
                                                 required
                                                 className="w-full rounded-xl border border-[#c8dcda] bg-[#fbfefd] px-4 py-3 text-[#123b49] outline-none transition placeholder:text-gray-400 focus:border-[#16805f] focus:ring-2 focus:ring-[#16805f]/10"
@@ -401,7 +289,7 @@ export default function Profile() {
                                             </label>
 
                                             <div className="rounded-xl border border-[#e0e9e7] bg-[#f3f9f8] px-4 py-3 text-gray-600">
-                                                {roleLabel}
+                                                Siswa
                                             </div>
 
                                             <p className="mt-1 text-xs text-gray-500">
@@ -457,7 +345,10 @@ export default function Profile() {
 
                         {/* Catatan */}
                         <div className="mt-5 rounded-xl border border-[#f3e7b1] bg-[#fff8d9] px-5 py-4 text-sm leading-relaxed text-[#77652b]">
-                            <strong>Catatan:</strong> Foto profil akan ditampilkan pada dashboard setelah berhasil disimpan. Gunakan gambar JPG, PNG, atau WEBP dengan ukuran maksimal 2 MB.
+                            <strong>Catatan:</strong> Foto profil akan
+                            ditampilkan pada dashboard setelah berhasil
+                            disimpan. Gunakan gambar JPG, PNG, atau WEBP
+                            dengan ukuran maksimal 2 MB.
                         </div>
                     </main>
                 </div>

@@ -1,64 +1,7 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
+import StudentSidebar from '@/Components/StudentSidebar';
 
-export default function Modul2({ auth }) {
-    const user = auth?.user;
-
-    const roleLabel = user?.role === 'teacher' ? 'Guru' : 'Siswa';
-
-    const avatarUrl = user?.avatar
-        ? `/storage/${user.avatar}`
-        : null;
-
-    const initial = user?.name
-        ? user.name.charAt(0).toUpperCase()
-        : 'U';
-
-    const { post } = useForm();
-
-    const logout = (e) => {
-        e.preventDefault();
-        post(route('logout'));
-    };
-
-    const menuItems = [
-        {
-            icon: '⌂',
-            label: 'Beranda',
-            href: route('student.dashboard'),
-        },
-        {
-            icon: '☷',
-            label: 'Petunjuk',
-            href: route('student.guide'),
-        },
-        {
-            icon: '◎',
-            label: 'Tujuan Belajar',
-            href: route('student.objectives'),
-        },
-        {
-            icon: '▣',
-            label: 'Materi Köppen',
-            href: route('student.material'),
-            active: true,
-        },
-        {
-            icon: '◇',
-            label: 'Tantangan',
-            href: '#tantangan',
-        },
-        {
-            icon: '▥',
-            label: 'Hasil Skor',
-            href: '#hasil-skor',
-        },
-        {
-            icon: 'ⓘ',
-            label: 'Chat AI Bot',
-            href: '#chat-ai-bot',
-        },
-    ];
-
+export default function Modul2() {
     return (
         <>
             <Head title="Modul 2: Kriteria Suhu dan Curah Hujan | IklimKöppenBot" />
@@ -66,109 +9,7 @@ export default function Modul2({ auth }) {
             <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
 
                 {/* SIDEBAR */}
-                <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-gradient-to-b from-[#07384b] to-[#087b70] text-white md:flex">
-
-                    {/* Logo */}
-                    <div className="px-6 pt-7">
-                        <Link
-                            href={route('student.dashboard')}
-                            className="flex items-center gap-3"
-                        >
-                            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-2xl">
-                                🌍
-                            </div>
-
-                            <h1 className="text-xl font-bold tracking-wide">
-                                IklimKöppenBot
-                            </h1>
-                        </Link>
-                    </div>
-
-                    <div className="mx-4 mt-6 border-t border-white/20" />
-
-                    {/* Menu */}
-                    <div className="px-4 pt-5">
-                        <p className="px-3 text-xs font-bold uppercase tracking-[0.15em] text-teal-100/80">
-                            Ruang Belajar Köppen
-                        </p>
-
-                        <nav className="mt-3 space-y-1">
-                            {menuItems.map((item) => {
-                                const className = `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
-                                    item.active
-                                        ? 'bg-[#e8f8f1] font-semibold text-[#07384b]'
-                                        : 'text-teal-50 hover:bg-white/10'
-                                }`;
-
-                                return item.active ? (
-                                    <div
-                                        key={item.label}
-                                        aria-current="page"
-                                        className={className}
-                                    >
-                                        <span className="w-5 text-center text-xl">
-                                            {item.icon}
-                                        </span>
-
-                                        <span>{item.label}</span>
-                                    </div>
-                                ) : (
-                                    <a
-                                        key={item.label}
-                                        href={item.href}
-                                        className={className}
-                                    >
-                                        <span className="w-5 text-center text-xl">
-                                            {item.icon}
-                                        </span>
-
-                                        <span>{item.label}</span>
-                                    </a>
-                                );
-                            })}
-                        </nav>
-                    </div>
-
-                    {/* Profil dan Logout */}
-                    <div className="mt-auto p-4">
-                        <Link
-                            href={route('student.profile')}
-                            className="mb-3 flex items-center gap-3 rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20"
-                        >
-                            {avatarUrl ? (
-                                <img
-                                    src={avatarUrl}
-                                    alt="Foto profil"
-                                    className="h-10 w-10 rounded-full object-cover"
-                                />
-                            ) : (
-                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#07384b]">
-                                    {initial}
-                                </div>
-                            )}
-
-                            <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-semibold">
-                                    {user?.name ?? 'Pengguna'}
-                                </p>
-
-                                <p className="text-xs text-teal-100">
-                                    {roleLabel} · Profil Saya
-                                </p>
-                            </div>
-
-                            <span className="text-lg">›</span>
-                        </Link>
-
-                        <button
-                            type="button"
-                            onClick={logout}
-                            className="w-full rounded-xl border border-white/20 px-4 py-2.5 text-left text-sm text-white transition hover:bg-white/10"
-                        >
-                            ↪ Keluar
-                        </button>
-                    </div>
-                </aside>
+                <StudentSidebar />
 
                 {/* MAIN CONTENT */}
                 <div className="min-h-screen md:ml-64">
@@ -176,6 +17,7 @@ export default function Modul2({ auth }) {
                     {/* HEADER */}
                     <header className="border-b border-[#d7e5e3] bg-white">
                         <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-6 py-6 sm:px-10">
+
                             <div>
                                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
                                     Media Pembelajaran Kelas X
@@ -221,7 +63,9 @@ export default function Modul2({ auth }) {
 
                         {/* HERO MODUL */}
                         <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#07384b] to-[#087b70] p-7 text-white shadow-sm sm:p-10">
+
                             <div className="absolute -right-10 -top-16 h-56 w-56 rounded-full border border-white/10" />
+
                             <div className="absolute -right-2 -top-8 h-40 w-40 rounded-full border border-white/10" />
 
                             <div className="relative">
@@ -260,6 +104,7 @@ export default function Modul2({ auth }) {
 
                             <div className="border-b border-[#e5efed] px-6 py-6 sm:px-10">
                                 <div className="flex items-start gap-4">
+
                                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#e1f5ed] text-2xl text-[#087b68]">
                                         🌡️
                                     </div>
@@ -281,6 +126,7 @@ export default function Modul2({ auth }) {
                                 {/* SUHU UDARA */}
                                 <section>
                                     <div className="flex items-center gap-3">
+
                                         <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#fff1d6] text-2xl">
                                             🌡️
                                         </div>
@@ -301,7 +147,10 @@ export default function Modul2({ auth }) {
 
                                     <div className="mt-5 rounded-2xl border border-[#f1dfb9] bg-[#fffaf0] p-5 sm:p-6">
                                         <div className="flex items-start gap-3">
-                                            <span className="text-2xl">💡</span>
+
+                                            <span className="text-2xl">
+                                                💡
+                                            </span>
 
                                             <div>
                                                 <h4 className="font-bold text-[#123b49]">
@@ -323,6 +172,7 @@ export default function Modul2({ auth }) {
                                     </div>
 
                                     <div className="mt-5 grid gap-3 sm:grid-cols-2">
+
                                         <div className="rounded-xl bg-[#f8fbfa] p-5">
                                             <p className="text-sm font-semibold text-gray-500">
                                                 Data suhu pertama
@@ -359,7 +209,9 @@ export default function Modul2({ auth }) {
 
                                 {/* CURAH HUJAN */}
                                 <section>
+
                                     <div className="flex items-center gap-3">
+
                                         <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#e8f4fb] text-2xl">
                                             💧
                                         </div>
@@ -380,7 +232,10 @@ export default function Modul2({ auth }) {
 
                                     <div className="mt-5 rounded-2xl border border-[#cfe5f0] bg-[#f1f9fd] p-5 sm:p-6">
                                         <div className="flex items-start gap-3">
-                                            <span className="text-2xl">💡</span>
+
+                                            <span className="text-2xl">
+                                                💡
+                                            </span>
 
                                             <div>
                                                 <h4 className="font-bold text-[#123b49]">
@@ -401,6 +256,7 @@ export default function Modul2({ auth }) {
                                     </div>
 
                                     <div className="mt-5 grid gap-3 sm:grid-cols-2">
+
                                         <div className="rounded-xl bg-[#f8fbfa] p-5">
                                             <p className="text-sm font-semibold text-gray-500">
                                                 Data curah hujan pertama
@@ -437,7 +293,9 @@ export default function Modul2({ auth }) {
 
                                 {/* KESIMPULAN */}
                                 <section className="rounded-2xl border border-[#cfe5df] bg-[#f3f9f8] p-5 sm:p-6">
+
                                     <div className="flex items-start gap-3">
+
                                         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#d9f99d] text-xl">
                                             ✓
                                         </div>
@@ -466,7 +324,9 @@ export default function Modul2({ auth }) {
 
                         {/* RINGKASAN */}
                         <section className="mt-7 rounded-2xl border border-[#d4e4e1] bg-white p-6 shadow-sm sm:p-8">
+
                             <div className="flex items-start gap-3">
+
                                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#d9f99d] text-xl">
                                     ☷
                                 </div>
@@ -510,7 +370,6 @@ export default function Modul2({ auth }) {
                         {/* NAVIGASI MODUL */}
                         <div className="mt-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
 
-                            {/* Modul Sebelumnya */}
                             <Link
                                 href={route('student.modul1')}
                                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#c8dcda] bg-white px-5 py-3 font-semibold text-[#087b68] transition hover:bg-[#f3f9f8]"
@@ -519,7 +378,6 @@ export default function Modul2({ auth }) {
                                 Modul Sebelumnya
                             </Link>
 
-                            {/* Kembali ke Daftar Materi */}
                             <Link
                                 href={route('student.material')}
                                 className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#087b68] px-6 py-3 font-semibold text-white transition hover:bg-[#066455]"

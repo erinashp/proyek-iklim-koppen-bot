@@ -1,12 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\StudentController as AdminStudentController;
+use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
+use App\Http\Controllers\Admin\MaterialController as AdminMaterialController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Teacher\StudentController;
+use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +34,7 @@ Route::get('/', function () {
 |--------------------------------------------------------------------------
 |
 | Setelah login, pengguna diarahkan berdasarkan role:
+|
 | admin   -> Admin Dashboard
 | teacher -> Teacher Dashboard
 | student -> Student Dashboard
@@ -37,14 +42,21 @@ Route::get('/', function () {
 */
 
 Route::get('/dashboard', function (Request $request) {
+
     $user = $request->user();
 
     return match ($user->role) {
+
         'admin' => redirect()->route('admin.dashboard'),
+
         'teacher' => redirect()->route('teacher.dashboard'),
+
         'student' => redirect()->route('student.dashboard'),
+
         default => abort(403, 'Role pengguna tidak dikenali.'),
+
     };
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -52,6 +64,13 @@ Route::get('/dashboard', function (Request $request) {
 |--------------------------------------------------------------------------
 | Student Routes
 |--------------------------------------------------------------------------
+|
+| Semua route siswa:
+|
+| URL prefix : /student
+| Route name : student.
+| Middleware : auth, verified, role:student
+|
 */
 
 Route::middleware(['auth', 'verified', 'role:student'])
@@ -59,35 +78,84 @@ Route::middleware(['auth', 'verified', 'role:student'])
     ->name('student.')
     ->group(function () {
 
-        // Dashboard Siswa
+        /*
+        |--------------------------------------------------------------------------
+        | Dashboard Siswa
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/dashboard', function () {
+
             return Inertia::render('Student/Dashboard');
+
         })->name('dashboard');
 
-        // Panduan Belajar
+
+        /*
+        |--------------------------------------------------------------------------
+        | Panduan Belajar
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/guide', function () {
+
             return Inertia::render('Student/Guide');
+
         })->name('guide');
 
-        // Materi Pembelajaran
+
+        /*
+        |--------------------------------------------------------------------------
+        | Materi Pembelajaran
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/material', function () {
+
             return Inertia::render('Student/Material');
+
         })->name('material');
 
-        // Tujuan Pembelajaran
+
+        /*
+        |--------------------------------------------------------------------------
+        | Tujuan Pembelajaran
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/objectives', function () {
+
             return Inertia::render('Student/Objectives');
+
         })->name('objectives');
 
-        // Profil Siswa
+
+        /*
+        |--------------------------------------------------------------------------
+        | Profil Siswa
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/profile', function (Request $request) {
+
             return Inertia::render('Student/Profile', [
                 'user' => $request->user(),
             ]);
+
         })->name('profile');
 
-        Route::put('/profile', [UserProfileController::class, 'update'])
-            ->name('profile.update');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Update Profil Siswa
+        |--------------------------------------------------------------------------
+        */
+
+        Route::put(
+            '/profile',
+            [UserProfileController::class, 'update']
+        )->name('profile.update');
+
     });
 
 
@@ -96,37 +164,91 @@ Route::middleware(['auth', 'verified', 'role:student'])
 | Student Learning Modules
 |--------------------------------------------------------------------------
 |
-| Route modul pembelajaran iklim Köppen.
-| Route ini tetap menggunakan nama student.modul1 sampai student.modul6.
+| Modul pembelajaran iklim Köppen.
 |
 */
 
-Route::middleware(['auth', 'verified', 'role:student'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:student'])
+    ->group(function () {
 
-    Route::get('/student/modul-1', function () {
-        return Inertia::render('Student/Modul1');
-    })->name('student.modul1');
+        /*
+        |--------------------------------------------------------------------------
+        | Modul 1
+        |--------------------------------------------------------------------------
+        */
 
-    Route::get('/student/modul-2', function () {
-        return Inertia::render('Student/Modul2');
-    })->name('student.modul2');
+        Route::get('/student/modul-1', function () {
 
-    Route::get('/student/modul-3', function () {
-        return Inertia::render('Student/Modul3');
-    })->name('student.modul3');
+            return Inertia::render('Student/Modul1');
 
-    Route::get('/student/modul-4', function () {
-        return Inertia::render('Student/Modul4');
-    })->name('student.modul4');
+        })->name('student.modul1');
 
-    Route::get('/student/modul-5', function () {
-        return Inertia::render('Student/Modul5');
-    })->name('student.modul5');
 
-    Route::get('/student/modul-6', function () {
-        return Inertia::render('Student/Modul6');
-    })->name('student.modul6');
-});
+        /*
+        |--------------------------------------------------------------------------
+        | Modul 2
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/student/modul-2', function () {
+
+            return Inertia::render('Student/Modul2');
+
+        })->name('student.modul2');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Modul 3
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/student/modul-3', function () {
+
+            return Inertia::render('Student/Modul3');
+
+        })->name('student.modul3');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Modul 4
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/student/modul-4', function () {
+
+            return Inertia::render('Student/Modul4');
+
+        })->name('student.modul4');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Modul 5
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/student/modul-5', function () {
+
+            return Inertia::render('Student/Modul5');
+
+        })->name('student.modul5');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Modul 6
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/student/modul-6', function () {
+
+            return Inertia::render('Student/Modul6');
+
+        })->name('student.modul6');
+
+    });
 
 
 /*
@@ -134,7 +256,8 @@ Route::middleware(['auth', 'verified', 'role:student'])->group(function () {
 | Teacher Routes
 |--------------------------------------------------------------------------
 |
-| Semua route guru menggunakan:
+| Semua route guru:
+|
 | URL prefix : /teacher
 | Route name : teacher.
 | Middleware : auth, verified, role:teacher
@@ -146,39 +269,144 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
     ->name('teacher.')
     ->group(function () {
 
-        // Dashboard Guru
+        /*
+        |--------------------------------------------------------------------------
+        | Dashboard Guru
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/dashboard', function () {
+
             return Inertia::render('Teacher/Dashboard');
+
         })->name('dashboard');
 
-        // Profil Guru
+
+        /*
+        |--------------------------------------------------------------------------
+        | Profil Guru
+        |--------------------------------------------------------------------------
+        */
+
         Route::get('/profile', function (Request $request) {
+
             return Inertia::render('Teacher/Profile', [
                 'user' => $request->user(),
             ]);
+
         })->name('profile');
 
-        Route::put('/profile', [UserProfileController::class, 'update'])
-            ->name('profile.update');
-
-        Route::get('/guide', function () {
-            return Inertia::render('Teacher/Guide');
-        })->name('guide');
-
-        Route::delete('/students/{student}', [StudentController::class, 'destroy'])
-        ->name('students.destroy');
 
         /*
-         * Data Siswa
-         */
+        |--------------------------------------------------------------------------
+        | Update Profil Guru
+        |--------------------------------------------------------------------------
+        */
 
-        // Menampilkan daftar siswa
-        Route::get('/students', [StudentController::class, 'index'])
-            ->name('students.index');
+        Route::put(
+            '/profile',
+            [UserProfileController::class, 'update']
+        )->name('profile.update');
 
-        // Menyimpan akun siswa baru
-        Route::post('/students', [StudentController::class, 'store'])
-            ->name('students.store');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Panduan Guru
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/guide', function () {
+
+            return Inertia::render('Teacher/Guide');
+
+        })->name('guide');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Tujuan Pembelajaran
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/objectives', function () {
+
+            return Inertia::render('Teacher/Objectives');
+
+        })->name('objectives');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Daftar Materi
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/materials', function () {
+
+            return Inertia::render('Teacher/Materials/Index');
+
+        })->name('materials.index');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Detail Materi / Modul
+        |--------------------------------------------------------------------------
+        |
+        | Contoh:
+        |
+        | /teacher/materials/1
+        | /teacher/materials/2
+        | ...
+        | /teacher/materials/6
+        |
+        */
+
+        Route::get('/materials/{material}', function ($material) {
+
+            return Inertia::render(
+                "Teacher/Materials/Modul{$material}"
+            );
+
+        })->whereNumber('material')
+            ->name('materials.show');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Data Siswa Guru
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get(
+            '/students',
+            [TeacherStudentController::class, 'index']
+        )->name('students.index');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Tambah Siswa oleh Guru
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post(
+            '/students',
+            [TeacherStudentController::class, 'store']
+        )->name('students.store');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Hapus Siswa oleh Guru
+        |--------------------------------------------------------------------------
+        */
+
+        Route::delete(
+            '/students/{student}',
+            [TeacherStudentController::class, 'destroy']
+        )->name('students.destroy');
+
     });
 
 
@@ -187,84 +415,187 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 | Admin Routes
 |--------------------------------------------------------------------------
 |
-| Admin memiliki akses ke:
-| - Dashboard admin
-| - Data guru
-| - Data siswa
-| - Materi pembelajaran
-| - Kuis atau tantangan
-| - Hasil kuis
+| Semua route admin:
+|
+| URL prefix : /admin
+| Route name : admin.
+| Middleware : auth, verified, role:admin
 |
 */
 
-Route::middleware(['auth', 'verified', 'role:teacher'])
-    ->prefix('teacher')
-    ->name('teacher.')
+
+Route::middleware(['auth', 'verified', 'role:admin'])
+    ->prefix('admin')
+    ->name('admin.')
     ->group(function () {
 
-        Route::get('/dashboard', fn () =>
-            Inertia::render('Teacher/Dashboard')
-        )->name('dashboard');
+        /*
+        |--------------------------------------------------------------------------
+        | Dashboard Admin
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/dashboard', function () {
+
+            return Inertia::render('Admin/Dashboard');
+
+        })->name('dashboard');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Profil Admin
+        |--------------------------------------------------------------------------
+        */
 
         Route::get('/profile', function (Request $request) {
-            return Inertia::render('Teacher/Profile', [
+
+            return Inertia::render('Admin/Profile', [
                 'user' => $request->user(),
             ]);
+
         })->name('profile');
 
-        Route::put('/profile', [UserProfileController::class, 'update'])
-            ->name('profile.update');
 
-        Route::get('/students', [StudentController::class, 'index'])
-            ->name('students.index');
+        /*
+        |--------------------------------------------------------------------------
+        | Update Profil Admin
+        |--------------------------------------------------------------------------
+        */
 
-        Route::post('/students', [StudentController::class, 'store'])
-            ->name('students.store');
+        Route::put(
+            '/profile',
+            [UserProfileController::class, 'update']
+        )->name('profile.update');
 
-        // TUJUAN PEMBELAJARAN
-        Route::get('/objectives', fn () =>
-            Inertia::render('Teacher/Objectives')
-        )->name('objectives');
 
-        // PANDUAN
-        Route::get('/guide', fn () =>
-            Inertia::render('Teacher/Guide')
-        )->name('guide');
+        /*
+        |--------------------------------------------------------------------------
+        | Data Siswa Admin
+        |--------------------------------------------------------------------------
+        */
 
-        // DAFTAR MATERI
-        Route::get('/materials', function () {
-            return Inertia::render('Teacher/Materials/Index');
-        })->name('materials.index');
+        Route::get(
+            '/students',
+            [AdminStudentController::class, 'index']
+        )->name('students.index');
 
-        // DETAIL MODUL 1 - 6
-        Route::get('/materials/{material}', function ($material) {
-            return Inertia::render("Teacher/Materials/Modul{$material}");
-        })->whereNumber('material')->name('materials.show');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Tambah Siswa Admin
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post(
+            '/students',
+            [AdminStudentController::class, 'store']
+        )->name('students.store');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Hapus Siswa Admin
+        |--------------------------------------------------------------------------
+        */
+
+        Route::delete(
+            '/students/{student}',
+            [AdminStudentController::class, 'destroy']
+        )->name('students.destroy');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Data Guru Admin
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get(
+            '/teachers',
+            [AdminTeacherController::class, 'index']
+        )->name('teachers.index');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Tambah Guru Admin
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post(
+            '/teachers',
+            [AdminTeacherController::class, 'store']
+        )->name('teachers.store');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Hapus Guru Admin
+        |--------------------------------------------------------------------------
+        */
+
+        Route::delete(
+            '/teachers/{teacher}',
+            [AdminTeacherController::class, 'destroy']
+        )->name('teachers.destroy');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Materi Pembelajaran Admin
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get(
+            '/materials',
+            [AdminMaterialController::class, 'index']
+        )->name('materials.index');
+
+        Route::get(
+            '/materials/create',
+            [AdminMaterialController::class, 'create']
+        )->name('materials.create');
+
+        Route::post(
+            '/materials',
+            [AdminMaterialController::class, 'store']
+        )->name('materials.store');
+
+        Route::get(
+            '/materials/{material}/edit',
+            [AdminMaterialController::class, 'edit']
+        )->name('materials.edit');
+
+        Route::put(
+            '/materials/{material}',
+            [AdminMaterialController::class, 'update']
+        )->name('materials.update');
+
+        Route::delete(
+            '/materials/{material}',
+            [AdminMaterialController::class, 'destroy']
+        )->name('materials.destroy');
+
+        Route::get('/materials', [AdminMaterialController::class, 'index'])
+            ->name('materials.index');
+
+        Route::get('/materials/create', [AdminMaterialController::class, 'create'])
+            ->name('materials.create');
+
+        Route::post('/materials', [AdminMaterialController::class, 'store'])
+            ->name('materials.store');
+
+        Route::get('/materials/{material}/edit', [AdminMaterialController::class, 'edit'])
+            ->name('materials.edit');
+
+        Route::put('/materials/{material}', [AdminMaterialController::class, 'update'])
+            ->name('materials.update');
+
+        Route::delete('/materials/{material}', [AdminMaterialController::class, 'destroy'])
+            ->name('materials.destroy');
+
     });
 
-        /*
-         * Route Data Siswa
-         *
-         * Tambahkan route CRUD siswa di sini.
-         */
-
-        /*
-         * Route Materi Pembelajaran
-         *
-         * Tambahkan route CRUD materi di sini.
-         */
-
-        /*
-         * Route Kuis
-         *
-         * Tambahkan route CRUD kuis di sini.
-         */
-
-        /*
-         * Route Hasil Kuis
-         *
-         * Tambahkan route hasil kuis di sini.
-         */
 
 /*
 |--------------------------------------------------------------------------
@@ -273,19 +604,50 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 |
 | Route profil bawaan Laravel Breeze.
 |
+| URL:
+| /profile
+|
 */
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')
+    ->group(function () {
 
-    Route::get('/profile', [ProfileController::class, 'edit'])
-        ->name('profile.edit');
+        /*
+        |--------------------------------------------------------------------------
+        | Edit Profile Breeze
+        |--------------------------------------------------------------------------
+        */
 
-    Route::patch('/profile', [ProfileController::class, 'update'])
-        ->name('profile.update');
+        Route::get(
+            '/profile',
+            [ProfileController::class, 'edit']
+        )->name('profile.edit');
 
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
-        ->name('profile.destroy');
-});
+
+        /*
+        |--------------------------------------------------------------------------
+        | Update Profile Breeze
+        |--------------------------------------------------------------------------
+        */
+
+        Route::patch(
+            '/profile',
+            [ProfileController::class, 'update']
+        )->name('profile.update');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Delete Profile Breeze
+        |--------------------------------------------------------------------------
+        */
+
+        Route::delete(
+            '/profile',
+            [ProfileController::class, 'destroy']
+        )->name('profile.destroy');
+
+    });
 
 
 /*

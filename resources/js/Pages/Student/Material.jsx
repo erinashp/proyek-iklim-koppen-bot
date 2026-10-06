@@ -1,65 +1,9 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
+import StudentSidebar from '@/Components/StudentSidebar';
 
-export default function Material({ auth }) {
-    const user = auth.user;
-    const { post } = useForm();
+export default function Material() {
     const [search, setSearch] = useState('');
-
-    const roleLabel = user.role === 'teacher' ? 'Guru' : 'Siswa';
-
-    const avatarUrl = user.avatar
-        ? `/storage/${user.avatar}`
-        : null;
-
-    const initial = user.name
-        ? user.name.charAt(0).toUpperCase()
-        : 'U';
-
-    const logout = (e) => {
-        e.preventDefault();
-        post(route('logout'));
-    };
-
-    // Menu sidebar
-    const menuItems = [
-        {
-            icon: '⌂',
-            label: 'Beranda',
-            href: route('student.dashboard'),
-        },
-        {
-            icon: '☷',
-            label: 'Petunjuk',
-            href: route('student.guide'),
-        },
-        {
-            icon: '◎',
-            label: 'Tujuan Belajar',
-            href: route('student.objectives'),
-        },
-        {
-            icon: '▣',
-            label: 'Materi Köppen',
-            href: route('student.material'),
-            active: true,
-        },
-        {
-            icon: '◇',
-            label: 'Tantangan',
-            href: '#tantangan',
-        },
-        {
-            icon: '▥',
-            label: 'Hasil Skor',
-            href: '#hasil-skor',
-        },
-        {
-            icon: 'ⓘ',
-            label: 'Chat AI Bot',
-            href: '#chat-ai-bot',
-        },
-    ];
 
     // Daftar modul materi
     const modules = [
@@ -69,7 +13,7 @@ export default function Material({ auth }) {
             title: 'Pengertian Klasifikasi Iklim',
             description:
                 'Mengenal pengertian iklim dan dasar klasifikasi iklim Köppen.',
-            href: route('student.modul1')
+            href: route('student.modul1'),
         },
         {
             number: 2,
@@ -77,7 +21,7 @@ export default function Material({ auth }) {
             title: 'Kriteria Suhu dan Curah Hujan',
             description:
                 'Memahami unsur suhu dan curah hujan yang digunakan dalam klasifikasi.',
-            href: route('student.modul2')
+            href: route('student.modul2'),
         },
         {
             number: 3,
@@ -85,7 +29,7 @@ export default function Material({ auth }) {
             title: 'Kelompok Iklim A, B, C, D, dan E',
             description:
                 'Mengenal lima kelompok utama iklim berdasarkan sistem Köppen.',
-            href: route('student.modul3')
+            href: route('student.modul3'),
         },
         {
             number: 4,
@@ -93,7 +37,7 @@ export default function Material({ auth }) {
             title: 'Perbedaan Tipe Iklim yang Mirip',
             description:
                 'Membandingkan karakteristik tipe iklim yang memiliki ciri serupa.',
-            href: route('student.modul4')
+            href: route('student.modul4'),
         },
         {
             number: 5,
@@ -101,7 +45,7 @@ export default function Material({ auth }) {
             title: 'Klasifikasi Wilayah Berdasarkan Data',
             description:
                 'Berlatih membaca data suhu dan curah hujan untuk menentukan tipe iklim.',
-            href: route('student.modul5')
+            href: route('student.modul5'),
         },
         {
             number: 6,
@@ -109,7 +53,7 @@ export default function Material({ auth }) {
             title: 'Dampak Iklim terhadap Kehidupan',
             description:
                 'Menghubungkan karakteristik iklim dengan lingkungan dan aktivitas manusia.',
-            href: route('student.modul6')
+            href: route('student.modul6'),
         },
     ];
 
@@ -134,107 +78,7 @@ export default function Material({ auth }) {
             <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
 
                 {/* SIDEBAR */}
-                <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-gradient-to-b from-[#07384b] to-[#087b70] text-white md:flex">
-
-                    {/* Logo */}
-                    <div className="px-6 pt-7">
-                        <Link
-                            href={route('student.dashboard')}
-                            className="flex items-center gap-3"
-                        >
-                            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-2xl">
-                                🌍
-                            </div>
-
-                            <h1 className="text-xl font-bold tracking-wide">
-                                IklimKöppenBot
-                            </h1>
-                        </Link>
-                    </div>
-
-                    <div className="mx-4 mt-6 border-t border-white/20" />
-
-                    {/* Menu */}
-                    <div className="px-4 pt-5">
-                        <p className="px-3 text-xs font-bold uppercase tracking-[0.15em] text-teal-100/80">
-                            Ruang Belajar Köppen
-                        </p>
-
-                        <nav className="mt-3 space-y-1">
-                            {menuItems.map((item) => {
-                                const className = `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
-                                    item.active
-                                        ? 'bg-[#e8f8f1] font-semibold text-[#07384b]'
-                                        : 'text-teal-50 hover:bg-white/10'
-                                }`;
-
-                                return item.active ? (
-                                    <div
-                                        key={item.label}
-                                        aria-current="page"
-                                        className={className}
-                                    >
-                                        <span className="w-5 text-center text-xl">
-                                            {item.icon}
-                                        </span>
-                                        <span>{item.label}</span>
-                                    </div>
-                                ) : (
-                                    <a
-                                        key={item.label}
-                                        href={item.href}
-                                        className={className}
-                                    >
-                                        <span className="w-5 text-center text-xl">
-                                            {item.icon}
-                                        </span>
-                                        <span>{item.label}</span>
-                                    </a>
-                                );
-                            })}
-                        </nav>
-                    </div>
-
-                    {/* Profil dan Logout */}
-                    <div className="mt-auto p-4">
-                        <Link
-                            href={route('student.profile')}
-                            className="mb-3 flex items-center gap-3 rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20"
-                        >
-                            {avatarUrl ? (
-                                <img
-                                    src={avatarUrl}
-                                    alt="Foto profil"
-                                    className="h-10 w-10 rounded-full object-cover"
-                                />
-                            ) : (
-                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#07384b]">
-                                    {initial}
-                                </div>
-                            )}
-
-                            <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-semibold">
-                                    {user.name}
-                                </p>
-
-                                <p className="text-xs text-teal-100">
-                                    {roleLabel} · Profil Saya
-                                </p>
-                            </div>
-
-                            <span className="text-lg">›</span>
-                        </Link>
-
-                        <button
-                            type="button"
-                            onClick={logout}
-                            className="w-full rounded-xl border border-white/20 px-4 py-2.5 text-left text-sm text-white transition hover:bg-white/10"
-                        >
-                            ↪ Keluar
-                        </button>
-                    </div>
-                </aside>
+                <StudentSidebar />
 
                 {/* MAIN CONTENT */}
                 <div className="min-h-screen md:ml-64">
@@ -309,7 +153,9 @@ export default function Material({ auth }) {
 
                             {/* Ilustrasi dekoratif */}
                             <div className="relative hidden min-h-[280px] items-center justify-center overflow-hidden bg-gradient-to-br from-[#e8f8f1] via-[#f3fbf8] to-[#d8f3eb] md:flex">
+
                                 <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full border border-[#b8e6d8]" />
+
                                 <div className="absolute -right-5 -top-5 h-40 w-40 rounded-full border border-[#b8e6d8]" />
 
                                 <div className="relative flex h-52 w-52 items-center justify-center rounded-full border-8 border-[#087b70]/20 bg-[#d7f2e9] shadow-inner">
@@ -333,9 +179,12 @@ export default function Material({ auth }) {
                         </section>
 
                         {/* DAFTAR MODUL */}
-                        <section id="daftar-modul" className="mt-8 scroll-mt-6">
-
+                        <section
+                            id="daftar-modul"
+                            className="mt-8 scroll-mt-6"
+                        >
                             <div className="mb-5 flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
+
                                 <div>
                                     <h3 className="text-2xl font-bold text-[#123b49]">
                                         Modul Materi
@@ -353,7 +202,7 @@ export default function Material({ auth }) {
 
                             <div className="space-y-3">
                                 {filteredModules.map((module) => (
-                                    <a
+                                    <Link
                                         key={module.number}
                                         href={module.href}
                                         className="group flex items-center gap-4 rounded-2xl border border-[#d4e4e1] bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-[#a8d9c9] hover:shadow-md sm:px-5"
@@ -379,7 +228,7 @@ export default function Material({ auth }) {
                                         <span className="shrink-0 text-2xl text-[#16805f] transition group-hover:translate-x-1">
                                             ›
                                         </span>
-                                    </a>
+                                    </Link>
                                 ))}
                             </div>
 
@@ -392,6 +241,7 @@ export default function Material({ auth }) {
 
                         {/* PROGRES MATERI */}
                         <section className="mt-8 overflow-hidden rounded-2xl border border-[#d4e4e1] bg-white p-6 shadow-sm sm:p-8">
+
                             <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
 
                                 <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#07384b] text-3xl text-white">
@@ -423,7 +273,9 @@ export default function Material({ auth }) {
                             >
                                 <div
                                     className="h-full rounded-full bg-gradient-to-r from-[#087b68] to-[#a3d94b] transition-all"
-                                    style={{ width: `${progressPercentage}%` }}
+                                    style={{
+                                        width: `${progressPercentage}%`,
+                                    }}
                                 />
                             </div>
 
@@ -434,7 +286,6 @@ export default function Material({ auth }) {
 
                     </main>
                 </div>
-
             </div>
         </>
     );
