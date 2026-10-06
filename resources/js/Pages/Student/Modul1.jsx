@@ -45,6 +45,7 @@ export default function Modul1() {
                         </div>
                     </header>
 
+
                     {/* PAGE CONTENT */}
                     <main className="mx-auto max-w-[1200px] px-6 py-8 sm:px-10">
 
@@ -65,6 +66,7 @@ export default function Modul1() {
                             </span>
 
                         </nav>
+
 
                         {/* HERO MODUL */}
                         <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#07384b] to-[#087b70] p-7 text-white shadow-sm sm:p-10">
@@ -103,6 +105,7 @@ export default function Modul1() {
                             </div>
                         </section>
 
+
                         {/* ISI MATERI */}
                         <article className="mt-7 overflow-hidden rounded-3xl border border-[#d4e4e1] bg-white shadow-sm">
 
@@ -131,9 +134,11 @@ export default function Modul1() {
 
                             </div>
 
+
                             {/* ISI TEKS */}
                             <div className="space-y-6 px-6 py-7 sm:px-10 sm:py-9">
 
+                                {/* PARAGRAF PEMBUKA */}
                                 <p className="text-justify text-base leading-8 text-gray-700">
                                     Klasifikasi iklim Köppen dikembangkan oleh
                                     <strong className="font-semibold text-[#123b49]">
@@ -148,6 +153,31 @@ export default function Modul1() {
                                     sehingga sering disebut juga klasifikasi iklim
                                     Köppen-Geiger.
                                 </p>
+
+
+                                {/* PETA KLASIFIKASI IKLIM KÖPPEN-GEIGER */}
+                                <figure className="overflow-hidden rounded-2xl border border-[#d4e4e1] bg-[#f8fbfa]">
+
+                                    <div className="bg-white p-3 sm:p-5">
+
+                                        <img
+                                            src="/image/peta-klasifikasi-koppen.jpeg"
+                                            alt="Peta klasifikasi iklim Köppen-Geiger dunia"
+                                            className="h-auto w-full rounded-xl object-contain"
+                                        />
+
+                                    </div>
+
+                                    <figcaption className="border-t border-[#e5efed] px-5 py-4 text-center text-sm leading-relaxed text-gray-500 sm:px-6">
+                                        Peta persebaran klasifikasi iklim
+                                        Köppen-Geiger di dunia. Setiap warna
+                                        menunjukkan tipe iklim yang berbeda
+                                        berdasarkan karakteristik suhu dan
+                                        curah hujan.
+                                    </figcaption>
+
+                                </figure>
+
 
                                 {/* TAHUKAH KAMU */}
                                 <div className="rounded-2xl border-l-4 border-[#087b68] bg-[#f3f9f8] p-5 sm:p-6">
@@ -177,6 +207,8 @@ export default function Modul1() {
 
                                 </div>
 
+
+                                {/* PENJELASAN DASAR */}
                                 <p className="text-justify text-base leading-8 text-gray-700">
                                     Berbeda dari klasifikasi iklim Junghuhn yang
                                     mengutamakan ketinggian tempat, Köppen
@@ -191,6 +223,7 @@ export default function Modul1() {
                                     menunjukkan karakteristik suhu.
                                 </p>
 
+
                                 {/* KODE KLASIFIKASI */}
                                 <section className="rounded-2xl border border-[#d4e4e1] p-5 sm:p-6">
 
@@ -203,8 +236,10 @@ export default function Modul1() {
                                         yang menunjukkan karakteristik iklim.
                                     </p>
 
+
                                     <div className="mt-5 grid gap-3 sm:grid-cols-3">
 
+                                        {/* HURUF PERTAMA */}
                                         <div className="rounded-xl bg-[#e1f5ed] p-4">
 
                                             <div className="text-3xl font-bold text-[#087b68]">
@@ -221,6 +256,8 @@ export default function Modul1() {
 
                                         </div>
 
+
+                                        {/* HURUF KEDUA */}
                                         <div className="rounded-xl bg-[#eef7fb] p-4">
 
                                             <div className="text-3xl font-bold text-[#26718b]">
@@ -237,6 +274,8 @@ export default function Modul1() {
 
                                         </div>
 
+
+                                        {/* HURUF KETIGA */}
                                         <div className="rounded-xl bg-[#f5f1fc] p-4">
 
                                             <div className="text-3xl font-bold text-[#7955a5]">
@@ -248,13 +287,16 @@ export default function Modul1() {
                                             </h4>
 
                                             <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                                                Pada tipe tertentu menunjukkan karakteristik suhu.
+                                                Pada tipe tertentu menunjukkan
+                                                karakteristik suhu.
                                             </p>
 
                                         </div>
 
                                     </div>
 
+
+                                    {/* CONTOH KODE */}
                                     <div className="mt-4 rounded-xl bg-[#f8fbfa] p-4">
 
                                         <p className="text-sm font-medium text-gray-500">
@@ -267,20 +309,23 @@ export default function Modul1() {
 
                                         <p className="mt-1 text-sm leading-relaxed text-gray-600">
                                             Kode ini termasuk kelompok iklim A,
-                                            dengan pola curah hujan yang ditunjukkan
-                                            oleh huruf kedua.
+                                            dengan pola curah hujan yang
+                                            ditunjukkan oleh huruf kedua.
                                         </p>
 
                                     </div>
 
                                 </section>
 
+
+                                {/* LIMA KELOMPOK */}
                                 <p className="text-justify text-base leading-8 text-gray-700">
                                     Köppen membagi iklim dunia menjadi lima
                                     kelompok utama: A (tropis), B (kering),
                                     C (subtropis lembap), D (kontinental), dan
                                     E (kutub).
                                 </p>
+
 
                                 {/* LIMA KELOMPOK IKLIM */}
                                 <section>
@@ -293,6 +338,7 @@ export default function Modul1() {
                                         Setiap kelompok memiliki karakteristik
                                         suhu dan curah hujan yang berbeda.
                                     </p>
+
 
                                     <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
 
@@ -377,6 +423,7 @@ export default function Modul1() {
                             </div>
                         </article>
 
+
                         {/* RINGKASAN */}
                         <section className="mt-7 rounded-2xl border border-[#d4e4e1] bg-white p-6 shadow-sm sm:p-8">
 
@@ -399,6 +446,7 @@ export default function Modul1() {
                                 </div>
 
                             </div>
+
 
                             <ul className="mt-5 space-y-3">
 
@@ -430,12 +478,14 @@ export default function Modul1() {
 
                         </section>
 
+
                         {/* SELESAIKAN MODUL */}
                         <div className="mt-7 rounded-2xl border border-[#d4e4e1] bg-white p-5 shadow-sm sm:p-6">
 
                             <CompleteModuleButton moduleNumber={1} />
 
                         </div>
+
 
                         {/* NAVIGASI MODUL */}
                         <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -447,6 +497,7 @@ export default function Modul1() {
                                 <span>←</span>
                                 Daftar Materi
                             </Link>
+
 
                             <Link
                                 href={route("student.modul2")}
