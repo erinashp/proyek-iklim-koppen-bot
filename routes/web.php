@@ -14,6 +14,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Teacher\GradeController;
 
 
 /*
@@ -350,9 +351,7 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         */
 
         Route::get('/dashboard', function () {
-
             return Inertia::render('Teacher/Dashboard');
-
         })->name('dashboard');
 
 
@@ -363,19 +362,10 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         */
 
         Route::get('/profile', function (Request $request) {
-
             return Inertia::render('Teacher/Profile', [
                 'user' => $request->user(),
             ]);
-
         })->name('profile');
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Update Profil Guru
-        |--------------------------------------------------------------------------
-        */
 
         Route::put(
             '/profile',
@@ -390,57 +380,43 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         */
 
         Route::get('/guide', function () {
-
             return Inertia::render('Teacher/Guide');
-
         })->name('guide');
 
 
         /*
         |--------------------------------------------------------------------------
-        | Tujuan Pembelajaran Guru
+        | Tujuan Pembelajaran
         |--------------------------------------------------------------------------
         */
 
         Route::get('/objectives', function () {
-
             return Inertia::render('Teacher/Objectives');
-
         })->name('objectives');
 
 
         /*
         |--------------------------------------------------------------------------
-        | Daftar Materi Guru
+        | Materi
         |--------------------------------------------------------------------------
         */
 
         Route::get('/materials', function () {
-
             return Inertia::render('Teacher/Materials/Index');
-
         })->name('materials.index');
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Detail Materi Guru
-        |--------------------------------------------------------------------------
-        */
-
         Route::get('/materials/{material}', function ($material) {
-
             return Inertia::render(
                 "Teacher/Materials/Modul{$material}"
             );
-
-        })->whereNumber('material')
+        })
+            ->whereNumber('material')
             ->name('materials.show');
 
 
         /*
         |--------------------------------------------------------------------------
-        | Daftar Siswa
+        | Data Siswa
         |--------------------------------------------------------------------------
         */
 
@@ -449,29 +425,48 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
             [TeacherStudentController::class, 'index']
         )->name('students.index');
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Tambah Siswa
-        |--------------------------------------------------------------------------
-        */
-
         Route::post(
             '/students',
             [TeacherStudentController::class, 'store']
         )->name('students.store');
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Hapus Siswa
-        |--------------------------------------------------------------------------
-        */
-
         Route::delete(
             '/students/{student}',
             [TeacherStudentController::class, 'destroy']
         )->name('students.destroy');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Nilai Siswa
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get(
+            '/grades',
+            [GradeController::class, 'index']
+        )->name('grades.index');
+
+        Route::get(
+            '/grades/{student}',
+            [GradeController::class, 'show']
+        )->name('grades.show');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Chatbot Guru
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/chatbot', function () {
+            return Inertia::render('Teacher/ChatBot');
+        })->name('chatbot');
+
+        Route::post(
+            '/chatbot',
+            [ChatbotController::class, 'chat']
+        )->name('chatbot.chat');
 
     });
 

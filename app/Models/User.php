@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\ChallengeAttempt;
 
 #[Fillable([
     'name',
@@ -21,6 +23,12 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
+
+    public function challengeAttempts(): HasMany
+    {
+        return $this->hasMany(ChallengeAttempt::class);
+    }
+    
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
