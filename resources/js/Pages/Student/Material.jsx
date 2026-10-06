@@ -78,7 +78,111 @@ export default function Material() {
             <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
 
                 {/* SIDEBAR */}
+<<<<<<< HEAD
                 <StudentSidebar />
+=======
+                <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-gradient-to-b from-[#07384b] to-[#087b70] text-white md:flex">
+
+                    {/* Logo */}
+                    <div className="px-6 pt-7">
+                        <Link
+                            href={route('student.dashboard')}
+                            className="flex items-center gap-3"
+                        >
+                            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-2xl">
+                                🌍
+                            </div>
+
+                            <h1 className="text-xl font-bold tracking-wide">
+                                IklimKöppenBot
+                            </h1>
+                        </Link>
+                    </div>
+
+                    <div className="mx-4 mt-6 border-t border-white/20" />
+
+                    {/* Menu */}
+                    <div className="px-4 pt-5">
+                        <p className="px-3 text-xs font-bold uppercase tracking-[0.15em] text-teal-100/80">
+                            Media Belajar Iklim Köppen
+                        </p>
+
+                        <nav className="mt-3 space-y-1">
+                            {menuItems.map((item) => {
+                                const className = `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
+                                    item.active
+                                        ? 'bg-[#e8f8f1] font-semibold text-[#07384b]'
+                                        : 'text-teal-50 hover:bg-white/10'
+                                }`;
+
+                                return item.active ? (
+                                    <div
+                                        key={item.label}
+                                        aria-current="page"
+                                        className={className}
+                                    >
+                                        <span className="w-5 text-center text-xl">
+                                            {item.icon}
+                                        </span>
+                                        <span>{item.label}</span>
+                                    </div>
+                                ) : (
+                                    <a
+                                        key={item.label}
+                                        href={item.href}
+                                        className={className}
+                                    >
+                                        <span className="w-5 text-center text-xl">
+                                            {item.icon}
+                                        </span>
+                                        <span>{item.label}</span>
+                                    </a>
+                                );
+                            })}
+                        </nav>
+                    </div>
+
+                    {/* Profil dan Logout */}
+                    <div className="mt-auto p-4">
+                        <Link
+                            href={route('student.profile')}
+                            className="mb-3 flex items-center gap-3 rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20"
+                        >
+                            {avatarUrl ? (
+                                <img
+                                    src={avatarUrl}
+                                    alt="Foto profil"
+                                    className="h-10 w-10 rounded-full object-cover"
+                                />
+                            ) : (
+                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#07384b]">
+                                    {initial}
+                                </div>
+                            )}
+
+                            <div className="min-w-0 flex-1">
+                                <p className="truncate text-sm font-semibold">
+                                    {user.name}
+                                </p>
+
+                                <p className="text-xs text-teal-100">
+                                    {roleLabel} · Profil Saya
+                                </p>
+                            </div>
+
+                            <span className="text-lg">›</span>
+                        </Link>
+
+                        <button
+                            type="button"
+                            onClick={logout}
+                            className="w-full rounded-xl border border-white/20 px-4 py-2.5 text-left text-sm text-white transition hover:bg-white/10"
+                        >
+                            ↪ Keluar
+                        </button>
+                    </div>
+                </aside>
+>>>>>>> 123cf000e52455313caed91e4383f3ccc709d93e
 
                 {/* MAIN CONTENT */}
                 <div className="min-h-screen md:ml-64">
@@ -89,15 +193,15 @@ export default function Material() {
 
                             <div>
                                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                    Media Pembelajaran Kelas X
+                                    Media Pembelajaran Kelas X Fase E Materi Iklim Köppen
                                 </p>
 
                                 <h2 className="mt-1 text-3xl font-bold text-[#123b49]">
-                                    Materi Köppen
+                                    Materi Iklim Köppen
                                 </h2>
 
                                 <p className="mt-1 text-gray-500">
-                                    Pelajari klasifikasi iklim berdasarkan suhu dan curah hujan.
+                                    Mempelajari klasifikasi iklim berdasarkan suhu dan curah hujan.
                                 </p>
                             </div>
 
@@ -127,7 +231,7 @@ export default function Material() {
 
                             <div className="flex flex-col justify-center px-8 py-9 sm:px-10">
                                 <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#16805f]">
-                                    Ruang Belajar Köppen
+                                    Media Pembelajaran Iklim Köppen
                                 </p>
 
                                 <h3 className="mt-4 max-w-xl text-2xl font-bold leading-tight text-[#123b49] sm:text-3xl">
@@ -135,7 +239,7 @@ export default function Material() {
                                 </h3>
 
                                 <p className="mt-4 max-w-xl leading-relaxed text-gray-600">
-                                    Kenali konsep dasar dan cara kerja klasifikasi
+                                    Mengenali konsep dasar dan cara kerja klasifikasi
                                     iklim Köppen melalui enam modul pembelajaran.
                                 </p>
 
@@ -191,7 +295,7 @@ export default function Material() {
                                     </h3>
 
                                     <p className="mt-1 text-gray-500">
-                                        Pelajari setiap topik secara berurutan.
+                                        Mempelajari setiap topik secara berurutan.
                                     </p>
                                 </div>
 

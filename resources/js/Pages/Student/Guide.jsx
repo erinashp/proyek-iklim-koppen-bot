@@ -57,7 +57,132 @@ export default function Guide() {
 
             <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
                 {/* SIDEBAR */}
+<<<<<<< HEAD
                 <StudentSidebar />
+=======
+                <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-gradient-to-b from-[#07384b] to-[#087b70] text-white md:flex">
+
+                    {/* Logo */}
+                    <div className="px-6 pt-7">
+                        <div className="flex items-center gap-3">
+                            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-2xl">
+                                🌍
+                            </div>
+
+                            <h1 className="text-xl font-bold tracking-wide">
+                                IklimKöppenBot
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div className="mx-4 mt-6 border-t border-white/20" />
+
+                    {/* Menu Navigasi */}
+                    <div className="px-4 pt-5">
+                        <p className="px-3 text-xs font-bold uppercase tracking-[0.15em] text-teal-100/80">
+                            Media Belajar Iklim Köppen
+                        </p>
+
+                        <nav className="mt-3 space-y-1">
+                            {menuItems.map((item) => {
+                                const itemClass = `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
+                                    item.active
+                                        ? 'bg-[#e8f8f1] font-semibold text-[#07384b]'
+                                        : 'text-teal-50 hover:bg-white/10'
+                                }`;
+
+                                const itemContent = (
+                                    <>
+                                        <span className="w-5 text-center text-xl">
+                                            {item.icon}
+                                        </span>
+
+                                        <span>{item.label}</span>
+                                    </>
+                                );
+
+                                // Menu halaman yang sedang aktif
+                                if (item.active) {
+                                    return (
+                                        <div
+                                            key={item.label}
+                                            className={itemClass}
+                                            aria-current="page"
+                                        >
+                                            {itemContent}
+                                        </div>
+                                    );
+                                }
+
+                                // Navigasi ke halaman lain menggunakan Inertia
+                                if (item.isPage) {
+                                    return (
+                                        <Link
+                                            key={item.label}
+                                            href={item.href}
+                                            className={itemClass}
+                                        >
+                                            {itemContent}
+                                        </Link>
+                                    );
+                                }
+
+                                // Navigasi ke bagian tertentu di dashboard
+                                return (
+                                    <a
+                                        key={item.label}
+                                        href={item.href}
+                                        className={itemClass}
+                                    >
+                                        {itemContent}
+                                    </a>
+                                );
+                            })}
+                        </nav>
+                    </div>
+
+                    {/* Profil User dan Logout */}
+                    <div className="mt-auto p-4">
+
+                        <Link
+                            href={profileUrl}
+                            className="mb-3 flex items-center gap-3 rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20"
+                        >
+                            {avatarUrl ? (
+                                <img
+                                    src={avatarUrl}
+                                    alt="Foto profil"
+                                    className="h-10 w-10 rounded-full object-cover"
+                                />
+                            ) : (
+                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#07384b]">
+                                    {initial}
+                                </div>
+                            )}
+
+                            <div className="min-w-0 flex-1">
+                                <p className="truncate text-sm font-semibold">
+                                    {user.name}
+                                </p>
+
+                                <p className="text-xs text-teal-100">
+                                    {roleLabel} · Profil Saya
+                                </p>
+                            </div>
+
+                            <span className="text-lg">›</span>
+                        </Link>
+
+                        <button
+                            type="button"
+                            onClick={logout}
+                            className="w-full rounded-xl border border-white/20 px-4 py-2.5 text-left text-sm text-white transition hover:bg-white/10"
+                        >
+                            ↪ Keluar
+                        </button>
+                    </div>
+                </aside>
+>>>>>>> 123cf000e52455313caed91e4383f3ccc709d93e
 
                 {/* KONTEN UTAMA */}
                 <div className="min-h-screen md:ml-64">
@@ -66,7 +191,7 @@ export default function Guide() {
                         <div className="mx-auto flex max-w-[1500px] flex-col justify-between gap-5 px-6 py-6 sm:flex-row sm:items-center sm:px-10">
                             <div>
                                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                    Media Pembelajaran Kelas X
+                                    Media Pembelajaran Kelas X Fase E Materi Iklim Köppen
                                 </p>
 
                                 <h2 className="mt-1 text-3xl font-bold text-[#123b49]">
@@ -74,8 +199,12 @@ export default function Guide() {
                                 </h2>
 
                                 <p className="mt-1 text-gray-500">
+<<<<<<< HEAD
                                     Ikuti langkah berikut untuk mulai belajar
                                     dengan GeoBot.
+=======
+                                    Ikuti langkah berikut untuk mulai belajar dengan IklimKöppenBot.
+>>>>>>> 123cf000e52455313caed91e4383f3ccc709d93e
                                 </p>
                             </div>
                         </div>
@@ -86,14 +215,20 @@ export default function Guide() {
                         {/* PENGANTAR */}
                         <section className="mb-8">
                             <h3 className="text-2xl font-bold text-[#123b49]">
-                                Mulai perjalanan belajarmu
+                                Mulai pengalaman belajarmu
                             </h3>
 
                             <p className="mt-2 max-w-3xl leading-relaxed text-gray-500">
+<<<<<<< HEAD
                                 IklimKöppenBot membantu kamu memahami klasifikasi iklim
                                 Köppen melalui materi, latihan kasus, dan
                                 evaluasi hasil belajar. Ikuti panduan berikut
                                 agar proses belajarmu lebih terarah.
+=======
+                                IklimKöppenBot membantu kamu memahami klasifikasi iklim Köppen
+                                melalui materi, latihan kasus, dan evaluasi hasil belajar.
+                                Ikuti yuk panduan berikut agar proses belajarmu lebih terarah.
+>>>>>>> 123cf000e52455313caed91e4383f3ccc709d93e
                             </p>
                         </section>
 
@@ -107,12 +242,16 @@ export default function Guide() {
 
                                     <div>
                                         <h3 className="text-xl font-bold text-[#123b49]">
-                                            Kenali menu utama
+                                            Kenali menu utama yang tersedia
                                         </h3>
 
                                         <p className="mt-1 text-sm text-gray-500">
+<<<<<<< HEAD
                                             Inilah bagian-bagian utama yang akan
                                             kamu gunakan.
+=======
+                                            Ini adalah fitur yang dapat kamu gunakan.
+>>>>>>> 123cf000e52455313caed91e4383f3ccc709d93e
                                         </p>
                                     </div>
                                 </div>
@@ -158,7 +297,7 @@ export default function Guide() {
                                         {/* Mini dashboard content */}
                                         <div className="min-w-0 flex-1 p-4 sm:p-5">
                                             <p className="text-[9px] font-bold uppercase tracking-wider text-[#16805f]">
-                                                Media Pembelajaran Kelas X
+                                                Media Pembelajaran Kelas X Fase E Materi Iklim Köppen
                                             </p>
 
                                             <h4 className="mt-1 text-lg font-bold text-[#123b49]">
@@ -168,7 +307,7 @@ export default function Guide() {
                                             <div className="mt-3 grid overflow-hidden rounded-lg bg-[#07384b] sm:grid-cols-2">
                                                 <div className="p-4 text-white">
                                                     <p className="text-[9px] font-bold uppercase text-[#a8e5ce]">
-                                                        Selamat datang di GeoBot
+                                                        Selamat datang di IklimKöppenBot
                                                     </p>
 
                                                     <p className="mt-2 text-sm font-bold">
@@ -212,7 +351,7 @@ export default function Guide() {
                                 </div>
 
                                 <p className="mt-3 text-center text-xs text-gray-500">
-                                    Ilustrasi sederhana tampilan Beranda GeoBot.
+                                    Tampilan Beranda IklimKöppenBot.
                                 </p>
                             </div>
                         </section>
