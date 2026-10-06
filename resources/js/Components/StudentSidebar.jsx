@@ -81,9 +81,9 @@ export default function StudentSidebar() {
         {
             icon: "ⓘ",
             label: "Chat AI Bot",
-            href: "#chat-ai-bot",
-            active: false,
-            type: "anchor",
+            href: route("student.chatbot"),
+            active: isActive("/student/chatbot"),
+            type: "link",
         },
     ];
 

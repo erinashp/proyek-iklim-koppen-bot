@@ -15,6 +15,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Data Peserta Didik
+
+        User::updateOrCreate(
+            ['email' => 'testing@smabhaone.com'],
+            [
+                'name' => 'Coba-coba saja',
+                'password' => '12345',
+                'role' => 'student',
+                'email_verified_at' => now(),
+            ]
+        );
+
         User::updateOrCreate(
             ['email' => 'acintya@smabhaone.com'],
             [

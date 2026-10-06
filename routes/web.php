@@ -61,7 +61,6 @@ Route::get('/dashboard', function (Request $request) {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Student Routes
@@ -135,6 +134,19 @@ Route::middleware(['auth', 'verified', 'role:student'])
 
         /*
         |--------------------------------------------------------------------------
+        | Chat AI Bot
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get('/chatbot', function () {
+
+            return Inertia::render('Student/ChatBot');
+
+        })->name('chatbot');
+
+
+        /*
+        |--------------------------------------------------------------------------
         | Tantangan Siswa
         |--------------------------------------------------------------------------
         |
@@ -203,7 +215,6 @@ Route::middleware(['auth', 'verified', 'role:student'])
         )->name('profile.update');
 
     });
-
 
 
 /*
@@ -297,7 +308,6 @@ Route::middleware(['auth', 'verified', 'role:student'])
         })->name('student.modul6');
 
     });
-
 
 
 /*
@@ -450,7 +460,6 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         )->name('students.destroy');
 
     });
-
 
 
 /*
@@ -628,7 +637,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])
     });
 
 
-
 /*
 |--------------------------------------------------------------------------
 | General Profile Routes
@@ -681,7 +689,6 @@ Route::middleware('auth')
         )->name('profile.destroy');
 
     });
-
 
 
 /*
