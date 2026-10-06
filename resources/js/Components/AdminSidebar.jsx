@@ -39,6 +39,18 @@ export default function AdminSidebar() {
             href: route("admin.materials.index"),
             active: currentUrl.startsWith("/admin/materials"),
         },
+        {
+            icon: "📝",
+            label: "Soal Tantangan",
+            href: route("admin.challenges.index"),
+            active: currentUrl.startsWith("/admin/challenges"),
+        },
+        {
+            icon: "📊",
+            label: "Nilai Siswa",
+            href: route("admin.grades.index"),
+            active: currentUrl.startsWith("/admin/grades"),
+        },
     ];
 
     const logout = (e) => {

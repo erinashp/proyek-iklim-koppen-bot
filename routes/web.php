@@ -3,18 +3,27 @@
 use App\Http\Controllers\Admin\MaterialController as AdminMaterialController;
 use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
+use App\Http\Controllers\Admin\ChallengeQuestionController;
+use App\Http\Controllers\Admin\GradeController as AdminGradeController;
+
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\Student\ChallengeController;
 use App\Http\Controllers\Student\ChatbotController;
 use App\Http\Controllers\Student\ModuleProgressController;
+
 use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
+use App\Http\Controllers\Teacher\GradeController as TeacherGradeController;
+
 use App\Http\Controllers\UserProfileController;
+
 use App\Models\StudentModuleProgress;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use Inertia\Inertia;
-use App\Http\Controllers\Teacher\GradeController;
 
 
 /*
@@ -104,10 +113,6 @@ Route::middleware(['auth', 'verified', 'role:student'])
         |--------------------------------------------------------------------------
         | Materi Pembelajaran
         |--------------------------------------------------------------------------
-        |
-        | Mengambil jumlah modul yang sudah selesai
-        | khusus untuk siswa yang sedang login.
-        |
         */
 
         Route::get('/material', function (Request $request) {
@@ -130,11 +135,6 @@ Route::middleware(['auth', 'verified', 'role:student'])
         |--------------------------------------------------------------------------
         | Menyelesaikan Modul
         |--------------------------------------------------------------------------
-        |
-        | Contoh:
-        | POST /student/modul/1/complete
-        | POST /student/modul/2/complete
-        |
         */
 
         Route::post(
@@ -351,7 +351,9 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         */
 
         Route::get('/dashboard', function () {
+
             return Inertia::render('Teacher/Dashboard');
+
         })->name('dashboard');
 
 
@@ -362,10 +364,13 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         */
 
         Route::get('/profile', function (Request $request) {
+
             return Inertia::render('Teacher/Profile', [
                 'user' => $request->user(),
             ]);
+
         })->name('profile');
+
 
         Route::put(
             '/profile',
@@ -380,7 +385,9 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         */
 
         Route::get('/guide', function () {
+
             return Inertia::render('Teacher/Guide');
+
         })->name('guide');
 
 
@@ -391,7 +398,9 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         */
 
         Route::get('/objectives', function () {
+
             return Inertia::render('Teacher/Objectives');
+
         })->name('objectives');
 
 
@@ -402,13 +411,18 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         */
 
         Route::get('/materials', function () {
+
             return Inertia::render('Teacher/Materials/Index');
+
         })->name('materials.index');
 
+
         Route::get('/materials/{material}', function ($material) {
+
             return Inertia::render(
                 "Teacher/Materials/Modul{$material}"
             );
+
         })
             ->whereNumber('material')
             ->name('materials.show');
@@ -425,10 +439,12 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
             [TeacherStudentController::class, 'index']
         )->name('students.index');
 
+
         Route::post(
             '/students',
             [TeacherStudentController::class, 'store']
         )->name('students.store');
+
 
         Route::delete(
             '/students/{student}',
@@ -444,12 +460,13 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 
         Route::get(
             '/grades',
-            [GradeController::class, 'index']
+            [TeacherGradeController::class, 'index']
         )->name('grades.index');
+
 
         Route::get(
             '/grades/{student}',
-            [GradeController::class, 'show']
+            [TeacherGradeController::class, 'show']
         )->name('grades.show');
 
 
@@ -460,8 +477,11 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         */
 
         Route::get('/chatbot', function () {
+
             return Inertia::render('Teacher/ChatBot');
+
         })->name('chatbot');
+
 
         Route::post(
             '/chatbot',
@@ -664,6 +684,66 @@ Route::middleware(['auth', 'verified', 'role:admin'])
             '/materials/{material}',
             [AdminMaterialController::class, 'destroy']
         )->name('materials.destroy');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Soal Tantangan
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get(
+            '/challenges',
+            [ChallengeQuestionController::class, 'index']
+        )->name('challenges.index');
+
+
+        Route::get(
+            '/challenges/create',
+            [ChallengeQuestionController::class, 'create']
+        )->name('challenges.create');
+
+
+        Route::post(
+            '/challenges',
+            [ChallengeQuestionController::class, 'store']
+        )->name('challenges.store');
+
+
+        Route::get(
+            '/challenges/{challenge}/edit',
+            [ChallengeQuestionController::class, 'edit']
+        )->name('challenges.edit');
+
+
+        Route::put(
+            '/challenges/{challenge}',
+            [ChallengeQuestionController::class, 'update']
+        )->name('challenges.update');
+
+
+        Route::delete(
+            '/challenges/{challenge}',
+            [ChallengeQuestionController::class, 'destroy']
+        )->name('challenges.destroy');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Nilai Siswa
+        |--------------------------------------------------------------------------
+        */
+
+        Route::get(
+            '/grades',
+            [AdminGradeController::class, 'index']
+        )->name('grades.index');
+
+
+        Route::get(
+            '/grades/{student}',
+            [AdminGradeController::class, 'show']
+        )->name('grades.show');
 
     });
 
