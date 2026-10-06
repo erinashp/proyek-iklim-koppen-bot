@@ -67,16 +67,16 @@ export default function StudentSidebar() {
         {
             icon: "◇",
             label: "Tantangan",
-            href: "#tantangan",
-            active: false,
-            type: "anchor",
+            href: route("student.challenge"),
+            active: isActive("/student/challenge"),
+            type: "link",
         },
         {
             icon: "▥",
             label: "Hasil Skor",
-            href: "#hasil-skor",
-            active: false,
-            type: "anchor",
+            href: route("student.scores"),
+            active: isActive("/student/scores"),
+            type: "link",
         },
         {
             icon: "ⓘ",

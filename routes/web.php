@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\MaterialController as AdminMaterialController;
 use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
-use App\Http\Controllers\Admin\MaterialController as AdminMaterialController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Student\ChallengeController;
 use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Foundation\Application;
@@ -60,6 +61,7 @@ Route::get('/dashboard', function (Request $request) {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Student Routes
@@ -77,6 +79,7 @@ Route::middleware(['auth', 'verified', 'role:student'])
     ->prefix('student')
     ->name('student.')
     ->group(function () {
+
 
         /*
         |--------------------------------------------------------------------------
@@ -132,6 +135,49 @@ Route::middleware(['auth', 'verified', 'role:student'])
 
         /*
         |--------------------------------------------------------------------------
+        | Tantangan Siswa
+        |--------------------------------------------------------------------------
+        |
+        | Halaman ini digunakan siswa untuk mengerjakan
+        | soal pilihan ganda.
+        |
+        */
+
+        Route::get(
+            '/challenge',
+            [ChallengeController::class, 'index']
+        )->name('challenge');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Submit Jawaban Tantangan
+        |--------------------------------------------------------------------------
+        */
+
+        Route::post(
+            '/challenge/submit',
+            [ChallengeController::class, 'submit']
+        )->name('challenge.submit');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Hasil Skor Siswa
+        |--------------------------------------------------------------------------
+        |
+        | Setiap siswa hanya akan melihat skor miliknya sendiri.
+        |
+        */
+
+        Route::get(
+            '/scores',
+            [ChallengeController::class, 'scores']
+        )->name('scores');
+
+
+        /*
+        |--------------------------------------------------------------------------
         | Profil Siswa
         |--------------------------------------------------------------------------
         */
@@ -159,6 +205,7 @@ Route::middleware(['auth', 'verified', 'role:student'])
     });
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Student Learning Modules
@@ -170,6 +217,7 @@ Route::middleware(['auth', 'verified', 'role:student'])
 
 Route::middleware(['auth', 'verified', 'role:student'])
     ->group(function () {
+
 
         /*
         |--------------------------------------------------------------------------
@@ -251,6 +299,7 @@ Route::middleware(['auth', 'verified', 'role:student'])
     });
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Teacher Routes
@@ -268,6 +317,7 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
     ->prefix('teacher')
     ->name('teacher.')
     ->group(function () {
+
 
         /*
         |--------------------------------------------------------------------------
@@ -352,14 +402,6 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
         |--------------------------------------------------------------------------
         | Detail Materi / Modul
         |--------------------------------------------------------------------------
-        |
-        | Contoh:
-        |
-        | /teacher/materials/1
-        | /teacher/materials/2
-        | ...
-        | /teacher/materials/6
-        |
         */
 
         Route::get('/materials/{material}', function ($material) {
@@ -410,6 +452,7 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
     });
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -423,11 +466,11 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 |
 */
 
-
 Route::middleware(['auth', 'verified', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
+
 
         /*
         |--------------------------------------------------------------------------
@@ -540,6 +583,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
             [AdminTeacherController::class, 'destroy']
         )->name('teachers.destroy');
 
+
         /*
         |--------------------------------------------------------------------------
         | Materi Pembelajaran Admin
@@ -551,50 +595,38 @@ Route::middleware(['auth', 'verified', 'role:admin'])
             [AdminMaterialController::class, 'index']
         )->name('materials.index');
 
+
         Route::get(
             '/materials/create',
             [AdminMaterialController::class, 'create']
         )->name('materials.create');
+
 
         Route::post(
             '/materials',
             [AdminMaterialController::class, 'store']
         )->name('materials.store');
 
+
         Route::get(
             '/materials/{material}/edit',
             [AdminMaterialController::class, 'edit']
         )->name('materials.edit');
+
 
         Route::put(
             '/materials/{material}',
             [AdminMaterialController::class, 'update']
         )->name('materials.update');
 
+
         Route::delete(
             '/materials/{material}',
             [AdminMaterialController::class, 'destroy']
         )->name('materials.destroy');
 
-        Route::get('/materials', [AdminMaterialController::class, 'index'])
-            ->name('materials.index');
-
-        Route::get('/materials/create', [AdminMaterialController::class, 'create'])
-            ->name('materials.create');
-
-        Route::post('/materials', [AdminMaterialController::class, 'store'])
-            ->name('materials.store');
-
-        Route::get('/materials/{material}/edit', [AdminMaterialController::class, 'edit'])
-            ->name('materials.edit');
-
-        Route::put('/materials/{material}', [AdminMaterialController::class, 'update'])
-            ->name('materials.update');
-
-        Route::delete('/materials/{material}', [AdminMaterialController::class, 'destroy'])
-            ->name('materials.destroy');
-
     });
+
 
 
 /*
@@ -611,6 +643,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 
 Route::middleware('auth')
     ->group(function () {
+
 
         /*
         |--------------------------------------------------------------------------
@@ -648,6 +681,7 @@ Route::middleware('auth')
         )->name('profile.destroy');
 
     });
+
 
 
 /*

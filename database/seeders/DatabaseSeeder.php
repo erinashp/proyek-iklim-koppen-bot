@@ -9,6 +9,11 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+
+        $this->call([
+            ChallengeQuestionSeeder::class,
+        ]);
+
         // Data Peserta Didik
         User::updateOrCreate(
             ['email' => 'acintya@smabhaone.com'],
