@@ -1,5 +1,6 @@
 import { Head, Link } from "@inertiajs/react";
 import StudentSidebar from "@/Components/StudentSidebar";
+import CompleteModuleButton from "@/Components/CompleteModuleButton";
 
 export default function Modul5() {
     const steps = [
@@ -400,6 +401,13 @@ export default function Modul5() {
 
                                 </div>
                             </section>
+
+                            {/* SELESAIKAN MODUL */}
+                            <div className="mt-7 rounded-2xl border border-[#d4e4e1] bg-white p-5 shadow-sm sm:p-6">
+
+                                <CompleteModuleButton moduleNumber={5} />
+
+                            </div>
 
                             {/* =================================================
                                 NAVIGATION

@@ -14,6 +14,10 @@ class DatabaseSeeder extends Seeder
             ChallengeQuestionSeeder::class,
         ]);
 
+        $this->call([
+            ChatbotKnowledgeSeeder::class,
+        ]);
+
         // Data Peserta Didik
 
         User::updateOrCreate(

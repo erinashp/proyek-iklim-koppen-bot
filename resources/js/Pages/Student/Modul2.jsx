@@ -1,5 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import StudentSidebar from '@/Components/StudentSidebar';
+import CompleteModuleButton from "@/Components/CompleteModuleButton";
 
 export default function Modul2() {
     return (
@@ -366,6 +367,13 @@ export default function Modul2() {
                                 ))}
                             </ul>
                         </section>
+
+                        {/* SELESAIKAN MODUL */}
+                        <div className="mt-7 rounded-2xl border border-[#d4e4e1] bg-white p-5 shadow-sm sm:p-6">
+
+                            <CompleteModuleButton moduleNumber={2} />
+
+                        </div>
 
                         {/* NAVIGASI MODUL */}
                         <div className="mt-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">

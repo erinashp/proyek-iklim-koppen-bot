@@ -1,5 +1,7 @@
-import { Head, Link } from '@inertiajs/react';
-import StudentSidebar from '@/Components/StudentSidebar';
+import { Head, Link } from "@inertiajs/react";
+
+import StudentSidebar from "@/Components/StudentSidebar";
+import CompleteModuleButton from "@/Components/CompleteModuleButton";
 
 export default function Modul1() {
     return (
@@ -33,12 +35,13 @@ export default function Modul1() {
                             </div>
 
                             <Link
-                                href={route('student.material')}
+                                href={route("student.material")}
                                 className="hidden shrink-0 items-center gap-2 rounded-xl border border-[#c8dcda] px-4 py-3 text-sm font-semibold text-[#087b68] transition hover:bg-[#f3f9f8] sm:inline-flex"
                             >
                                 <span>←</span>
                                 Kembali
                             </Link>
+
                         </div>
                     </header>
 
@@ -47,8 +50,9 @@ export default function Modul1() {
 
                         {/* BREADCRUMB */}
                         <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-gray-500">
+
                             <Link
-                                href={route('student.material')}
+                                href={route("student.material")}
                                 className="transition hover:text-[#087b68]"
                             >
                                 Materi Köppen
@@ -59,6 +63,7 @@ export default function Modul1() {
                             <span className="font-medium text-[#123b49]">
                                 Modul 1
                             </span>
+
                         </nav>
 
                         {/* HERO MODUL */}
@@ -69,6 +74,7 @@ export default function Modul1() {
                             <div className="absolute -right-2 -top-8 h-40 w-40 rounded-full border border-white/10" />
 
                             <div className="relative">
+
                                 <span className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-teal-50">
                                     Modul Pembelajaran 01
                                 </span>
@@ -83,6 +89,7 @@ export default function Modul1() {
                                 </p>
 
                                 <div className="mt-6 flex flex-wrap gap-3 text-sm">
+
                                     <span className="rounded-lg bg-white/10 px-3 py-2">
                                         📘 Materi Geografi
                                     </span>
@@ -90,15 +97,18 @@ export default function Modul1() {
                                     <span className="rounded-lg bg-white/10 px-3 py-2">
                                         ⏱️ Estimasi 10 menit
                                     </span>
+
                                 </div>
+
                             </div>
                         </section>
 
                         {/* ISI MATERI */}
                         <article className="mt-7 overflow-hidden rounded-3xl border border-[#d4e4e1] bg-white shadow-sm">
 
-                            {/* Judul artikel */}
+                            {/* JUDUL ARTIKEL */}
                             <div className="border-b border-[#e5efed] px-6 py-6 sm:px-10">
+
                                 <div className="flex items-start gap-4">
 
                                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#e1f5ed] text-2xl text-[#087b68]">
@@ -106,6 +116,7 @@ export default function Modul1() {
                                     </div>
 
                                     <div>
+
                                         <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#16805f]">
                                             Materi 1.1
                                         </p>
@@ -113,17 +124,20 @@ export default function Modul1() {
                                         <h2 className="mt-1 text-xl font-bold text-[#123b49] sm:text-2xl">
                                             Apa Itu Klasifikasi Iklim Köppen?
                                         </h2>
+
                                     </div>
+
                                 </div>
+
                             </div>
 
-                            {/* Isi teks */}
+                            {/* ISI TEKS */}
                             <div className="space-y-6 px-6 py-7 sm:px-10 sm:py-9">
 
                                 <p className="text-justify text-base leading-8 text-gray-700">
                                     Klasifikasi iklim Köppen dikembangkan oleh
                                     <strong className="font-semibold text-[#123b49]">
-                                        {' '}Wladimir Köppen
+                                        {" "}Wladimir Köppen
                                     </strong>,
                                     seorang ahli iklim, geograf, dan botanis Jerman
                                     kelahiran Saint Petersburg, Rusia (1846–1940).
@@ -137,6 +151,7 @@ export default function Modul1() {
 
                                 {/* TAHUKAH KAMU */}
                                 <div className="rounded-2xl border-l-4 border-[#087b68] bg-[#f3f9f8] p-5 sm:p-6">
+
                                     <div className="flex items-start gap-3">
 
                                         <span className="text-2xl">
@@ -144,6 +159,7 @@ export default function Modul1() {
                                         </span>
 
                                         <div>
+
                                             <h3 className="font-bold text-[#123b49]">
                                                 Tahukah Kamu?
                                             </h3>
@@ -154,8 +170,11 @@ export default function Modul1() {
                                                 menggambarkan karakteristik iklim
                                                 berbagai wilayah di dunia.
                                             </p>
+
                                         </div>
+
                                     </div>
+
                                 </div>
 
                                 <p className="text-justify text-base leading-8 text-gray-700">
@@ -187,6 +206,7 @@ export default function Modul1() {
                                     <div className="mt-5 grid gap-3 sm:grid-cols-3">
 
                                         <div className="rounded-xl bg-[#e1f5ed] p-4">
+
                                             <div className="text-3xl font-bold text-[#087b68]">
                                                 A
                                             </div>
@@ -198,9 +218,11 @@ export default function Modul1() {
                                             <p className="mt-1 text-sm leading-relaxed text-gray-600">
                                                 Menunjukkan kelompok iklim utama.
                                             </p>
+
                                         </div>
 
                                         <div className="rounded-xl bg-[#eef7fb] p-4">
+
                                             <div className="text-3xl font-bold text-[#26718b]">
                                                 f
                                             </div>
@@ -212,9 +234,11 @@ export default function Modul1() {
                                             <p className="mt-1 text-sm leading-relaxed text-gray-600">
                                                 Menunjukkan pola curah hujan musiman.
                                             </p>
+
                                         </div>
 
                                         <div className="rounded-xl bg-[#f5f1fc] p-4">
+
                                             <div className="text-3xl font-bold text-[#7955a5]">
                                                 a
                                             </div>
@@ -226,7 +250,9 @@ export default function Modul1() {
                                             <p className="mt-1 text-sm leading-relaxed text-gray-600">
                                                 Pada tipe tertentu menunjukkan karakteristik suhu.
                                             </p>
+
                                         </div>
+
                                     </div>
 
                                     <div className="mt-4 rounded-xl bg-[#f8fbfa] p-4">
@@ -244,7 +270,9 @@ export default function Modul1() {
                                             dengan pola curah hujan yang ditunjukkan
                                             oleh huruf kedua.
                                         </p>
+
                                     </div>
+
                                 </section>
 
                                 <p className="text-justify text-base leading-8 text-gray-700">
@@ -270,50 +298,52 @@ export default function Modul1() {
 
                                         {[
                                             {
-                                                code: 'A',
-                                                title: 'Tropis',
+                                                code: "A",
+                                                title: "Tropis",
                                                 description:
-                                                    'Memiliki suhu tinggi sepanjang tahun.',
-                                                icon: '🌴',
-                                                color: 'bg-[#e4f5e8]',
+                                                    "Memiliki suhu tinggi sepanjang tahun.",
+                                                icon: "🌴",
+                                                color: "bg-[#e4f5e8]",
                                             },
                                             {
-                                                code: 'B',
-                                                title: 'Kering',
+                                                code: "B",
+                                                title: "Kering",
                                                 description:
-                                                    'Ditandai kondisi kekurangan air atau curah hujan yang rendah.',
-                                                icon: '🏜️',
-                                                color: 'bg-[#fff3d9]',
+                                                    "Ditandai kondisi kekurangan air atau curah hujan yang rendah.",
+                                                icon: "🏜️",
+                                                color: "bg-[#fff3d9]",
                                             },
                                             {
-                                                code: 'C',
-                                                title: 'Subtropis Lembap',
+                                                code: "C",
+                                                title: "Subtropis Lembap",
                                                 description:
-                                                    'Memiliki kondisi suhu sedang dengan variasi musiman.',
-                                                icon: '🌿',
-                                                color: 'bg-[#e8f4fb]',
+                                                    "Memiliki kondisi suhu sedang dengan variasi musiman.",
+                                                icon: "🌿",
+                                                color: "bg-[#e8f4fb]",
                                             },
                                             {
-                                                code: 'D',
-                                                title: 'Kontinental',
+                                                code: "D",
+                                                title: "Kontinental",
                                                 description:
-                                                    'Umumnya memiliki perbedaan suhu musiman yang nyata.',
-                                                icon: '🍂',
-                                                color: 'bg-[#f8eadf]',
+                                                    "Umumnya memiliki perbedaan suhu musiman yang nyata.",
+                                                icon: "🍂",
+                                                color: "bg-[#f8eadf]",
                                             },
                                             {
-                                                code: 'E',
-                                                title: 'Kutub',
+                                                code: "E",
+                                                title: "Kutub",
                                                 description:
-                                                    'Memiliki suhu sangat rendah sepanjang tahun.',
-                                                icon: '❄️',
-                                                color: 'bg-[#e8f0fc]',
+                                                    "Memiliki suhu sangat rendah sepanjang tahun.",
+                                                icon: "❄️",
+                                                color: "bg-[#e8f0fc]",
                                             },
                                         ].map((climate) => (
+
                                             <div
                                                 key={climate.code}
                                                 className="flex items-start gap-4 rounded-xl border border-[#e5efed] p-4 transition hover:border-[#a8d9c9] hover:shadow-sm"
                                             >
+
                                                 <div
                                                     className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl text-2xl ${climate.color}`}
                                                 >
@@ -321,6 +351,7 @@ export default function Modul1() {
                                                 </div>
 
                                                 <div>
+
                                                     <p className="text-xs font-bold uppercase tracking-wider text-[#16805f]">
                                                         Kelompok {climate.code}
                                                     </p>
@@ -332,11 +363,17 @@ export default function Modul1() {
                                                     <p className="mt-1 text-sm leading-relaxed text-gray-600">
                                                         {climate.description}
                                                     </p>
+
                                                 </div>
+
                                             </div>
+
                                         ))}
+
                                     </div>
+
                                 </section>
+
                             </div>
                         </article>
 
@@ -350,6 +387,7 @@ export default function Modul1() {
                                 </div>
 
                                 <div>
+
                                     <h3 className="text-xl font-bold text-[#123b49]">
                                         Ringkasan Modul
                                     </h3>
@@ -357,21 +395,25 @@ export default function Modul1() {
                                     <p className="mt-1 text-gray-600">
                                         Hal-hal penting yang perlu kamu ingat:
                                     </p>
+
                                 </div>
+
                             </div>
 
                             <ul className="mt-5 space-y-3">
 
                                 {[
-                                    'Klasifikasi Köppen dikembangkan oleh Wladimir Köppen dan disempurnakan pada 1918 serta 1936.',
-                                    'Sistem Köppen-Geiger menggunakan suhu dan curah hujan sebagai dasar klasifikasi iklim.',
-                                    'Kode huruf menunjukkan kelompok iklim, pola curah hujan, dan pada tipe tertentu karakteristik suhu.',
-                                    'Terdapat lima kelompok iklim utama, yaitu A, B, C, D, dan E.',
+                                    "Klasifikasi Köppen dikembangkan oleh Wladimir Köppen dan disempurnakan pada 1918 serta 1936.",
+                                    "Sistem Köppen-Geiger menggunakan suhu dan curah hujan sebagai dasar klasifikasi iklim.",
+                                    "Kode huruf menunjukkan kelompok iklim, pola curah hujan, dan pada tipe tertentu karakteristik suhu.",
+                                    "Terdapat lima kelompok iklim utama, yaitu A, B, C, D, dan E.",
                                 ].map((point, index) => (
+
                                     <li
                                         key={index}
                                         className="flex items-start gap-3 rounded-xl bg-[#f8fbfa] p-4"
                                     >
+
                                         <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#087b68] text-xs font-bold text-white">
                                             {index + 1}
                                         </span>
@@ -379,16 +421,27 @@ export default function Modul1() {
                                         <p className="leading-relaxed text-gray-700">
                                             {point}
                                         </p>
+
                                     </li>
+
                                 ))}
+
                             </ul>
+
                         </section>
 
+                        {/* SELESAIKAN MODUL */}
+                        <div className="mt-7 rounded-2xl border border-[#d4e4e1] bg-white p-5 shadow-sm sm:p-6">
+
+                            <CompleteModuleButton moduleNumber={1} />
+
+                        </div>
+
                         {/* NAVIGASI MODUL */}
-                        <div className="mt-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+                        <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
                             <Link
-                                href={route('student.material')}
+                                href={route("student.material")}
                                 className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#c8dcda] bg-white px-5 py-3 font-semibold text-[#087b68] transition hover:bg-[#f3f9f8]"
                             >
                                 <span>←</span>
@@ -396,7 +449,7 @@ export default function Modul1() {
                             </Link>
 
                             <Link
-                                href={route('student.modul2')}
+                                href={route("student.modul2")}
                                 className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#087b68] px-6 py-3 font-semibold text-white transition hover:bg-[#066455]"
                             >
                                 Modul Berikutnya
@@ -406,6 +459,7 @@ export default function Modul1() {
                         </div>
 
                     </main>
+
                 </div>
             </div>
         </>

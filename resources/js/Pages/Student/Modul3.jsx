@@ -1,5 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import StudentSidebar from '@/Components/StudentSidebar';
+import CompleteModuleButton from "@/Components/CompleteModuleButton";
 
 export default function Modul3() {
     const tableClass =
@@ -136,47 +137,12 @@ export default function Modul3() {
                             </div>
                         </section>
 
-                        {/* ========================= */}
-                        {/* KELOMPOK A */}
-                        {/* ========================= */}
+                        {/* SELESAIKAN MODUL */}
+                        <div className="mt-7 rounded-2xl border border-[#d4e4e1] bg-white p-5 shadow-sm sm:p-6">
 
-                        {/* ... isi Kelompok A kamu tetap ... */}
+                            <CompleteModuleButton moduleNumber={3} />
 
-
-                        {/* ========================= */}
-                        {/* KELOMPOK B */}
-                        {/* ========================= */}
-
-                        {/* ... isi Kelompok B kamu tetap ... */}
-
-
-                        {/* ========================= */}
-                        {/* KELOMPOK C */}
-                        {/* ========================= */}
-
-                        {/* ... isi Kelompok C kamu tetap ... */}
-
-
-                        {/* ========================= */}
-                        {/* KELOMPOK D */}
-                        {/* ========================= */}
-
-                        {/* ... isi Kelompok D kamu tetap ... */}
-
-
-                        {/* ========================= */}
-                        {/* KELOMPOK E */}
-                        {/* ========================= */}
-
-                        {/* ... isi Kelompok E kamu tetap ... */}
-
-
-                        {/* ========================= */}
-                        {/* RINGKASAN */}
-                        {/* ========================= */}
-
-                        {/* ... isi Ringkasan kamu tetap ... */}
-
+                        </div>
 
                         {/* NAVIGASI MODUL */}
                         <div className="mt-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">

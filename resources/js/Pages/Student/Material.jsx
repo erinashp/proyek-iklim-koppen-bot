@@ -2,7 +2,7 @@ import { Head, Link } from "@inertiajs/react";
 import { useState } from "react";
 import StudentSidebar from "@/Components/StudentSidebar";
 
-export default function Material() {
+export default function Material({ completedModules = 0 }) {
     const [search, setSearch] = useState("");
 
     // Daftar modul materi
@@ -66,10 +66,12 @@ export default function Material() {
         );
     });
 
-    // Sesuaikan angka ini dengan progres yang nantinya disimpan di database.
-    const completedModules = 0;
     const totalModules = modules.length;
-    const progressPercentage = (completedModules / totalModules) * 100;
+
+    const progressPercentage =
+        totalModules > 0
+            ? Math.round((completedModules / totalModules) * 100)
+            : 0;
 
     return (
         <>
@@ -200,35 +202,59 @@ export default function Material() {
                             </div>
 
                             <div className="space-y-3">
-                                {filteredModules.map((module) => (
-                                    <Link
-                                        key={module.number}
-                                        href={module.href}
-                                        className="group flex items-center gap-4 rounded-2xl border border-[#d4e4e1] bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-[#a8d9c9] hover:shadow-md sm:px-5"
-                                    >
-                                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#e1f5ed] text-2xl text-[#087b68] transition group-hover:bg-[#d1f0e4]">
-                                            {module.icon}
-                                        </div>
+                                {filteredModules.map((module) => {
+                                    const isCompleted =
+                                        module.number <= completedModules;
 
-                                        <div className="min-w-0 flex-1">
-                                            <p className="text-xs font-semibold uppercase tracking-wide text-[#16805f]">
-                                                Modul {module.number}
-                                            </p>
+                                    return (
+                                        <Link
+                                            key={module.number}
+                                            href={module.href}
+                                            className="group flex items-center gap-4 rounded-2xl border border-[#d4e4e1] bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-[#a8d9c9] hover:shadow-md sm:px-5"
+                                        >
+                                            {/* ICON MODUL */}
+                                            <div
+                                                className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl text-2xl transition ${
+                                                    isCompleted
+                                                        ? "bg-[#dff5e9] text-[#087b68]"
+                                                        : "bg-[#e1f5ed] text-[#087b68] group-hover:bg-[#d1f0e4]"
+                                                }`}
+                                            >
+                                                {isCompleted
+                                                    ? "✓"
+                                                    : module.icon}
+                                            </div>
 
-                                            <h4 className="mt-1 font-semibold text-[#123b49] sm:text-lg">
-                                                {module.title}
-                                            </h4>
+                                            {/* INFORMASI MODUL */}
+                                            <div className="min-w-0 flex-1">
+                                                <p className="text-xs font-semibold uppercase tracking-wide text-[#16805f]">
+                                                    Modul {module.number}
+                                                </p>
 
-                                            <p className="mt-1 hidden text-sm leading-relaxed text-gray-500 sm:block">
-                                                {module.description}
-                                            </p>
-                                        </div>
+                                                <h4 className="mt-1 font-semibold text-[#123b49] sm:text-lg">
+                                                    {module.title}
+                                                </h4>
 
-                                        <span className="shrink-0 text-2xl text-[#16805f] transition group-hover:translate-x-1">
-                                            ›
-                                        </span>
-                                    </Link>
-                                ))}
+                                                <p className="mt-1 hidden text-sm leading-relaxed text-gray-500 sm:block">
+                                                    {module.description}
+                                                </p>
+                                            </div>
+
+                                            {/* STATUS */}
+                                            <div className="shrink-0">
+                                                {isCompleted ? (
+                                                    <span className="hidden rounded-full bg-[#e3f4ee] px-3 py-1 text-xs font-semibold text-[#16805f] sm:inline-block">
+                                                        Selesai
+                                                    </span>
+                                                ) : (
+                                                    <span className="text-2xl text-[#16805f] transition group-hover:translate-x-1">
+                                                        →
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
                             </div>
 
                             {filteredModules.length === 0 && (
@@ -258,10 +284,11 @@ export default function Material() {
                                 </div>
 
                                 <div className="text-3xl font-bold text-[#087b68]">
-                                    {Math.round(progressPercentage)}%
+                                    {progressPercentage}%
                                 </div>
                             </div>
 
+                            {/* PROGRESS BAR */}
                             <div
                                 className="mt-6 h-3 overflow-hidden rounded-full bg-gray-100"
                                 role="progressbar"
@@ -271,7 +298,7 @@ export default function Material() {
                                 aria-valuenow={progressPercentage}
                             >
                                 <div
-                                    className="h-full rounded-full bg-gradient-to-r from-[#087b68] to-[#a3d94b] transition-all"
+                                    className="h-full rounded-full bg-gradient-to-r from-[#087b68] to-[#a3d94b] transition-all duration-500"
                                     style={{
                                         width: `${progressPercentage}%`,
                                     }}

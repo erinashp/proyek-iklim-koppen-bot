@@ -1,5 +1,6 @@
 import { Head, Link } from "@inertiajs/react";
 import StudentSidebar from "@/Components/StudentSidebar";
+import CompleteModuleButton from "@/Components/CompleteModuleButton";
 
 export default function Modul6() {
     const climateImpacts = [
@@ -293,6 +294,13 @@ export default function Modul6() {
                                     khusus dalam kegiatan sehari-hari.
                                 </p>
                             </section>
+
+                            {/* SELESAIKAN MODUL */}
+                            <div className="mt-7 rounded-2xl border border-[#d4e4e1] bg-white p-5 shadow-sm sm:p-6">
+
+                                <CompleteModuleButton moduleNumber={6} />
+
+                            </div>
 
                             {/* NAVIGATION */}
                             <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">

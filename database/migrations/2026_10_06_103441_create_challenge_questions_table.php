@@ -10,24 +10,20 @@ return new class extends Migration
     {
         Schema::create('challenge_questions', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedInteger('number');
-
             $table->text('question');
-
-            $table->text('option_a');
-            $table->text('option_b');
-            $table->text('option_c');
-            $table->text('option_d');
-            $table->text('option_e');
 
             $table->string('image')->nullable();
 
-            $table->string('correct_answer', 1);
+            $table->text('option_a')->nullable();
+            $table->text('option_b')->nullable();
+            $table->text('option_c')->nullable();
+            $table->text('option_d')->nullable();
+            $table->text('option_e')->nullable();
+
+            $table->char('correct_answer', 1);
 
             $table->timestamps();
-
-            $table->unique('number');
         });
     }
 

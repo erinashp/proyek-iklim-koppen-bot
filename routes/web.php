@@ -5,8 +5,11 @@ use App\Http\Controllers\Admin\StudentController as AdminStudentController;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Student\ChallengeController;
+use App\Http\Controllers\Student\ChatbotController;
+use App\Http\Controllers\Student\ModuleProgressController;
 use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
 use App\Http\Controllers\UserProfileController;
+use App\Models\StudentModuleProgress;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,13 +36,6 @@ Route::get('/', function () {
 |--------------------------------------------------------------------------
 | Main Dashboard
 |--------------------------------------------------------------------------
-|
-| Setelah login, pengguna diarahkan berdasarkan role:
-|
-| admin   -> Admin Dashboard
-| teacher -> Teacher Dashboard
-| student -> Student Dashboard
-|
 */
 
 Route::get('/dashboard', function (Request $request) {
@@ -66,8 +62,6 @@ Route::get('/dashboard', function (Request $request) {
 | Student Routes
 |--------------------------------------------------------------------------
 |
-| Semua route siswa:
-|
 | URL prefix : /student
 | Route name : student.
 | Middleware : auth, verified, role:student
@@ -78,7 +72,6 @@ Route::middleware(['auth', 'verified', 'role:student'])
     ->prefix('student')
     ->name('student.')
     ->group(function () {
-
 
         /*
         |--------------------------------------------------------------------------
@@ -110,13 +103,45 @@ Route::middleware(['auth', 'verified', 'role:student'])
         |--------------------------------------------------------------------------
         | Materi Pembelajaran
         |--------------------------------------------------------------------------
+        |
+        | Mengambil jumlah modul yang sudah selesai
+        | khusus untuk siswa yang sedang login.
+        |
         */
 
-        Route::get('/material', function () {
+        Route::get('/material', function (Request $request) {
 
-            return Inertia::render('Student/Material');
+            $completedModules = StudentModuleProgress::where(
+                'user_id',
+                $request->user()->id
+            )
+                ->whereNotNull('completed_at')
+                ->count();
+
+            return Inertia::render('Student/Material', [
+                'completedModules' => $completedModules,
+            ]);
 
         })->name('material');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Menyelesaikan Modul
+        |--------------------------------------------------------------------------
+        |
+        | Contoh:
+        | POST /student/modul/1/complete
+        | POST /student/modul/2/complete
+        |
+        */
+
+        Route::post(
+            '/modul/{module}/complete',
+            [ModuleProgressController::class, 'complete']
+        )
+            ->whereNumber('module')
+            ->name('modul.complete');
 
 
         /*
@@ -144,15 +169,16 @@ Route::middleware(['auth', 'verified', 'role:student'])
 
         })->name('chatbot');
 
+        Route::post(
+            '/chatbot',
+            [ChatbotController::class, 'chat']
+        )->name('chatbot.chat');
+
 
         /*
         |--------------------------------------------------------------------------
         | Tantangan Siswa
         |--------------------------------------------------------------------------
-        |
-        | Halaman ini digunakan siswa untuk mengerjakan
-        | soal pilihan ganda.
-        |
         */
 
         Route::get(
@@ -177,9 +203,6 @@ Route::middleware(['auth', 'verified', 'role:student'])
         |--------------------------------------------------------------------------
         | Hasil Skor Siswa
         |--------------------------------------------------------------------------
-        |
-        | Setiap siswa hanya akan melihat skor miliknya sendiri.
-        |
         */
 
         Route::get(
@@ -228,7 +251,6 @@ Route::middleware(['auth', 'verified', 'role:student'])
 
 Route::middleware(['auth', 'verified', 'role:student'])
     ->group(function () {
-
 
         /*
         |--------------------------------------------------------------------------
@@ -314,20 +336,12 @@ Route::middleware(['auth', 'verified', 'role:student'])
 |--------------------------------------------------------------------------
 | Teacher Routes
 |--------------------------------------------------------------------------
-|
-| Semua route guru:
-|
-| URL prefix : /teacher
-| Route name : teacher.
-| Middleware : auth, verified, role:teacher
-|
 */
 
 Route::middleware(['auth', 'verified', 'role:teacher'])
     ->prefix('teacher')
     ->name('teacher.')
     ->group(function () {
-
 
         /*
         |--------------------------------------------------------------------------
@@ -384,7 +398,7 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 
         /*
         |--------------------------------------------------------------------------
-        | Tujuan Pembelajaran
+        | Tujuan Pembelajaran Guru
         |--------------------------------------------------------------------------
         */
 
@@ -397,7 +411,7 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 
         /*
         |--------------------------------------------------------------------------
-        | Daftar Materi
+        | Daftar Materi Guru
         |--------------------------------------------------------------------------
         */
 
@@ -410,7 +424,7 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 
         /*
         |--------------------------------------------------------------------------
-        | Detail Materi / Modul
+        | Detail Materi Guru
         |--------------------------------------------------------------------------
         */
 
@@ -426,7 +440,7 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 
         /*
         |--------------------------------------------------------------------------
-        | Data Siswa Guru
+        | Daftar Siswa
         |--------------------------------------------------------------------------
         */
 
@@ -438,7 +452,7 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 
         /*
         |--------------------------------------------------------------------------
-        | Tambah Siswa oleh Guru
+        | Tambah Siswa
         |--------------------------------------------------------------------------
         */
 
@@ -450,7 +464,7 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 
         /*
         |--------------------------------------------------------------------------
-        | Hapus Siswa oleh Guru
+        | Hapus Siswa
         |--------------------------------------------------------------------------
         */
 
@@ -466,20 +480,12 @@ Route::middleware(['auth', 'verified', 'role:teacher'])
 |--------------------------------------------------------------------------
 | Admin Routes
 |--------------------------------------------------------------------------
-|
-| Semua route admin:
-|
-| URL prefix : /admin
-| Route name : admin.
-| Middleware : auth, verified, role:admin
-|
 */
 
 Route::middleware(['auth', 'verified', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-
 
         /*
         |--------------------------------------------------------------------------
@@ -523,7 +529,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 
         /*
         |--------------------------------------------------------------------------
-        | Data Siswa Admin
+        | Daftar Siswa
         |--------------------------------------------------------------------------
         */
 
@@ -535,7 +541,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 
         /*
         |--------------------------------------------------------------------------
-        | Tambah Siswa Admin
+        | Tambah Siswa
         |--------------------------------------------------------------------------
         */
 
@@ -547,7 +553,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 
         /*
         |--------------------------------------------------------------------------
-        | Hapus Siswa Admin
+        | Hapus Siswa
         |--------------------------------------------------------------------------
         */
 
@@ -559,7 +565,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 
         /*
         |--------------------------------------------------------------------------
-        | Data Guru Admin
+        | Daftar Guru
         |--------------------------------------------------------------------------
         */
 
@@ -571,7 +577,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 
         /*
         |--------------------------------------------------------------------------
-        | Tambah Guru Admin
+        | Tambah Guru
         |--------------------------------------------------------------------------
         */
 
@@ -583,7 +589,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 
         /*
         |--------------------------------------------------------------------------
-        | Hapus Guru Admin
+        | Hapus Guru
         |--------------------------------------------------------------------------
         */
 
@@ -595,7 +601,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 
         /*
         |--------------------------------------------------------------------------
-        | Materi Pembelajaran Admin
+        | Daftar Materi
         |--------------------------------------------------------------------------
         */
 
@@ -605,11 +611,23 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         )->name('materials.index');
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Tambah Materi
+        |--------------------------------------------------------------------------
+        */
+
         Route::get(
             '/materials/create',
             [AdminMaterialController::class, 'create']
         )->name('materials.create');
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Simpan Materi
+        |--------------------------------------------------------------------------
+        */
 
         Route::post(
             '/materials',
@@ -617,17 +635,35 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         )->name('materials.store');
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Edit Materi
+        |--------------------------------------------------------------------------
+        */
+
         Route::get(
             '/materials/{material}/edit',
             [AdminMaterialController::class, 'edit']
         )->name('materials.edit');
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | Update Materi
+        |--------------------------------------------------------------------------
+        */
+
         Route::put(
             '/materials/{material}',
             [AdminMaterialController::class, 'update']
         )->name('materials.update');
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Hapus Materi
+        |--------------------------------------------------------------------------
+        */
 
         Route::delete(
             '/materials/{material}',
@@ -641,23 +677,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])
 |--------------------------------------------------------------------------
 | General Profile Routes
 |--------------------------------------------------------------------------
-|
-| Route profil bawaan Laravel Breeze.
-|
-| URL:
-| /profile
-|
 */
 
 Route::middleware('auth')
     ->group(function () {
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Edit Profile Breeze
-        |--------------------------------------------------------------------------
-        */
 
         Route::get(
             '/profile',
@@ -665,23 +688,11 @@ Route::middleware('auth')
         )->name('profile.edit');
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | Update Profile Breeze
-        |--------------------------------------------------------------------------
-        */
-
         Route::patch(
             '/profile',
             [ProfileController::class, 'update']
         )->name('profile.update');
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | Delete Profile Breeze
-        |--------------------------------------------------------------------------
-        */
 
         Route::delete(
             '/profile',

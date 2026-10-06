@@ -17,16 +17,6 @@ export default function Objectives() {
         "Menjelaskan dampak tipe iklim terhadap kehidupan, seperti pola pertanian, persebaran vegetasi, dan aktivitas manusia sehari-hari.",
     ];
 
-    // Progres sementara.
-    // Nantinya dapat diambil dari database.
-    const completedObjectives = 0;
-    const totalObjectives = objectives.length;
-
-    const progressPercentage =
-        totalObjectives > 0
-            ? (completedObjectives / totalObjectives) * 100
-            : 0;
-
     return (
         <>
             <Head title="Tujuan Pembelajaran | IklimKöppenBot" />
@@ -39,16 +29,16 @@ export default function Objectives() {
                 <div className="min-h-screen md:ml-64">
                     {/* HEADER */}
                     <header className="border-b border-[#d7e5e3] bg-white">
-                        <div className="mx-auto max-w-[1500px] px-6 py-6 sm:px-10">
-                            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
+                        <div className="mx-auto max-w-[1400px] px-6 py-5 sm:px-8">
+                            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#16805f]">
                                 Media Pembelajaran Kelas X
                             </p>
 
-                            <h2 className="mt-1 text-3xl font-bold text-[#123b49]">
+                            <h2 className="mt-1 text-2xl font-bold text-[#123b49]">
                                 Tujuan Pembelajaran
                             </h2>
 
-                            <p className="mt-1 text-gray-500">
+                            <p className="mt-1 max-w-2xl text-sm text-gray-500">
                                 Kompetensi yang akan kamu capai setelah
                                 mempelajari klasifikasi iklim Köppen.
                             </p>
@@ -56,28 +46,25 @@ export default function Objectives() {
                     </header>
 
                     {/* ISI HALAMAN */}
-                    <main className="mx-auto max-w-[1400px] px-6 py-8 sm:px-10">
-                        {/* KARTU TUJUAN */}
-                        <section className="relative overflow-hidden rounded-3xl border border-[#d4e8e4] bg-white p-5 shadow-sm sm:p-8">
+                    <main className="mx-auto max-w-[1250px] px-6 py-7 sm:px-8">
+                        <section className="relative overflow-hidden rounded-3xl border border-[#d4e8e4] bg-white p-5 shadow-sm sm:p-7">
                             {/* Dekorasi */}
-                            <div className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full border border-[#d8f1e9]" />
+                            <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full border border-[#d8f1e9]" />
 
-                            <div className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full border border-[#d8f1e9]" />
+                            <div className="pointer-events-none absolute -right-5 -top-5 h-24 w-24 rounded-full border border-[#d8f1e9]" />
 
                             {/* Judul */}
-                            <div className="relative mb-7">
+                            <div className="relative mb-6">
                                 <div className="flex items-start justify-between gap-4">
                                     <div>
-                                        <h3 className="text-3xl font-extrabold leading-tight text-[#075568] sm:text-3xl">
-                                            Tujuan
-                                            <br />
-                                            Pembelajaran
+                                        <h3 className="text-2xl font-extrabold leading-tight text-[#075568]">
+                                            Tujuan Pembelajaran
                                         </h3>
 
-                                        <div className="mt-5 h-2 w-32 rounded-full bg-[#55c2ae]" />
+                                        <div className="mt-3 h-1.5 w-24 rounded-full bg-[#55c2ae]" />
                                     </div>
 
-                                    <div className="hidden text-4xl text-[#55bda9] sm:block">
+                                    <div className="hidden text-3xl text-[#55bda9] sm:block">
                                         📍
                                     </div>
                                 </div>
@@ -88,24 +75,24 @@ export default function Objectives() {
                                 {objectives.map((objective, index) => (
                                     <div
                                         key={index}
-                                        className="flex items-center gap-4 rounded-2xl border border-[#e4eeec] bg-white p-4 shadow-sm transition hover:border-[#b9ded5] hover:shadow-md sm:gap-6 sm:p-5"
+                                        className="flex items-center gap-3 rounded-2xl border border-[#e4eeec] bg-white p-3.5 shadow-sm transition hover:border-[#b9ded5] hover:shadow-md sm:gap-4 sm:p-4"
                                     >
                                         {/* Nomor */}
-                                        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-[#eff9f7] text-4xl font-extrabold text-[#55bda9] sm:h-20 sm:w-20 sm:text-5xl">
+                                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#eff9f7] text-xl font-extrabold text-[#55bda9] sm:h-14 sm:w-14 sm:text-2xl">
                                             {index + 1}
                                         </div>
 
                                         {/* Garis pemisah */}
-                                        <div className="hidden h-16 border-l-2 border-dotted border-[#b9ded5] sm:block" />
+                                        <div className="hidden h-10 border-l-2 border-dotted border-[#b9ded5] sm:block" />
 
                                         {/* Deskripsi */}
-                                        <p className="flex-1 text-sm font-medium leading-relaxed text-[#174453] sm:text-base">
+                                        <p className="flex-1 text-[13px] font-medium leading-6 text-[#174453] sm:text-sm">
                                             {objective}
                                         </p>
 
                                         {/* Ikon ceklis */}
                                         <div
-                                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-[#69c8b4] text-lg font-bold text-[#55bda9] sm:h-11 sm:w-11"
+                                            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-[#69c8b4] text-sm font-bold text-[#55bda9] sm:h-8 sm:w-8"
                                             aria-label="Tujuan pembelajaran"
                                         >
                                             ✓
@@ -114,55 +101,14 @@ export default function Objectives() {
                                 ))}
                             </div>
 
-                            {/* PROGRES BELAJAR */}
-                            <div className="mt-7 rounded-2xl border border-[#e1efec] bg-[#f4fbf9] p-5 sm:p-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#087b70] text-2xl text-white">
-                                        ▥
-                                    </div>
-
-                                    <div>
-                                        <h3 className="text-xl font-bold text-[#123b49] sm:text-2xl">
-                                            Progres Belajar
-                                        </h3>
-
-                                        <p className="mt-1 text-sm text-[#42616a] sm:text-base">
-                                            {completedObjectives} dari{" "}
-                                            {totalObjectives} tujuan tercapai
-                                        </p>
-                                    </div>
-                                </div>
-
-                                {/* Progress bar */}
-                                <div
-                                    className="mt-5 h-4 overflow-hidden rounded-full border border-[#dce8e5] bg-[#e9eeee]"
-                                    role="progressbar"
-                                    aria-valuenow={progressPercentage}
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                    aria-label="Progres tujuan pembelajaran"
-                                >
-                                    <div
-                                        className="h-full rounded-full bg-[#55c2ae] transition-all duration-500"
-                                        style={{
-                                            width: `${progressPercentage}%`,
-                                        }}
-                                    />
-                                </div>
-
-                                <p className="mt-2 text-right text-xs font-semibold text-[#16805f]">
-                                    {progressPercentage}%
-                                </p>
-                            </div>
-
                             {/* Tombol mulai materi */}
-                            <div className="mt-5">
+                            <div className="mt-6">
                                 <Link
                                     href={route("student.material")}
-                                    className="flex w-full items-center justify-center rounded-2xl bg-[#087b70] px-6 py-5 text-lg font-bold text-white shadow-sm transition hover:bg-[#06675e] sm:text-xl"
+                                    className="flex w-full items-center justify-center rounded-2xl bg-[#087b70] px-5 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#06675e]"
                                 >
                                     Mulai Materi
-                                    <span className="ml-3">→</span>
+                                    <span className="ml-2 text-base">→</span>
                                 </Link>
                             </div>
                         </section>
