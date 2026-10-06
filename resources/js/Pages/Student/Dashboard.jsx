@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Head, Link } from "@inertiajs/react";
+
 import StudentSidebar from "../../Components/StudentSidebar";
 
 export default function Dashboard({ auth }) {
@@ -69,126 +70,18 @@ export default function Dashboard({ auth }) {
             <Head title="Beranda | IklimKöppenBot" />
 
             <div className="min-h-screen bg-[#f3f9f8] text-[#123b49]">
-
                 {/* SIDEBAR */}
-<<<<<<< HEAD
                 <StudentSidebar />
-=======
-                <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-gradient-to-b from-[#07384b] to-[#087b70] text-white md:flex">
-
-                    {/* Logo */}
-                    <div className="px-6 pt-7">
-                        <div className="flex items-center gap-3">
-                            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-2xl">
-                                🌍
-                            </div>
-
-                            <div>
-                                <h1 className="text-xl font-bold tracking-wide">
-                                    IklimKöppenBot
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="mx-4 mt-6 border-t border-white/20" />
-
-                    {/* Menu Navigasi */}
-                    <div className="px-4 pt-5">
-                        <p className="px-3 text-xs font-bold uppercase tracking-[0.15em] text-teal-100/80">
-                            Media Belajar Iklim Köppen
-                        </p>
-
-                        <nav className="mt-3 space-y-1">
-                            {menuItems.map((item) => {
-                                const className = `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
-                                    item.active
-                                        ? 'bg-[#e8f8f1] font-semibold text-[#07384b]'
-                                        : 'text-teal-50 hover:bg-white/10'
-                                }`;
-
-                                return item.label === 'Petunjuk' ? (
-                                    <Link
-                                        key={item.label}
-                                        href={item.href}
-                                        className={className}
-                                    >
-                                        <span className="w-5 text-center text-xl">
-                                            {item.icon}
-                                        </span>
-
-                                        <span>{item.label}</span>
-                                    </Link>
-                                ) : (
-                                    <a
-                                        key={item.label}
-                                        href={item.href}
-                                        className={className}
-                                    >
-                                        <span className="w-5 text-center text-xl">
-                                            {item.icon}
-                                        </span>
-
-                                        <span>{item.label}</span>
-                                    </a>
-                                );
-                            })}
-                        </nav>
-                    </div>
-
-                    {/* Profil dan Logout */}
-                    <div className="mt-auto p-4">
-
-                        <Link
-                            href={route('student.profile')}
-                            className="mb-3 flex items-center gap-3 rounded-xl border border-white/20 bg-white/10 p-3 transition hover:bg-white/20"
-                        >
-                            {avatarUrl ? (
-                                <img
-                                    src={avatarUrl}
-                                    alt="Foto profil"
-                                    className="h-10 w-10 rounded-full object-cover"
-                                />
-                            ) : (
-                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#d9f99d] font-bold text-[#07384b]">
-                                    {initial}
-                                </div>
-                            )}
-
-                            <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-semibold">
-                                    {user.name}
-                                </p>
-
-                                <p className="text-xs text-teal-100">
-                                    {roleLabel} · Profil Saya
-                                </p>
-                            </div>
-
-                            <span className="text-lg">›</span>
-                        </Link>
-
-                        <button
-                            type="button"
-                            onClick={logout}
-                            className="w-full rounded-xl border border-white/20 px-4 py-2.5 text-left text-sm text-white transition hover:bg-white/10"
-                        >
-                            ↪ Keluar
-                        </button>
-                    </div>
-                </aside>
->>>>>>> 123cf000e52455313caed91e4383f3ccc709d93e
 
                 {/* MAIN CONTENT */}
                 <div className="min-h-screen md:ml-64">
-
                     {/* HEADER */}
                     <header className="border-b border-[#d7e5e3] bg-white">
                         <div className="mx-auto flex max-w-[1500px] flex-col justify-between gap-5 px-6 py-6 sm:flex-row sm:items-center sm:px-10">
-
                             <div>
                                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                    Media Pembelajaran Kelas X Fase E Materi Iklim Köppen
+                                    Media Pembelajaran Kelas X Fase E
+                                    Materi Iklim Köppen
                                 </p>
 
                                 <h2 className="mt-1 text-3xl font-bold text-[#123b49]">
@@ -196,11 +89,12 @@ export default function Dashboard({ auth }) {
                                 </h2>
 
                                 <p className="mt-1 text-gray-500">
-                                    Belajar tentang pola suhu dan curah hujan dunia.
+                                    Belajar tentang pola suhu dan curah hujan
+                                    dunia.
                                 </p>
                             </div>
 
-                            {/* Search */}
+                            {/* SEARCH */}
                             <div className="relative w-full sm:max-w-xs">
                                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
                                     ⌕
@@ -221,36 +115,37 @@ export default function Dashboard({ auth }) {
 
                     {/* KONTEN */}
                     <main className="mx-auto max-w-[1500px] px-6 py-8 sm:px-10">
-
                         {/* HERO */}
                         <section className="grid overflow-hidden rounded-3xl bg-[#07384b] shadow-xl md:min-h-[340px] md:grid-cols-[1.15fr_0.85fr]">
-
                             <div className="flex flex-col justify-center px-8 py-10 sm:px-12">
                                 <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#a8e5ce]">
                                     Halo Anak-Anak !!!
-                                    Selamat datang di Media Belajar Iklim Köppen Bot,
+                                    <br />
+                                    Selamat datang di Media Belajar
+                                    Iklim Köppen Bot,
+                                    <br />
                                     Pantun dulu yaa Bestii
+                                    <br />
                                     Jalan-Jalan ke Surabaya,
+                                    <br />
                                     Mampir dulu ke Kota Lama,
-                                    Halo SMA Bhayangkari 1 Surabaya, 
-                                    Mari belajar Iklim Köppen dengan Suka Cita 
+                                    <br />
+                                    Halo SMA Bhayangkari 1 Surabaya,
+                                    <br />
+                                    Mari belajar Iklim Köppen dengan Suka
+                                    Cita
                                 </p>
 
                                 <h3 className="mt-5 max-w-xl text-2xl font-bold leading-tight text-white sm:text-3xl">
-                                    Pembelajaran materi klasifikasi iklim Köppen.
+                                    Pembelajaran materi klasifikasi iklim
+                                    Köppen.
                                 </h3>
 
                                 <p className="mt-4 max-w-xl leading-relaxed text-[#d0e4e7]">
-<<<<<<< HEAD
-                                    Pelajari klasifikasi iklim Köppen, berlatih
-                                    melalui kasus sederhana, lalu berdiskusi
-                                    dengan IklimKöppenBot berbasis aturan lokal.
-=======
-                                    Yuk, kita belajar tentang klasifikasi iklim Köppen mulai dari mempelajari materi, 
-                                    berlatih melalui kasus sederhana, kemudian
-                                    berdiskusi dengan IklimKöppenBot yang tersedia di media ini.
-                                    Semoga pembelajaran kita bermanfaat dan menyenangkan.
->>>>>>> 123cf000e52455313caed91e4383f3ccc709d93e
+                                    Pelajari klasifikasi iklim Köppen,
+                                    berlatih melalui kasus sederhana, lalu
+                                    berdiskusi dengan IklimKöppenBot berbasis
+                                    aturan lokal.
                                 </p>
 
                                 <div className="mt-6">
@@ -263,6 +158,7 @@ export default function Dashboard({ auth }) {
                                 </div>
                             </div>
 
+                            {/* VISUAL HERO */}
                             <div className="relative hidden min-h-[280px] overflow-hidden bg-[#111333] md:block">
                                 <div className="absolute inset-0 bg-gradient-to-br from-[#17234b] via-[#10142e] to-[#061b2d]" />
 
@@ -296,8 +192,8 @@ export default function Dashboard({ auth }) {
                             </h3>
 
                             <p className="mt-1 text-gray-500">
-                                Ikuti bagian berikut secara berurutan atau gunakan
-                                menu untuk berpindah.
+                                Ikuti bagian berikut secara berurutan atau
+                                gunakan menu untuk berpindah.
                             </p>
 
                             <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -353,9 +249,7 @@ export default function Dashboard({ auth }) {
                     {/* FOOTER */}
                     <footer className="mt-8 border-t border-[#d7e5e3] bg-white">
                         <div className="mx-auto max-w-[1500px] px-6 py-8 sm:px-10">
-
                             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-
                                 {/* BRAND */}
                                 <div className="flex items-start gap-4">
                                     <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#e1f5ed] text-2xl">
@@ -369,8 +263,9 @@ export default function Dashboard({ auth }) {
 
                                         <p className="mt-1 max-w-md text-sm leading-relaxed text-gray-500">
                                             Media pembelajaran interaktif untuk
-                                            mempelajari klasifikasi iklim Köppen
-                                            berdasarkan suhu dan curah hujan.
+                                            mempelajari klasifikasi iklim
+                                            Köppen berdasarkan suhu dan curah
+                                            hujan.
                                         </p>
                                     </div>
                                 </div>
@@ -394,7 +289,6 @@ export default function Dashboard({ auth }) {
                                     Semua hak dilindungi.
                                 </p>
                             </div>
-
                         </div>
                     </footer>
                 </div>
