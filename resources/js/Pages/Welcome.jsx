@@ -86,10 +86,10 @@ export default function Welcome({ auth, canLogin, canRegister }) {
 
                             <div>
                                 <h1 className="text-xl font-bold tracking-wide text-[#07384b]">
-                                    GeoBot
+                                    IklimKöppenBot
                                 </h1>
                                 <p className="hidden text-xs text-gray-500 sm:block">
-                                    Ruang Belajar Köppen
+                                    Ruang Belajar untuk Materi Iklim Köppen
                                 </p>
                             </div>
                         </Link>
@@ -148,20 +148,20 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                             {/* Teks Hero */}
                             <div className="flex flex-col justify-center px-7 py-12 sm:px-12 sm:py-14">
                                 <span className="inline-flex w-fit items-center rounded-full border border-[#a8e5ce]/30 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.15em] text-[#a8e5ce]">
-                                    Media Pembelajaran Kelas X
+                                    Media Pembelajaran Kelas X Fase E
                                 </span>
 
                                 <h2 className="mt-6 max-w-2xl text-4xl font-extrabold leading-tight text-white sm:text-5xl">
-                                    Jelajahi
+                                    Jelajahi Yukkk
                                     <span className="block text-[#d9f99d]">
                                         Klasifikasi Iklim Köppen
                                     </span>
                                 </h2>
 
                                 <p className="mt-5 max-w-xl text-base leading-relaxed text-[#d0e4e7] sm:text-lg">
-                                    Pelajari pola suhu dan curah hujan dunia melalui
-                                    materi interaktif, peta persebaran iklim, latihan
-                                    studi kasus, dan evaluasi hasil belajar.
+                                    Anak-Anak media ini dibuat untuk membantu kalian mempelajari pola suhu dan curah hujan yang ada
+                                    dunia melalui materi interaktif, peta persebaran iklim, latihan
+                                    studi kasus seperti tantangan, tanya chatbot, dan evaluasi hasil belajar.
                                 </p>
 
                                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -225,10 +225,10 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                                     </div>
 
                                     <p className="mt-6 text-sm font-bold uppercase tracking-[0.25em] text-[#b6d7df]">
-                                        Jelajahi Iklim Dunia
+                                        Menjelajahi Iklim Dunia
                                     </p>
                                     <p className="mt-2 max-w-xs text-sm text-[#d0e4e7]">
-                                        Memahami hubungan suhu, curah hujan, dan karakteristik wilayah.
+                                        Memahami suhu, curah hujan, dan karakteristik wilayah.
                                     </p>
                                 </div>
 
@@ -252,11 +252,11 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                             </p>
 
                             <h3 className="mt-2 text-2xl font-bold text-[#123b49] sm:text-3xl">
-                                Semua yang kamu butuhkan untuk belajar
+                                Tersedia untuk pembelajaran
                             </h3>
 
                             <p className="mt-2 max-w-2xl leading-relaxed text-gray-500">
-                                Gunakan berbagai fitur GeoBot untuk memahami konsep
+                                Gunakan berbagai fitur IklimKöppenBot yang tersedia untuk memahami konsep
                                 klasifikasi iklim secara bertahap.
                             </p>
                         </div>
@@ -289,17 +289,17 @@ export default function Welcome({ auth, canLogin, canRegister }) {
 
                             <div className="flex flex-col justify-center">
                                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                    Mulai dari sini
+                                    Dimulai dari sini
                                 </p>
 
                                 <h3 className="mt-2 text-2xl font-bold text-[#123b49] sm:text-3xl">
-                                    Perjalanan belajarmu dimulai dari langkah sederhana
+                                    Perjalanan belajarmu dimulai dari langkah kecil hingga besar
                                 </h3>
 
                                 <p className="mt-4 leading-relaxed text-gray-500">
                                     Ikuti alur pembelajaran dari pengenalan konsep,
                                     memahami kelompok iklim, hingga menerapkan
-                                    pengetahuan melalui latihan.
+                                    pengetahuan yang kamu dapatkan melalui latihan.
                                 </p>
 
                                 <Link
@@ -341,12 +341,12 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                         <div className="flex flex-col items-center justify-between gap-6 rounded-3xl border border-[#cce7d9] bg-[#effaf3] p-7 text-center sm:flex-row sm:px-10 sm:text-left">
                             <div>
                                 <h3 className="text-2xl font-bold text-[#123b49]">
-                                    Siap menjelajahi iklim dunia?
+                                    Apakah kamu siap menjelajahi iklim dunia?
                                 </h3>
 
                                 <p className="mt-2 max-w-2xl text-gray-600">
-                                    Mulai belajar klasifikasi iklim Köppen bersama GeoBot
-                                    dan temukan bagaimana iklim membentuk karakteristik
+                                    Mulai belajar klasifikasi iklim Köppen bersama IklimKöppenBot
+                                    dan menemukan bagaimana karakteristik iklim yang membentuk
                                     berbagai wilayah.
                                 </p>
                             </div>
@@ -366,7 +366,7 @@ export default function Welcome({ auth, canLogin, canRegister }) {
                 <footer className="border-t border-[#d7e5e3] bg-white">
                     <div className="mx-auto flex max-w-[1500px] flex-col gap-2 px-6 py-6 text-center sm:flex-row sm:items-center sm:justify-between sm:px-10 sm:text-left">
                         <p className="font-bold text-[#07384b]">
-                            GeoBot · Ruang Belajar Köppen
+                            IklimKöppenBot · Ruang Belajar Iklim Köppen
                         </p>
 
                         <p className="text-sm text-gray-500">
