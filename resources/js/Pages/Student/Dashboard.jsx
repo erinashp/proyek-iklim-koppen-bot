@@ -273,11 +273,11 @@ export default function Dashboard({ auth }) {
                                 {/* INFO */}
                                 <div className="text-left md:text-right">
                                     <p className="text-sm font-semibold text-[#123b49]">
-                                        Media Pembelajaran Kelas X
+                                        Media Pembelajaran Iklim Köppen Kelas X
                                     </p>
 
                                     <p className="mt-1 text-sm text-gray-500">
-                                        Belajar • Berlatih • Memahami Iklim
+                                        Bersama Bu Erina Saharani Hermanto Putri
                                     </p>
                                 </div>
                             </div>
