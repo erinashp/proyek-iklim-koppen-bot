@@ -289,7 +289,7 @@ export default function Profile() {
                                             </label>
 
                                             <div className="rounded-xl border border-[#e0e9e7] bg-[#f3f9f8] px-4 py-3 text-gray-600">
-                                                Siswa
+                                                Peserta Didik
                                             </div>
 
                                             <p className="mt-1 text-xs text-gray-500">

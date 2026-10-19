@@ -211,7 +211,7 @@ export default function Dashboard() {
                         <footer className="mt-8 rounded-2xl border border-[#d4e4e1] bg-white/70 px-5 py-4">
                             <p className="text-sm leading-relaxed text-slate-500">
                                 <span className="font-semibold text-[#123b49]">
-                                    GeoBot
+                                    IklimKöppenBot
                                 </span>{" "}
                                 — Media pembelajaran klasifikasi iklim Köppen
                                 untuk mendukung kegiatan belajar mengajar.

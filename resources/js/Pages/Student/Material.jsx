@@ -174,7 +174,7 @@ export default function Material({ completedModules = 0 }) {
                                 </div>
 
                                 <p className="absolute bottom-5 right-8 text-xs font-bold uppercase tracking-[0.2em] text-[#16805f]">
-                                    Kenali Iklim Dunia
+                                    Mengenali Iklim yang ada di Dunia
                                 </p>
                             </div>
                         </section>
@@ -191,7 +191,7 @@ export default function Material({ completedModules = 0 }) {
                                     </h3>
 
                                     <p className="mt-1 text-gray-500">
-                                        Mempelajari setiap topik secara
+                                        Mempelajari setiap topik dengan secara
                                         berurutan.
                                     </p>
                                 </div>
@@ -307,7 +307,7 @@ export default function Material({ completedModules = 0 }) {
 
                             <p className="mt-3 text-sm text-gray-500">
                                 Selesaikan modul secara bertahap untuk
-                                meningkatkan progres belajarmu.
+                                meningkatkan progres belajar Anda.
                             </p>
                         </section>
                     </main>

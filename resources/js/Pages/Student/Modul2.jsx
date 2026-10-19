@@ -1010,16 +1010,16 @@ export default function Modul2() {
                             </Link>
 
                             <Link
-                                href={route("student.material")}
-                                className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#087b68] px-6 py-3 font-semibold text-white transition hover:bg-[#066455]"
-                            >
-                                Kembali ke Daftar Materi
-                                <span>→</span>
-                            </Link>
-                        </div>
-                    </main>
-                </div>
-            </div>
-        </>
-    );
-}
+                                                            href={route("student.modul3")}
+                                                            className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#087b68] px-6 py-3 font-semibold text-white transition hover:bg-[#065f50]"
+                                                        >
+                                                            Modul Berikutnya
+                                                            <span>→</span>
+                                                        </Link>
+                                                    </div>
+                                                </main>
+                                            </div>
+                                        </div>
+                                    </>
+                                );
+                            }

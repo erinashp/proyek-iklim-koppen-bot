@@ -115,7 +115,7 @@ export default function Guide() {
                                         </h3>
 
                                         <p className="mt-1 text-sm text-gray-500">
-                                            Ini adalah fitur yang dapat kamu
+                                            Fitur ini Ini dapat kamu
                                             gunakan.
                                         </p>
                                     </div>

@@ -31,7 +31,7 @@ export default function Objectives() {
                     <header className="border-b border-[#d7e5e3] bg-white">
                         <div className="mx-auto max-w-[1400px] px-6 py-5 sm:px-8">
                             <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                Media Pembelajaran Kelas X
+                                Media Pembelajaran Kelas X Fase E
                             </p>
 
                             <h2 className="mt-1 text-2xl font-bold text-[#123b49]">

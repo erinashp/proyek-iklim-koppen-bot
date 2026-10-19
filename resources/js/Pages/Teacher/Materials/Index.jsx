@@ -111,16 +111,16 @@ export default function Materials() {
 
                                 <div>
                                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                        Media Pembelajaran Kelas X
+                                        Media Pembelajaran Kelas X Fase E
                                     </p>
 
                                     <h1 className="mt-1 text-3xl font-bold text-[#123b49]">
-                                        Materi Köppen
+                                        Materi IklimKöppen
                                     </h1>
 
                                     <p className="mt-1 max-w-2xl text-sm text-gray-500 sm:text-base">
                                         Materi yang dapat digunakan guru untuk
-                                        membimbing siswa memahami klasifikasi
+                                        membimbing peseta didik dalam memahami klasifikasi
                                         iklim Köppen.
                                     </p>
                                 </div>
@@ -157,7 +157,7 @@ export default function Materials() {
                                 </div>
 
                                 <p className="text-sm font-semibold uppercase tracking-[0.15em] text-teal-100">
-                                    Ruang Materi Guru
+                                    Ruang Materi untuk Guru
                                 </p>
 
                                 <h2 className="mt-2 text-2xl font-extrabold leading-tight sm:text-3xl">
@@ -167,7 +167,7 @@ export default function Materials() {
                                 </h2>
 
                                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-teal-50 sm:text-base">
-                                    Pelajari konsep, kriteria, dan penerapan
+                                    Mempelajari konsep, kriteria, dan penerapan
                                     klasifikasi iklim Köppen sebagai bekal
                                     untuk membimbing siswa dalam proses
                                     pembelajaran.
@@ -250,13 +250,13 @@ export default function Materials() {
                                 </p>
 
                                 <h2 className="mt-1 text-2xl font-bold text-[#123b49]">
-                                    Materi Pembelajaran Köppen
+                                    Materi Pembelajaran Iklim Köppen
                                 </h2>
 
                                 <p className="mt-2 max-w-3xl text-sm leading-relaxed text-gray-500 sm:text-base">
                                     Gunakan materi berikut sebagai referensi
                                     ketika menjelaskan konsep klasifikasi iklim
-                                    kepada siswa.
+                                    kepada peserta didik.
                                 </p>
                             </div>
 
@@ -455,13 +455,13 @@ export default function Materials() {
 
                                     <div>
                                         <h3 className="text-lg font-bold text-[#123b49]">
-                                            Lanjutkan ke Data Siswa
+                                            Lanjutkan ke Data Peserta Didik
                                         </h3>
 
                                         <p className="mt-1 text-sm leading-relaxed text-gray-600">
-                                            Kelola akun siswa yang akan
+                                            Kelola akun peserta didik yang akan
                                             menggunakan materi pembelajaran
-                                            GeoBot.
+                                            IklimKöppenBot.
                                         </p>
                                     </div>
 
@@ -481,7 +481,7 @@ export default function Materials() {
 
                         {/* FOOTER */}
                         <footer className="mt-8 border-t border-[#d7e5e3] pt-5 pb-8 text-center text-sm text-gray-400">
-                            GeoBot · Media Pembelajaran Klasifikasi Iklim Köppen
+                            IklimKöppenBot · Media Pembelajaran Klasifikasi Iklim Köppen
                         </footer>
 
                     </div>
