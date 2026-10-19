@@ -28,11 +28,11 @@ export default function ForgotPassword({ status }) {
 
                             <div>
                                 <h1 className="text-xl font-bold tracking-wide text-[#07384b]">
-                                    GeoBot
+                                    IklimKöppenBot
                                 </h1>
 
                                 <p className="hidden text-xs text-gray-500 sm:block">
-                                    Ruang Belajar Köppen
+                                    Ruang Belajar Iklim Köppen
                                 </p>
                             </div>
                         </Link>
@@ -72,7 +72,7 @@ export default function ForgotPassword({ status }) {
                                 <h2 className="mt-4 text-3xl font-extrabold leading-tight lg:text-4xl">
                                     Kembali
                                     <span className="mt-2 block text-[#d9f99d]">
-                                        Belajar Bersama GeoBot
+                                        Belajar Bersama IklimKöppenBot
                                     </span>
                                 </h2>
 
@@ -214,7 +214,7 @@ export default function ForgotPassword({ status }) {
                 {/* FOOTER */}
                 <footer className="border-t border-[#d7e5e3] bg-white px-6 py-3 text-center">
                     <p className="text-xs text-gray-500">
-                        GeoBot · Media Pembelajaran Klasifikasi Iklim Köppen
+                        IklimKöppenBot · Media Pembelajaran Klasifikasi Iklim Köppen
                     </p>
                 </footer>
             </div>

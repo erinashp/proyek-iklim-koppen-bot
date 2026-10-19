@@ -1016,4 +1016,22 @@ function Kuis() {
         </div>
     );
 }
-    
+
+{/* NAVIGASI MODUL */}
+<div className="mt-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+    <Link
+        href={route('student.modul2')}
+        className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#c8dcda] bg-white px-5 py-3 font-semibold text-[#087b68] transition hover:bg-[#f3f9f8]"
+    >
+        <span>←</span>
+        Modul Sebelumnya
+    </Link>
+
+    <Link
+        href={route('student.modul4')}
+        className="inline-flex items-center justify-center gap-3 rounded-xl bg-[#087b68] px-6 py-3 font-semibold text-white transition hover:bg-[#066455]"
+    >
+        Modul Berikutnya
+        <span>→</span>
+    </Link>
+</div>

@@ -33,7 +33,7 @@ export default function Login({ status, canResetPassword }) {
 
                             <div>
                                 <h1 className="text-lg font-bold tracking-wide text-[#07384b] sm:text-xl">
-                                    GeoBot
+                                    IklimKöppenBot
                                 </h1>
 
                                 <p className="hidden text-xs text-gray-500 sm:block">
@@ -80,13 +80,13 @@ export default function Login({ status, canResetPassword }) {
                                 </div>
 
                                 <p className="mt-6 text-xs font-bold uppercase tracking-[0.18em] text-[#a8e5ce]">
-                                    Media Pembelajaran Kelas X
+                                    Media Pembelajaran Kelas X Fase E
                                 </p>
 
                                 <h2 className="mt-3 text-3xl font-extrabold leading-tight lg:text-4xl xl:text-5xl">
                                     Selamat Datang
                                     <span className="mt-2 block text-[#d9f99d]">
-                                        di GeoBot
+                                        di IklimKöppenBot
                                     </span>
                                 </h2>
 
@@ -122,7 +122,7 @@ export default function Login({ status, canResetPassword }) {
                                     </div>
 
                                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                        Ruang Belajar Köppen
+                                        Ruang Belajar Materi Iklim Köppen
                                     </p>
 
                                     <h2 className="mt-2 text-2xl font-extrabold text-[#123b49] sm:text-3xl">
@@ -279,7 +279,7 @@ export default function Login({ status, canResetPassword }) {
                 {/* FOOTER */}
                 <footer className="shrink-0 border-t border-[#d7e5e3] bg-white px-6 py-2.5 text-center">
                     <p className="text-xs text-gray-500">
-                        GeoBot · Media Pembelajaran Klasifikasi Iklim Köppen
+                        IklimKöppenBot · Media Pembelajaran Klasifikasi Iklim Köppen
                     </p>
                 </footer>
             </div>
