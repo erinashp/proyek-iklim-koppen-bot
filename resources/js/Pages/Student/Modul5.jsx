@@ -5,7 +5,7 @@ import CompleteModuleButton from "@/Components/CompleteModuleButton";
 
 /* =====================================================================
    GAMBAR
-   Simpan semua gambar di: public/images/modul15
+   Simpan semua gambar di: public/images/modul5
    ===================================================================== */
 const IMG = "/images/modul5";
 
@@ -380,54 +380,34 @@ const infoRows = [
     ["Disusun untuk", "Guru dan peserta didik"],
 ];
 
-const objectives = [
-    "menjelaskan dasar pemikiran klasifikasi iklim Köppen (suhu, curah hujan, dan vegetasi);",
-    "menyebutkan lima kelompok iklim utama (A, B, C, D, E) beserta ciri suhu dan curah hujannya;",
-    "menerapkan kriteria Köppen langkah demi langkah pada data 12 bulan suatu kota;",
-    "membaca klimatogram dan menyimpulkan tipe iklimnya;",
-    "membandingkan tipe iklim beberapa wilayah di Indonesia dan di dunia serta menjelaskan penyebabnya;",
-    "menggunakan KoppenBot sebagai “teman bertanya” tanpa menelan jawabannya mentah-mentah (selalu cek hitungannya).",
-];
-
-const contentMap = [
-    ["B", "Mengenal klasifikasi Köppen", "Membaca", "bagian-b"],
-    ["C", "Kriteria dan alur menentukan tipe iklim", "Membaca, mencatat", "bagian-c"],
-    ["D", "Kenalan dengan Iklim KoppenBot", "Simulasi", "bagian-d"],
-    ["E", "Studi kasus Indonesia (5 kota)", "Simulasi + hitung", "bagian-e"],
-    ["F", "Studi kasus dunia (5 kota)", "Simulasi + hitung", "bagian-f"],
-    ["G", "Mengapa Indonesia didominasi iklim A?", "Diskusi", "bagian-g"],
-    ["H", "Aktivitas kelas: jadilah KoppenBot", "Kerja kelompok", "bagian-h"],
-    ["I", "Latihan soal, kunci, dan penilaian", "Mandiri", "bagian-i"],
-    ["J", "Daftar pustaka", "Rujukan", "bagian-j"],
-];
-
+// Urutan pengujian disamakan dengan Modul 4: E, B, A, lalu C/D
 const steps = [
     {
         number: "01",
-        title: "Cek suhu bulan terdingin",
+        title: "Cek suhu bulan terpanas (kelompok E)",
         description:
-            "Jika suhu bulan terdingin ≥ 18 °C, wilayah itu masuk kelompok A (tropis). Lanjutkan dengan memeriksa bulan terkering untuk menentukan Af, Am, atau Aw.",
-        icon: "🌡️",
+            "Jika suhu bulan terpanas (Thot) < 10 °C, wilayah itu masuk kelompok E (kutub): ET (tundra) jika Thot > 0 °C, atau EF (es abadi) jika Thot ≤ 0 °C.",
+        icon: "🧊",
     },
     {
         number: "02",
-        title: "Cek apakah wilayah kering",
+        title: "Cek apakah wilayah kering (kelompok B)",
         description:
-            "Jika bukan A, hitung ambang kering (Pthreshold). Bila curah hujan tahunan (MAP) < 10 × Pthreshold, wilayah itu masuk kelompok B (kering).",
+            "Jika bukan E, hitung ambang kering (Pthreshold). Bila curah hujan tahunan (MAP) < 10 × Pthreshold, wilayah itu masuk kelompok B (kering).",
         icon: "🌵",
     },
     {
         number: "03",
-        title: "Cek suhu bulan terpanas",
+        title: "Cek suhu bulan terdingin (kelompok A)",
         description:
-            "Jika suhu bulan terpanas ≤ 10 °C, wilayah itu masuk kelompok E (kutub): ET (tundra) atau EF (es abadi).",
-        icon: "☀️",
+            "Jika bukan E dan bukan B, lalu suhu bulan terdingin ≥ 18 °C, wilayah itu masuk kelompok A (tropis). Lanjutkan dengan memeriksa bulan terkering untuk menentukan Af, Am, atau Aw.",
+        icon: "🌡️",
     },
     {
         number: "04",
-        title: "Cek suhu bulan terdingin lagi",
+        title: "Pisahkan kelompok C dan D",
         description:
-            "Jika suhu bulan terdingin > 0 °C, wilayah itu masuk kelompok C (sedang). Jika ≤ 0 °C, wilayah itu masuk kelompok D (benua).",
+            "Jika bukan E, B, atau A: suhu bulan terdingin > 0 °C berarti kelompok C (sedang), sedangkan ≤ 0 °C berarti kelompok D (benua).",
         icon: "❄️",
     },
     {
@@ -437,14 +417,6 @@ const steps = [
             "Huruf kedua menunjukkan pola hujan (f, s, w, atau m untuk A), huruf ketiga menunjukkan suhu (a, b, c, atau h/k untuk B).",
         icon: "🔤",
     },
-];
-
-const groups = [
-    ["A", "Tropis", "Suhu bulan terdingin ≥ 18 °C. Panas sepanjang tahun.", "Pontianak, Jakarta, Surabaya, Kupang"],
-    ["B", "Kering (arid dan semiarid)", "Penguapan lebih besar daripada hujan. Curah hujan tahunan di bawah ambang kering.", "Kairo"],
-    ["C", "Sedang (temperate)", "Bulan terdingin antara 0 dan 18 °C, bulan terpanas > 10 °C.", "Roma, London, Dieng"],
-    ["D", "Benua (continental)", "Bulan terdingin ≤ 0 °C, bulan terpanas > 10 °C. Musim dingin sangat dingin.", "Moskow"],
-    ["E", "Kutub (polar)", "Bulan terpanas ≤ 10 °C.", "Utqiagvik"],
 ];
 
 const symbols = [
@@ -512,7 +484,8 @@ const dialog1 = [
     ["siswa", "Terus, dari mana tahu sebuah kota masuk huruf yang mana?"],
     [
         "bot",
-        "Dari data 12 bulan. Aku hanya butuh suhu dan curah hujan tiap bulan. Pertama kita lihat **suhu bulan terdingin**. Kalau ≥ 18 °C, kota itu pasti kelompok **A (tropis)**. Kalau tidak, kita lanjut ke pertanyaan berikutnya di alur pada Gambar 1.",
+        "Dari data 12 bulan. Aku hanya butuh suhu dan curah hujan tiap bulan. Aturan resminya menguji kelompok secara berurutan: **E dulu, lalu B, lalu A**, baru C atau D (lihat alur pada Gambar 1).",
+        "Untuk kota-kota Indonesia yang jelas hangat dan basah, E dan B pasti tidak terpenuhi, jadi di dialog berikutnya aku langsung menunjukkan hasil ujinya dari **suhu bulan terdingin**. Kalau ≥ 18 °C, kota itu kelompok **A (tropis)**.",
         "Mau coba dengan kota di Indonesia dulu?",
     ],
     ["siswa", "Boleh. Ayo!"],
@@ -675,8 +648,8 @@ const dialogMoskow = [
 const dialogUtqiagvik = [
     [
         "bot",
-        "Di sini pertanyaan pertama sudah cukup menentukan: **Thot = 4,5 °C ≤ 10 °C ⇒ kelompok E (kutub)**. Karena Thot > 0 °C, jenisnya **ET (tundra)**. Jika Thot ≤ 0 °C sepanjang tahun, namanya EF (es abadi).",
-        "Perhatikan juga bahwa MAP-nya hanya sekitar 156 mm, tetapi **bukan gurun** menurut Köppen. Pada suhu serendah itu, penguapan sangat kecil sehingga ambang kering menjadi sangat rendah.",
+        "Di sini pertanyaan pertama (uji E) sudah cukup menentukan: **Thot = 4,5 °C < 10 °C ⇒ kelompok E (kutub)**. Karena Thot > 0 °C, jenisnya **ET (tundra)**. Jika Thot ≤ 0 °C sepanjang tahun, namanya EF (es abadi).",
+        "Perhatikan juga bahwa MAP-nya hanya sekitar 156 mm, tetapi **bukan gurun** menurut Köppen. Karena E diuji lebih dulu, kelompok B tidak perlu diperiksa lagi. Pada suhu serendah itu, penguapan juga sangat kecil sehingga ambang kering menjadi sangat rendah.",
     ],
 ];
 
@@ -710,7 +683,7 @@ const summaryWorld = [
     ["Roma", "8,0", "26,0", "765", "C; Psdry 20 mm; Thot ≥ 22", "**Csa**"],
     ["London", "5,0", "19,0", "615", "C; tidak kering; Tmon10 = 6", "**Cfb**"],
     ["Moskow", "−6,5", "19,0", "695", "D; tidak kering; Tmon10 = 5", "**Dfb**"],
-    ["Utqiagvik", "−27,0", "4,5", "156", "Thot ≤ 10 °C", "**ET**"],
+    ["Utqiagvik", "−27,0", "4,5", "156", "Thot < 10 °C", "**ET**"],
 ];
 
 const discussion = [
@@ -721,7 +694,7 @@ const discussion = [
 
 const activitySteps = [
     "Bentuk kelompok 3 orang: **Penanya**, **KoppenBot**, dan **Pemeriksa**.",
-    "Penanya memilih satu kota (dari Bagian E atau F, atau “Kota Misteri” di Bagian I) dan membacakan data 12 bulannya.",
+    "Penanya memilih satu kota (dari Bagian C atau D, atau “Kota Misteri” di Bagian G) dan membacakan data 12 bulannya.",
     "KoppenBot menjawab dengan **pola tanya-jawab bertahap** seperti pada dialog, lengkap dengan hitungan.",
     "Pemeriksa mengecek setiap langkah memakai alur (Gambar 1) dan memberi tanda centang atau silang.",
     "Tukar peran sampai setiap anggota pernah menjadi KoppenBot.",
@@ -729,9 +702,9 @@ const activitySteps = [
 ];
 
 const worksheet = [
-    ["1", "Tcold ≥ 18 °C ?"],
-    ["2", "MAP < 10 × Pthreshold ? (hitung Pthreshold dulu)"],
-    ["3", "Thot ≤ 10 °C ?"],
+    ["1", "Thot < 10 °C ? (kelompok E)"],
+    ["2", "MAP < 10 × Pthreshold ? (hitung Pthreshold dulu; kelompok B)"],
+    ["3", "Tcold ≥ 18 °C ? (kelompok A)"],
     ["4", "Tcold > 0 °C ? (C atau D)"],
     ["5", "Huruf ke-2 (f / s / w, atau f / m / w untuk A)"],
     ["6", "Huruf ke-3 (a / b / c, atau h / k untuk B)"],
@@ -779,7 +752,7 @@ const mcq = [
         q: "Kota dengan Thot = 4,5 °C dan Tcold = −27 °C termasuk ...",
         opts: ["Dfc", "BWk", "ET", "Cfb"],
         key: "C",
-        why: "Thot ≤ 10 °C ⇒ kelompok E; Thot > 0 °C ⇒ ET (tundra).",
+        why: "Thot < 10 °C ⇒ kelompok E; Thot > 0 °C ⇒ ET (tundra).",
     },
     {
         q: "Dieng berada di Indonesia tetapi tergolong Cfb, bukan A, karena ...",
@@ -877,12 +850,6 @@ const references = [
         url: "https://doi.org/10.1038/sdata.2018.214",
     },
     {
-        text: "Kottek, M., Grieser, J., Beck, C., Rudolf, B., & Rubel, F. (2006). World map of the Köppen-Geiger climate classification updated. ",
-        italic: "Meteorologische Zeitschrift, 15",
-        tail: "(3), 259–263.",
-        url: "https://doi.org/10.1127/0941-2948/2006/0130",
-    },
-    {
         text: "Peel, M. C., Finlayson, B. L., & McMahon, T. A. (2007). Updated world map of the Köppen-Geiger climate classification. ",
         italic: "Hydrology and Earth System Sciences, 11",
         tail: "(5), 1633–1644.",
@@ -907,9 +874,7 @@ export default function Modul5() {
                 {/* AREA UTAMA */}
                 <div className="min-h-screen md:ml-64">
 
-                    {/* =====================================================
-                        TOP HEADER
-                    ====================================================== */}
+                    {/* TOP HEADER */}
                     <header className="border-b border-[#d7e5e3] bg-white">
                         <div className="flex items-center justify-between gap-6 px-6 py-6 sm:px-10">
 
@@ -938,9 +903,7 @@ export default function Modul5() {
                         </div>
                     </header>
 
-                    {/* =====================================================
-                        MOBILE BACK BUTTON
-                    ====================================================== */}
+                    {/* MOBILE BACK BUTTON */}
                     <div className="border-b border-[#d7e5e3] bg-white px-6 pb-5 sm:hidden">
                         <Link
                             href={route("student.material")}
@@ -950,16 +913,11 @@ export default function Modul5() {
                         </Link>
                     </div>
 
-                    {/* =====================================================
-                        CONTENT WRAPPER
-                    ====================================================== */}
+                    {/* CONTENT WRAPPER */}
                     <div className="mx-auto max-w-[1400px] px-6 py-8 sm:px-10">
 
-                        {/* =================================================
-                            BREADCRUMB
-                        ================================================== */}
+                        {/* BREADCRUMB */}
                         <div className="mb-7 flex items-center gap-3 text-sm">
-
                             <Link
                                 href={route("student.material")}
                                 className="text-gray-500 transition hover:text-[#087b68]"
@@ -967,39 +925,29 @@ export default function Modul5() {
                                 Materi Iklim Köppen
                             </Link>
 
-                            <span className="text-gray-400">
-                                /
-                            </span>
+                            <span className="text-gray-400">/</span>
 
                             <span className="font-medium text-[#123b49]">
                                 Modul 5
                             </span>
-
                         </div>
 
-                        {/* =================================================
-                            HERO MODUL
-                        ================================================== */}
+                        {/* HERO MODUL */}
                         <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-r from-[#07384b] via-[#08635f] to-[#087b70] px-8 py-10 text-white shadow-sm sm:px-12 sm:py-11">
 
-                            {/* Dekorasi lingkaran */}
                             <div className="absolute -right-10 -top-20 h-64 w-64 rounded-full border border-white/10" />
-
                             <div className="absolute -right-20 -top-10 h-72 w-72 rounded-full border border-white/10" />
 
                             <div className="relative z-10 max-w-4xl">
 
-                                {/* Label */}
                                 <div className="inline-flex rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs font-bold tracking-wide">
                                     MODUL PEMBELAJARAN 05
                                 </div>
 
-                                {/* Judul */}
                                 <h2 className="mt-6 text-3xl font-bold leading-tight sm:text-4xl">
                                     Klasifikasi Iklim Köppen: dari Rumus ke Kota Nyata
                                 </h2>
 
-                                {/* Deskripsi */}
                                 <p className="mt-4 max-w-3xl text-base leading-7 text-teal-50 sm:text-lg">
                                     Menerapkan kriteria klasifikasi iklim
                                     Köppen pada studi kasus wilayah di
@@ -1007,41 +955,29 @@ export default function Modul5() {
                                     tanya-jawab bersama Iklim KoppenBot.
                                 </p>
 
-                                {/* Kategori */}
                                 <div className="mt-7 flex flex-wrap gap-3">
-
                                     <span className="rounded-lg bg-white/10 px-4 py-2.5 text-sm font-medium">
                                         🌡️ Data Suhu
                                     </span>
-
                                     <span className="rounded-lg bg-white/10 px-4 py-2.5 text-sm font-medium">
                                         💧 Curah Hujan
                                     </span>
-
                                     <span className="rounded-lg bg-white/10 px-4 py-2.5 text-sm font-medium">
                                         🌍 10 Studi Kasus Kota
                                     </span>
-
                                     <span className="rounded-lg bg-white/10 px-4 py-2.5 text-sm font-medium">
                                         🤖 Simulasi KoppenBot
                                     </span>
-
                                 </div>
                             </div>
                         </section>
 
-                        {/* =================================================
-                            ISI MODUL
-                        ================================================== */}
+                        {/* ISI MODUL */}
                         <main className="mx-auto mt-8 max-w-7xl">
 
-                            {/* =================================================
-                                INTRO
-                            ================================================== */}
+                            {/* INTRO */}
                             <div className="mb-6 rounded-2xl border border-teal-100 bg-white p-5 shadow-sm sm:p-6">
-
                                 <div className="flex items-start gap-3">
-
                                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-xl">
                                         🧭
                                     </div>
@@ -1057,13 +993,10 @@ export default function Modul5() {
                                             klasifikasi iklim suatu wilayah.
                                         </p>
                                     </div>
-
                                 </div>
                             </div>
 
-                            {/* =================================================
-                                INFO BAHAN AJAR
-                            ================================================== */}
+                            {/* INFO BAHAN AJAR */}
                             <Card>
                                 <h3 className="mb-1 text-lg font-bold text-[#123b49]">
                                     Informasi Bahan Ajar
@@ -1100,127 +1033,33 @@ export default function Modul5() {
                                         dirujuk.
                                     </p>
                                 </Callout>
-                            </Card>
 
-                            {/* =================================================
-                                A. TUJUAN & PETA ISI
-                            ================================================== */}
-                            <Card>
-                                <SectionHeading
-                                    id="bagian-a"
-                                    letter="A"
-                                    title="Tujuan Pembelajaran dan Peta Isi"
-                                />
-                                <Para>
-                                    Setelah mempelajari bahan ajar ini, kamu
-                                    diharapkan mampu:
-                                </Para>
-                                <NumberedList items={objectives} />
-
-                                <SubHeading>Peta isi</SubHeading>
-                                <div className="overflow-x-auto rounded-xl border border-slate-200">
-                                    <table className="w-full min-w-[480px] border-collapse text-left text-sm">
-                                        <thead className="bg-[#e7f4f1] text-[#123b49]">
-                                            <tr>
-                                                <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide">Bagian</th>
-                                                <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide">Isi</th>
-                                                <th className="px-4 py-3 text-xs font-bold uppercase tracking-wide">Kegiatan</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="divide-y divide-slate-100 text-slate-600">
-                                            {contentMap.map(([letter, isi, kegiatan, anchor]) => (
-                                                <tr key={letter}>
-                                                    <td className="px-4 py-3 font-bold text-[#087b68]">
-                                                        {letter}
-                                                    </td>
-                                                    <td className="px-4 py-3">
-                                                        <a
-                                                            href={`#${anchor}`}
-                                                            className="transition hover:text-[#087b68] hover:underline"
-                                                        >
-                                                            {isi}
-                                                        </a>
-                                                    </td>
-                                                    <td className="px-4 py-3">{kegiatan}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </Card>
-
-                            {/* =================================================
-                                B. MENGENAL KLASIFIKASI KÖPPEN
-                            ================================================== */}
-                            <Card>
-                                <SectionHeading
-                                    id="bagian-b"
-                                    letter="B"
-                                    title="Mengenal Klasifikasi Iklim Köppen"
-                                />
-
-                                <SubHeading>1. Kenapa iklim perlu dikelompokkan?</SubHeading>
-                                <Para>
-                                    Bumi punya ribuan lokasi dengan kondisi
-                                    cuaca yang berbeda-beda. Kalau setiap
-                                    tempat dijelaskan satu per satu, kita
-                                    kewalahan. Karena itu para ilmuwan
-                                    mengelompokkan tempat-tempat yang polanya
-                                    mirip ke dalam satu **tipe iklim**. Dengan
-                                    begitu, kita bisa cepat membayangkan: “Oh,
-                                    kota ini iklimnya seperti Jakarta” atau
-                                    “Wilayah ini kering seperti Kairo”.
-                                </Para>
-
-                                <SubHeading>2. Siapa Köppen?</SubHeading>
-                                <Para>
-                                    Klasifikasi Köppen disusun oleh Wladimir
-                                    Köppen, ahli iklim berkebangsaan Jerman, dan
-                                    kemudian disempurnakan oleh banyak ilmuwan
-                                    lain, termasuk Rudolf Geiger. Karena itu
-                                    sistem ini sering disebut **klasifikasi
-                                    Köppen–Geiger**. Gagasannya sederhana:
-                                    **vegetasi alami adalah cerminan iklim**,
-                                    sehingga batas-batas iklim dipilih mengikuti
-                                    sebaran tumbuhan, lalu diterjemahkan menjadi
-                                    angka suhu dan curah hujan.
-                                </Para>
-                                <Para>
-                                    Klasifikasi Köppen–Geiger masih banyak
-                                    digunakan dalam pembelajaran dan penelitian
-                                    iklim (Peel dkk., 2007; Kottek dkk., 2006).
-                                    Salah satu peta yang banyak dirujuk
-                                    menyajikan klasifikasi pada resolusi sekitar
-                                    1 km dan menggambarkan lima kelompok utama
-                                    beserta subtipenya (Beck dkk., 2018).
-                                </Para>
-
-                                <SubHeading>3. Lima kelompok iklim utama</SubHeading>
-                                <SimpleTable
-                                    head={["Kode", "Nama", "Ciri utama (versi Peel dkk., 2007)", "Contoh di bahan ajar"]}
-                                    rows={groups.map(([k, n, c, e]) => [`**${k}**`, n, c, e])}
-                                />
-
-                                <Callout title="Tips mengingat" tone="lime" icon="💡">
+                                <Callout
+                                    title="Belum paham dasar Köppen?"
+                                    tone="sky"
+                                    icon="📖"
+                                >
                                     <p>
-                                        Urutan A → E kira-kira bergerak dari
-                                        panas ke dingin: tropis → sedang → benua
-                                        → kutub. Kelompok B (kering) adalah
-                                        pengecualian, sebab penentunya adalah
-                                        hujan, bukan suhu. Karena itu dalam alur
-                                        keputusan, kelompok B diperiksa lebih
-                                        dulu sebelum C, D, dan E.
+                                        Pengenalan klasifikasi Köppen dan lima
+                                        kelompok iklim utama sudah dibahas pada
+                                        Modul 1. Buka kembali dari{" "}
+                                        <Link
+                                            href={route("student.material")}
+                                            className="font-semibold underline"
+                                        >
+                                            daftar materi
+                                        </Link>
+                                        . Modul ini langsung fokus menerapkan
+                                        kriteria pada data kota.
                                     </p>
                                 </Callout>
                             </Card>
 
-                            {/* =================================================
-                                C. KRITERIA DAN ALUR
-                            ================================================== */}
+                            {/* A. KRITERIA DAN ALUR */}
                             <Card>
                                 <SectionHeading
-                                    id="bagian-c"
-                                    letter="C"
+                                    id="bagian-a"
+                                    letter="A"
                                     title="Kriteria dan Alur Menentukan Tipe Iklim"
                                 />
 
@@ -1267,14 +1106,16 @@ export default function Modul5() {
                                 <SubHeading>2. Alur keputusan</SubHeading>
                                 <Para>
                                     Ikuti alur keputusan secara berurutan dari
-                                    atas ke bawah. Setiap jawaban menentukan
-                                    apakah kamu bisa menetapkan kelompok utama
-                                    atau harus melanjutkan ke langkah berikutnya.
-                                    Jangan memilih kode hanya berdasarkan letak
-                                    lintang atau kesan umum tentang suatu kota.
+                                    atas ke bawah: **E dahulu, lalu B, lalu A,
+                                    terakhir C atau D**. Setiap jawaban
+                                    menentukan apakah kamu bisa menetapkan
+                                    kelompok utama atau harus melanjutkan ke
+                                    langkah berikutnya. Jangan memilih kode
+                                    hanya berdasarkan letak lintang atau kesan
+                                    umum tentang suatu kota.
                                 </Para>
 
-                                {/* Ringkasan langkah (versi interaktif dari alur) */}
+                                {/* Ringkasan langkah */}
                                 <div className="mt-5 space-y-4 rounded-2xl border border-slate-200 p-5">
                                     <h5 className="text-sm font-bold text-[#123b49]">
                                         Langkah-langkah mengklasifikasikan
@@ -1285,10 +1126,8 @@ export default function Modul5() {
                                             key={step.number}
                                             className="flex gap-4"
                                         >
-
                                             {/* Icon + garis */}
                                             <div className="flex flex-col items-center">
-
                                                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#e7f4f1] text-xl">
                                                     {step.icon}
                                                 </div>
@@ -1296,12 +1135,10 @@ export default function Modul5() {
                                                 {index !== steps.length - 1 && (
                                                     <div className="mt-2 min-h-8 w-px flex-1 bg-teal-100" />
                                                 )}
-
                                             </div>
 
                                             {/* Isi langkah */}
                                             <div className="flex-1 pb-3">
-
                                                 <p className="text-xs font-bold tracking-wide text-[#087b68]">
                                                     LANGKAH {step.number}
                                                 </p>
@@ -1313,9 +1150,7 @@ export default function Modul5() {
                                                 <p className="mt-2 text-sm leading-6 text-slate-600">
                                                     {step.description}
                                                 </p>
-
                                             </div>
-
                                         </div>
                                     ))}
                                 </div>
@@ -1359,14 +1194,11 @@ export default function Modul5() {
                                 />
                             </Card>
 
-                            
-                            {/* =================================================
-                                D. KENALAN DENGAN KOPPENBOT
-                            ================================================== */}
+                            {/* B. KENALAN DENGAN KOPPENBOT */}
                             <Card>
                                 <SectionHeading
-                                    id="bagian-d"
-                                    letter="D"
+                                    id="bagian-b"
+                                    letter="B"
                                     title="Kenalan dengan Iklim KoppenBot"
                                 />
                                 <Para>
@@ -1393,13 +1225,11 @@ export default function Modul5() {
                                 <Dialogue lines={dialog1} />
                             </Card>
 
-                            {/* =================================================
-                                E. STUDI KASUS INDONESIA
-                            ================================================== */}
+                            {/* C. STUDI KASUS INDONESIA */}
                             <Card>
                                 <SectionHeading
-                                    id="bagian-e"
-                                    letter="E"
+                                    id="bagian-c"
+                                    letter="C"
                                     title="Studi Kasus Indonesia"
                                 />
 
@@ -1457,13 +1287,11 @@ export default function Modul5() {
                                 />
                             </Card>
 
-                            {/* =================================================
-                                F. STUDI KASUS DUNIA
-                            ================================================== */}
+                            {/* D. STUDI KASUS DUNIA */}
                             <Card>
                                 <SectionHeading
-                                    id="bagian-f"
-                                    letter="F"
+                                    id="bagian-d"
+                                    letter="D"
                                     title="Studi Kasus Dunia"
                                     subtitle="Sekarang kita keluar dari tropis. Perhatikan bagaimana kriteria yang sama dipakai di lima kota yang iklimnya sangat berbeda."
                                 />
@@ -1501,13 +1329,11 @@ export default function Modul5() {
                                 />
                             </Card>
 
-                            {/* =================================================
-                                G. MENGAPA INDONESIA DIDOMINASI A
-                            ================================================== */}
+                            {/* E. MENGAPA INDONESIA DIDOMINASI A */}
                             <Card>
                                 <SectionHeading
-                                    id="bagian-g"
-                                    letter="G"
+                                    id="bagian-e"
+                                    letter="E"
                                     title="Mengapa Indonesia Didominasi Iklim A?"
                                 />
                                 <Para>
@@ -1534,13 +1360,11 @@ export default function Modul5() {
                                 </Para>
                             </Card>
 
-                            {/* =================================================
-                                H. AKTIVITAS KELAS
-                            ================================================== */}
+                            {/* F. AKTIVITAS KELAS */}
                             <Card>
                                 <SectionHeading
-                                    id="bagian-h"
-                                    letter="H"
+                                    id="bagian-f"
+                                    letter="F"
                                     title="Aktivitas Kelas: Jadilah KoppenBot"
                                 />
                                 <Para>
@@ -1559,13 +1383,11 @@ export default function Modul5() {
                                 />
                             </Card>
 
-                            {/* =================================================
-                                I. LATIHAN SOAL
-                            ================================================== */}
+                            {/* G. LATIHAN SOAL */}
                             <Card>
                                 <SectionHeading
-                                    id="bagian-i"
-                                    letter="I"
+                                    id="bagian-g"
+                                    letter="G"
                                     title="Latihan Soal, Kunci, dan Penilaian"
                                 />
 
@@ -1641,13 +1463,11 @@ export default function Modul5() {
                                 </Collapsible>
                             </Card>
 
-                            {/* =================================================
-                                J. DAFTAR PUSTAKA
-                            ================================================== */}
+                            {/* H. DAFTAR PUSTAKA */}
                             <Card>
                                 <SectionHeading
-                                    id="bagian-j"
-                                    letter="J"
+                                    id="bagian-h"
+                                    letter="H"
                                     title="Daftar Pustaka"
                                 />
                                 <ul className="space-y-4 text-sm leading-7 text-slate-600">
@@ -1701,15 +1521,10 @@ export default function Modul5() {
                                 </Callout>
                             </Card>
 
-                            {/* =================================================
-                                CHATBOT CTA
-                            ================================================== */}
+                            {/* CHATBOT CTA */}
                             <section className="mt-7 overflow-hidden rounded-2xl bg-gradient-to-r from-[#07384b] to-[#087b70] p-6 text-white shadow-sm sm:p-8">
-
                                 <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-
                                     <div className="max-w-xl">
-
                                         <div className="mb-3 inline-flex rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-lime-200">
                                             Praktik Mandiri
                                         </div>
@@ -1726,7 +1541,6 @@ export default function Modul5() {
                                             bisa salah, jadi kamu yang menjadi
                                             pemeriksanya!
                                         </p>
-
                                     </div>
 
                                     <Link
@@ -1735,22 +1549,16 @@ export default function Modul5() {
                                     >
                                         Coba di Chatbot →
                                     </Link>
-
                                 </div>
                             </section>
 
                             {/* SELESAIKAN MODUL */}
                             <div className="mt-7 rounded-2xl border border-[#d4e4e1] bg-white p-5 shadow-sm sm:p-6">
-
                                 <CompleteModuleButton moduleNumber={5} />
-
                             </div>
 
-                            {/* =================================================
-                                NAVIGATION
-                            ================================================== */}
+                            {/* NAVIGATION */}
                             <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
-
                                 <Link
                                     href={route("student.modul4")}
                                     className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-[#123b49] transition hover:bg-slate-50"
@@ -1764,7 +1572,6 @@ export default function Modul5() {
                                 >
                                     Modul Selanjutnya →
                                 </Link>
-
                             </div>
 
                         </main>

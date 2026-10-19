@@ -33,11 +33,11 @@ export default function Register() {
 
                             <div>
                                 <h1 className="text-xl font-bold tracking-wide text-[#07384b]">
-                                    GeoBot
+                                    IklimKöppenBot
                                 </h1>
 
                                 <p className="hidden text-xs text-gray-500 sm:block">
-                                    Ruang Belajar Köppen
+                                    Ruang Belajar Iklim Köppen
                                 </p>
                             </div>
                         </Link>
@@ -79,7 +79,7 @@ export default function Register() {
                                 <h2 className="mt-3 text-3xl font-extrabold leading-tight lg:text-4xl xl:text-5xl">
                                     Selamat Datang
                                     <span className="mt-2 block text-[#d9f99d]">
-                                        di GeoBot
+                                        di IklimKöppenBot
                                     </span>
                                 </h2>
 
@@ -115,7 +115,7 @@ export default function Register() {
                                     </div>
 
                                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#16805f]">
-                                        Ruang Belajar Köppen
+                                        Ruang Belajar Iklim Köppen
                                     </p>
 
                                     <h2 className="mt-2 text-3xl font-extrabold text-[#123b49]">
@@ -124,7 +124,7 @@ export default function Register() {
 
                                     <p className="mt-2 leading-relaxed text-gray-500">
                                         Daftarkan akunmu untuk mulai menjelajahi
-                                        materi pembelajaran GeoBot.
+                                        materi pembelajaran Iklim Köppen.
                                     </p>
                                 </div>
 
@@ -308,7 +308,7 @@ export default function Register() {
                 {/* FOOTER */}
                 <footer className="border-t border-[#d7e5e3] bg-white px-6 py-3 text-center">
                     <p className="text-xs text-gray-500">
-                        GeoBot · Media Pembelajaran Klasifikasi Iklim Köppen
+                        IklimKöppenBot · Media Pembelajaran Klasifikasi Iklim Köppen
                     </p>
                 </footer>
             </div>
