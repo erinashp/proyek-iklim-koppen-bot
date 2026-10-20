@@ -11,23 +11,23 @@
     "routes": [
         {
             "src": "/build/(.*)",
-            "dest": "/public/build/$1"
+            "dest": "/build/$1"
         },
         {
             "src": "/image/(.*)",
-            "dest": "/public/image/$1"
+            "dest": "/image/$1"
         },
         {
             "src": "/images/(.*)",
-            "dest": "/public/image/$1"
+            "dest": "/image/$1"
         },
         {
             "src": "/favicon.ico",
-            "dest": "/public/favicon.ico"
+            "dest": "/favicon.ico"
         },
         {
             "src": "/robots.txt",
-            "dest": "/public/robots.txt"
+            "dest": "/robots.txt"
         },
         {
             "src": "/(.*)",
@@ -43,6 +43,8 @@
         "APP_ROUTES_CACHE": "/tmp/routes.php",
         "APP_SERVICES_CACHE": "/tmp/services.php",
         "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
+        "DB_CONNECTION": "pgsql",
+        "DB_SSLMODE": "require",
         "CACHE_STORE": "array",
         "SESSION_DRIVER": "cookie",
         "LOG_CHANNEL": "stderr"
