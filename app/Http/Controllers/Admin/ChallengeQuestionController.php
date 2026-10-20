@@ -121,7 +121,7 @@ class ChallengeQuestionController extends Controller
         if ($request->hasFile('image')) {
             $validated['image'] = $request
                 ->file('image')
-                ->store('challenge', 'public');
+                ->store('challenge', config('filesystems.uploads'));
         }
 
         ChallengeQuestion::create($validated);
@@ -225,12 +225,13 @@ class ChallengeQuestionController extends Controller
 
         if ($request->hasFile('image')) {
             if ($challenge->image) {
-                Storage::disk('public')->delete($challenge->image);
+                Storage::disk(config('filesystems.uploads'))
+                    ->delete($challenge->image);
             }
 
             $validated['image'] = $request
                 ->file('image')
-                ->store('challenge', 'public');
+                ->store('challenge', config('filesystems.uploads'));
         }
 
         $challenge->update($validated);
@@ -246,7 +247,8 @@ class ChallengeQuestionController extends Controller
     public function destroy(ChallengeQuestion $challenge)
     {
         if ($challenge->image) {
-            Storage::disk('public')->delete($challenge->image);
+            Storage::disk(config('filesystems.uploads'))
+                ->delete($challenge->image);
         }
 
         $challenge->delete();

@@ -24,7 +24,7 @@ export default function Profile() {
     const roleLabel = 'Siswa';
 
     const avatarUrl = user.avatar
-        ? `/storage/${user.avatar}`
+        ? `/uploads/${user.avatar}`
         : null;
 
     const displayedAvatar = preview || avatarUrl;
@@ -48,7 +48,7 @@ export default function Profile() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        put(route('profile.update'), {
+        put(route('student.profile.update'), {
             forceFormData: true,
             preserveScroll: true,
         });

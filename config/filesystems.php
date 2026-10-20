@@ -2,6 +2,8 @@
 
 return [
 
+    'uploads' => env('UPLOAD_DISK', 'public'),
+
     /*
     |--------------------------------------------------------------------------
     | Default Filesystem Disk

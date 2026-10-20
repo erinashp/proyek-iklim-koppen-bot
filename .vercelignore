@@ -1,0 +1,10 @@
+/vendor
+/node_modules
+/.git
+/.env
+/public/hot
+/tests
+/storage/*.key
+/assets
+*.docx
+*.html

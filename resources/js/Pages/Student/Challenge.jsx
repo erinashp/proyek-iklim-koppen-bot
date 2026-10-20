@@ -153,7 +153,7 @@ export default function Challenge({ questions, attempt }) {
                                                     {question.image && (
                                                         <div className="mt-5 overflow-hidden rounded-2xl border border-[#d9e6e3] bg-[#f8fcfb] p-4">
                                                             <img
-                                                                src={`/storage/${question.image}`}
+                                                                src={`/uploads/${question.image}`}
                                                                 alt={`Gambar soal nomor ${question.number}`}
                                                                 className="mx-auto max-h-[450px] w-auto max-w-full rounded-lg object-contain"
                                                                 onError={(e) => {
