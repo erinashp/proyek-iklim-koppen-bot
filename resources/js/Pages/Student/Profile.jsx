@@ -48,7 +48,7 @@ export default function Profile() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        put(route('profile.update'), {
+        put(route('student.profile.update'), {
             forceFormData: true,
             preserveScroll: true,
         });
