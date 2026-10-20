@@ -7,7 +7,7 @@ export default function AdminSidebar() {
     const currentUrl = usePage().url;
 
     const avatarUrl = user?.avatar
-        ? `/storage/${user.avatar}`
+        ? `/uploads/${user.avatar}`
         : null;
 
     const initial = user?.name

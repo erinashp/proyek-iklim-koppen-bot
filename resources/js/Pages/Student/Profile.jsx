@@ -24,7 +24,7 @@ export default function Profile() {
     const roleLabel = 'Siswa';
 
     const avatarUrl = user.avatar
-        ? `/storage/${user.avatar}`
+        ? `/uploads/${user.avatar}`
         : null;
 
     const displayedAvatar = preview || avatarUrl;

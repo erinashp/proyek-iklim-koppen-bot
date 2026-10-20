@@ -32,7 +32,7 @@ export default function Profile() {
         : "G";
 
     const avatarUrl = user?.avatar
-        ? `/storage/${user.avatar}`
+        ? `/uploads/${user.avatar}`
         : null;
 
     const displayedAvatar = preview || avatarUrl;

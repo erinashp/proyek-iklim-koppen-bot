@@ -145,7 +145,7 @@ export default function Index({ questions = [] }) {
                                                     <td className="px-6 py-5">
                                                         {question.image ? (
                                                             <img
-                                                                src={`/storage/${question.image}`}
+                                                                src={`/uploads/${question.image}`}
                                                                 alt={`Soal ${question.number}`}
                                                                 className="h-16 w-24 rounded-lg object-cover"
                                                             />

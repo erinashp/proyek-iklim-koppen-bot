@@ -7,7 +7,7 @@ export default function Profile() {
     const user = auth?.user;
 
     const [preview, setPreview] = useState(
-        user?.avatar ? `/storage/${user.avatar}` : null
+        user?.avatar ? `/uploads/${user.avatar}` : null
     );
 
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -57,7 +57,7 @@ export default function Profile() {
         setData("avatar", null);
 
         if (user?.avatar) {
-            setPreview(`/storage/${user.avatar}`);
+            setPreview(`/uploads/${user.avatar}`);
         } else {
             setPreview(null);
         }

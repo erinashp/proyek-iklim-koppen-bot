@@ -39,10 +39,11 @@ class UserProfileController extends Controller
 
         if ($request->hasFile('avatar')) {
             $newAvatar = $request->file('avatar')
-                ->store('profiles', 'public');
+                ->store('profiles', config('filesystems.uploads'));
 
             if ($user->avatar) {
-                Storage::disk('public')->delete($user->avatar);
+                Storage::disk(config('filesystems.uploads'))
+                    ->delete($user->avatar);
             }
 
             $user->avatar = $newAvatar;

@@ -10,7 +10,7 @@ export default function StudentSidebar() {
     const roleLabel = user?.role === "teacher" ? "Guru" : "Siswa";
 
     const avatarUrl = user?.avatar
-        ? `/storage/${user.avatar}`
+        ? `/uploads/${user.avatar}`
         : null;
 
     const initial = user?.name

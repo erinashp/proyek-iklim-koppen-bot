@@ -65,6 +65,13 @@ Buka **Project → Settings → Environment Variables** dan tambahkan nilai beri
 | `APP_KEY` | Hasil `php artisan key:generate --show` |
 | `APP_URL` | URL Production milik deployment atau custom domain |
 | `DB_URL` | Connection string Session Pooler Supabase |
+| `UPLOAD_DISK` | Gunakan `s3` untuk Supabase Storage |
+| `AWS_ACCESS_KEY_ID` | S3 access key dari Supabase Storage |
+| `AWS_SECRET_ACCESS_KEY` | S3 secret key dari Supabase Storage |
+| `AWS_DEFAULT_REGION` | Region yang ditampilkan Supabase |
+| `AWS_BUCKET` | Nama bucket untuk upload aplikasi |
+| `AWS_ENDPOINT` | Endpoint S3 Supabase yang berakhir dengan `/storage/v1/s3` |
+| `AWS_USE_PATH_STYLE_ENDPOINT` | Gunakan `true` |
 
 `APP_URL` sengaja tidak ditulis permanen di repository. Nilainya berbeda untuk setiap akun, project, atau custom domain.
 
@@ -78,7 +85,8 @@ npx vercel env add APP_URL production
 npx vercel env add DB_URL production
 ```
 
-Pilih tipe **Secret** untuk `APP_KEY` dan `DB_URL`.
+Pilih tipe **Secret** untuk `APP_KEY`, `DB_URL`, `AWS_ACCESS_KEY_ID`, dan
+`AWS_SECRET_ACCESS_KEY`.
 
 ## 5. Deployment Production
 
@@ -124,11 +132,39 @@ Periksa hal berikut:
 
 ## 8. Upload gambar pada Vercel
 
-Filesystem Vercel bersifat sementara. Avatar dan gambar tantangan yang disimpan ke disk lokal dapat hilang setelah deployment baru atau perpindahan instance.
+Filesystem Vercel bersifat sementara. Avatar dan gambar tantangan harus
+disimpan di Supabase Storage agar tidak hilang setelah deployment baru atau
+perpindahan instance.
 
-Untuk upload permanen, gunakan Supabase Storage atau penyimpanan S3-compatible. Siapkan bucket terlebih dahulu, lalu konfigurasi disk Laravel menggunakan environment variable. Jangan menggunakan service-role key di frontend dan jangan memasukkannya ke Git.
+1. Buka **Storage** di dashboard Supabase dan buat bucket, misalnya `uploads`.
+2. Buka **Storage → S3 Configuration**, aktifkan protokol S3, lalu buat access
+   key dan secret key.
+3. Salin endpoint, region, bucket, dan kredensial S3 ke environment variable
+   Vercel sesuai tabel di atas.
+4. Set `UPLOAD_DISK=s3` dan `AWS_USE_PATH_STYLE_ENDPOINT=true`.
+5. Redeploy aplikasi setelah seluruh environment variable tersimpan.
 
-Migrasi upload belum otomatis dilakukan oleh panduan ini karena nama bucket, endpoint, dan kebijakan akses berbeda untuk setiap project Supabase.
+Untuk menguji konfigurasi yang sama secara lokal, isi `.env` tanpa memasukkan
+nilainya ke Git:
+
+```dotenv
+UPLOAD_DISK=s3
+AWS_ACCESS_KEY_ID=access-key-dari-supabase
+AWS_SECRET_ACCESS_KEY=secret-key-dari-supabase
+AWS_DEFAULT_REGION=region-dari-supabase
+AWS_BUCKET=uploads
+AWS_ENDPOINT=https://project-ref.storage.supabase.co/storage/v1/s3
+AWS_USE_PATH_STYLE_ENDPOINT=true
+AWS_URL=
+```
+
+Gunakan endpoint, region, dan nama bucket persis seperti yang ditampilkan oleh
+dashboard Supabase. Setelah mengubah environment variable, bersihkan cache
+konfigurasi dengan `php artisan config:clear`.
+
+Kredensial S3 hanya digunakan oleh backend Laravel. Jangan menaruhnya di
+frontend atau Git. File dibaca melalui route aplikasi `/uploads/...`, sehingga
+bucket tidak perlu diekspos langsung kepada browser.
 
 ## 9. Troubleshooting singkat
 

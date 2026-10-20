@@ -195,7 +195,7 @@ export default function Edit({ question }) {
 
                                         <div className="mt-3">
                                             <img
-                                                src={`/storage/${question.image}`}
+                                                src={`/uploads/${question.image}`}
                                                 alt={`Soal ${question.number}`}
                                                 className="max-h-64 rounded-xl border border-[#d4e4e1] object-contain"
                                             />

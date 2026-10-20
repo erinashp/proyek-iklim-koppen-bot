@@ -477,7 +477,7 @@ export default function Index({ teachers, filters }) {
 
                                                         const avatar =
                                                             teacher.avatar
-                                                                ? `/storage/${teacher.avatar}`
+                                                                ? `/uploads/${teacher.avatar}`
                                                                 : null;
 
                                                         const isDeleting =

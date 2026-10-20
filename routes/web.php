@@ -16,6 +16,7 @@ use App\Http\Controllers\Teacher\StudentController as TeacherStudentController;
 use App\Http\Controllers\Teacher\GradeController as TeacherGradeController;
 
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\UploadedImageController;
 
 use App\Models\StudentModuleProgress;
 
@@ -40,6 +41,11 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('home');
+
+Route::get('/uploads/{path}', UploadedImageController::class)
+    ->middleware('auth')
+    ->where('path', '.*')
+    ->name('uploads.show');
 
 
 /*

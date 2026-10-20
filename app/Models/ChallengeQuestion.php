@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ChallengeQuestion extends Model
 {
     protected $fillable = [
+        'number',
         'question',
         'option_a',
         'option_b',
@@ -15,7 +16,6 @@ class ChallengeQuestion extends Model
         'option_e',
         'image',
         'correct_answer',
-        'order',
     ];
 
     protected $casts = [
