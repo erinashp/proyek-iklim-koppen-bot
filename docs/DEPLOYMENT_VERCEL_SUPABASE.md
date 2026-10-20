@@ -70,6 +70,7 @@ Buka **Project → Settings → Environment Variables** dan tambahkan nilai beri
 | `AWS_SECRET_ACCESS_KEY` | S3 secret key dari Supabase Storage |
 | `AWS_DEFAULT_REGION` | Region yang ditampilkan Supabase |
 | `AWS_BUCKET` | Nama bucket untuk upload aplikasi |
+| `AWS_URL` | Kosongkan; file disajikan melalui route Laravel |
 | `AWS_ENDPOINT` | Endpoint S3 Supabase yang berakhir dengan `/storage/v1/s3` |
 | `AWS_USE_PATH_STYLE_ENDPOINT` | Gunakan `true` |
 
@@ -80,9 +81,9 @@ Konfigurasi non-rahasia seperti `APP_ENV`, `DB_CONNECTION`, `DB_SSLMODE`, cache,
 Environment variable juga dapat ditambahkan melalui CLI:
 
 ```bash
-npx vercel env add APP_KEY production
-npx vercel env add APP_URL production
-npx vercel env add DB_URL production
+npx vercel env add APP_KEY --environment production
+npx vercel env add APP_URL --environment production
+npx vercel env add DB_URL --environment production
 ```
 
 Pilih tipe **Secret** untuk `APP_KEY`, `DB_URL`, `AWS_ACCESS_KEY_ID`, dan
@@ -164,7 +165,17 @@ konfigurasi dengan `php artisan config:clear`.
 
 Kredensial S3 hanya digunakan oleh backend Laravel. Jangan menaruhnya di
 frontend atau Git. File dibaca melalui route aplikasi `/uploads/...`, sehingga
-bucket tidak perlu diekspos langsung kepada browser.
+bucket tidak perlu diekspos langsung kepada browser. Route tersebut dilindungi
+middleware autentikasi Laravel; pengguna yang belum login tidak dapat membaca
+upload privat.
+
+Perubahan disk tidak memindahkan file lama secara otomatis. Upload yang dahulu
+tersimpan di `storage/app/public` perlu diunggah kembali atau dipindahkan ke
+bucket Supabase. Untuk memeriksa perilaku upload aplikasi, jalankan:
+
+```bash
+php artisan test tests/Feature/UploadStorageTest.php
+```
 
 ## 9. Troubleshooting singkat
 
